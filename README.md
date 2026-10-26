@@ -1,6 +1,8 @@
 # Kinética: el poder del conocimiento
 
-Juego multimedia educativo para el curso 05477 Investigación en Ciencias Sociales (Escuela de Ciencias Sociales y Humanidades, UNED), propuesto con el Programa de Producción Electrónica Multimedial (PEM). La persona usuaria asume el rol de accionador o accionadora de la Sociedad Kinética y practica la Unidad 4, análisis de resultados, resolviendo el caso rural de Moín, Limón: la matanza y el saqueo de tortugas marinas (caso Jairo Mora).
+Juego multimedia educativo para el curso 05477 Investigación en Ciencias Sociales (Escuela de Ciencias Sociales y Humanidades, UNED), propuesto con el Programa de Producción Electrónica Multimedial (PEM).
+
+**Profesor del curso:** Cristian Alonso Silva Jiménez · **Desarrollo:** Luis Alonso Solórzano Vásquez La persona usuaria asume el rol de accionador o accionadora de la Sociedad Kinética y practica la Unidad 4, análisis de resultados, resolviendo el caso rural de Moín, Limón: la matanza y el saqueo de tortugas marinas (caso Jairo Mora).
 
 ## Versiones
 
@@ -33,7 +35,20 @@ Se necesita conexión a internet para las tipografías (Google Fonts) y, en la v
 | 1 · La codificación de hallazgos | Asociación | Segmentar, codificar y agrupar en categorías de análisis | Conocimiento |
 | 2 · El radar de la información | Aprobar y descartar | Validar testimonios según su fuente y sus sesgos | Rigurosidad |
 | 3 · Lentes del conocimiento gráfico | Selección única | Leer gráficos con datos reales | Interpretación |
-| 4 · Triangulando la realidad | Acertijo | Confirmar un hallazgo con tres fuentes independientes | Triangulación |
+| 4 · Triangulando la realidad | Acertijo y redacción | Confirmar un hallazgo con tres fuentes independientes y redactar la conclusión | Triangulación |
+
+## Ayudas para resolver los desafíos
+
+Cada desafío tiene un botón **Pistas, explicación y fuentes** con los pasos para resolverlo, pistas que se muestran de una en una, cómo se construyó el desafío y sus referencias en APA 7. Además:
+
+- En la codificación de hallazgos, después de dos errores con el mismo fragmento el juego indica la categoría correcta y explica por qué.
+- En la lectura de gráficos, el primer error muestra una pista y el segundo, la respuesta explicada.
+- En la triangulación, cada acertijo tiene una pista; al cerrar el triángulo se explica por qué sirve o no sirve cada fuente, y tras dos intentos fallidos se pueden mostrar las tres fuentes correctas.
+- La redacción final tiene frases de apoyo, una lista de revisión que se actualiza mientras se escribe y un ejemplo para reescribir con palabras propias.
+
+## Escenarios
+
+En las zonas se investigan sobre todo objetos (bitácora del biólogo, pizarra del vivero, acta de patrullaje, herramientas, rótulos, periódico). Algunas personas no son interactivas: conversan entre sí y sus diálogos dan contexto al caso.
 
 ## Fuentes
 

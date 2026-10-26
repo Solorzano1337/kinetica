@@ -368,6 +368,36 @@ select{background:#0a1d26;border:1px solid var(--line);border-radius:6px;padding
 .rev div{border:1px solid var(--line);border-radius:8px;padding:10px 12px;display:grid;gap:2px;font-size:14px}
 .rev div.ok b{color:var(--neon)}
 .rev div.no b{color:var(--sunset)}
+.chatb{position:absolute;z-index:2;transform:translate(-50%,-100%);max-width:34%;background:#f6f2e7;color:#1d1a14;border-radius:12px;padding:7px 11px;font-size:13px;line-height:1.35;box-shadow:0 6px 18px rgba(0,0,0,.35);pointer-events:none}
+.chatb b{display:block;font-family:var(--f-mono);font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:#8a4b14}
+.chatb::after{content:"";position:absolute;left:50%;bottom:-7px;margin-left:-7px;border:7px solid transparent;border-bottom:0;border-top-color:#f6f2e7}
+.chatb.in{animation:chatIn .35s ease both}
+@keyframes chatIn{from{opacity:0;transform:translate(-50%,-90%)}to{opacity:1;transform:translate(-50%,-100%)}}
+@media (max-width:620px){.chatb{font-size:10.5px;max-width:46%;padding:5px 8px}.chatb b{font-size:8.5px}}
+.hintbtn{justify-self:start}
+.bin.hint{border-color:var(--sunset);box-shadow:0 0 0 2px var(--sunset),0 0 30px -6px var(--sunset)}
+.hintd{border:1px dashed var(--line);border-radius:8px;padding:8px 12px;font-size:15px}
+.hintd summary{cursor:pointer;color:var(--neon);font-family:var(--f-mono);font-size:12px;letter-spacing:.08em;text-transform:uppercase}
+.hintd p{margin-top:6px;color:var(--muted)}
+.guide .gsteps{margin:0;padding-left:20px;display:grid;gap:6px;font-size:15px}
+.guide .ghint,.guide .gmade{text-indent:0!important;padding-left:0!important;font-size:15px}
+.guide .ghint b{color:var(--neon)}
+.explain{display:grid;gap:6px;margin:8px 0 0;padding:0;list-style:none}
+.explain li{display:grid;grid-template-columns:22px 1fr;gap:6px;font-size:14px;line-height:1.4}
+.explain li i{font-style:normal;font-weight:700}
+.explain li.ok i{color:var(--neon)}.explain li.no i{color:var(--sunset)}
+.wr-grid{display:grid;grid-template-columns:minmax(0,1fr) 300px;gap:16px;align-items:start;margin-top:14px}
+@media (max-width:760px){.wr-grid{grid-template-columns:1fr}}
+.wr-main{display:grid;gap:10px;min-width:0}
+.wr-area{min-height:220px;resize:vertical;line-height:1.5}
+.wr-chips{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.wr-chips button{border:1px solid var(--line);background:var(--deep);border-radius:999px;padding:6px 12px;font-size:13px;cursor:pointer;color:var(--text)}
+.wr-chips button:hover{border-color:var(--neon)}
+.wr-side{border:1px solid var(--line);border-radius:12px;padding:14px;background:var(--deep);display:grid;gap:10px}
+.checks{list-style:none;margin:0;padding:0;display:grid;gap:8px}
+.checks li{display:grid;grid-template-columns:22px 1fr;gap:6px;font-size:14px;color:var(--muted)}
+.checks li i{font-style:normal;font-weight:700}
+.checks li.ok{color:var(--text)}.checks li.ok i{color:var(--neon)}
 @media (prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important}}
 
 /* ---------- Capa 3D: lienzo a pantalla completa, HUD encima, paneles para biblioteca y desafíos ---------- */
@@ -608,7 +638,7 @@ const BADGES = {
   interpretacion:{name:"Insignia de Interpretación", color:"#ff8f45", glyph:'<path d="M26 56V44M36 56V34M46 56V40M56 56V26"/><path d="M22 58h38"/>',
     mean:"Reconoce que leíste los gráficos sin forzarlos: comparaste magnitudes, calculaste proporciones y no confundiste asociación con causa."},
   cuarta:{name:"Insignia de Triangulación", color:"#f2d35e", glyph:'<path d="M40 22 60 56H20z"/><circle cx="40" cy="22" r="3.5" fill="currentColor"/><circle cx="60" cy="56" r="3.5" fill="currentColor"/><circle cx="20" cy="56" r="3.5" fill="currentColor"/>',
-    mean:"Reconoce que confirmaste un hallazgo con tres fuentes independientes. Cuando fuentes que no se conocen coinciden, la evidencia gana peso; cuando no, el hallazgo se reformula."}
+    mean:"Reconoce que confirmaste hallazgos con tres fuentes independientes y redactaste una conclusión prudente: responde la pregunta, se apoya en la evidencia y reconoce sus límites."}
 };
 function badgeSVG(key, cls=""){
   const b = BADGES[key];
@@ -685,12 +715,12 @@ const CLUES = {
     lines:["El perro de la entrada no se mueve de su sitio. Dicen los vecinos que ladra distinto cuando pasa un carro que no es del pueblo."],
     scan:"El reloj cruza los ladridos nocturnos con el sonido de motores: hay entradas de vehículos ajenos a la comunidad entre la medianoche y el amanecer, varias con las luces apagadas, rumbo a la playa.",
     short:"Vehículos ajenos a la comunidad entran de madrugada, algunos sin luces, rumbo a la playa.", tag:"Observación"},
-  biologo:{zone:"playa", title:"Biólogo de campo (voluntario de ONG)", who:"Biólogo de campo", action:"Registrar testimonio",
-    lines:["«Caminamos la playa cada noche de temporada. Si encontramos un nido, lo pasamos al vivero antes de que llegue otra persona.»",
-           "«En 2023 reubicamos aquí en Moín 323 nidos: 316 de baula, 4 de tortuga verde y 3 de carey.»",
-           "«En una temporada en que la policía patrulló con el proyecto se salvaron unos 1.750 nidos. Cuando dejaron de venir, solo unos seis.»"],
-    scan:"Testimonio experto respaldado por registros. Relaciona la cantidad de nidos salvados con la presencia de patrullaje y con la inseguridad en la zona.",
-    src:"LAST (2023); Mongabay (2013)", short:"2023: 323 nidos al vivero (316 baula, 4 verde, 3 carey). Con patrullaje ~1.750 nidos salvados; sin él, ~6.", tag:"Testimonio + datos"},
+  biologo:{zone:"playa", title:"Bitácora del biólogo de campo", action:"Leer la bitácora",
+    lines:["Sobre una caja de madera hay una bitácora abierta. La letra es apurada, como de quien escribe de noche con la linterna en la mano.",
+           "«Temporada 2023 · Moín: 323 nidos reubicados al vivero. Baula 316 · Verde 4 · Carey 3.»",
+           "«Nota al margen: temporada con patrullaje policial ≈ 1.750 nidos salvados. Temporada siguiente, sin patrullaje ≈ 6.»"],
+    scan:"Documento de campo. Registra cuántos nidos se protegieron y relaciona los nidos salvados con la presencia de patrullaje. Al ser un registro sistemático, se puede contrastar con otros informes.",
+    src:"LAST (2023); Mongabay (2013)", short:"2023: 323 nidos al vivero (316 baula, 4 verde, 3 carey). Con patrullaje ~1.750 nidos salvados; sin él, ~6.", tag:"Documento de campo"},
   zopilotes:{zone:"playa", title:"Aves carroñeras (zopilotes)", action:"Escanear con el reloj",
     lines:["Tres zopilotes picotean alrededor de un hueco en la arena. Otros dos vuelan en círculos."],
     scan:"Nido extraído: hueco profundo, arena revuelta y cascarones rotos alrededor. Los zopilotes se comen los huevos que quedaron. Un nido saqueado equivale a cerca de 100 crías que nunca llegarán al mar.",
@@ -703,21 +733,21 @@ const CLUES = {
     lines:["«Zona protegida. Prohibida la extracción de huevos de tortuga.» El letrero está entero y bien pintado."],
     scan:"La Ley 8325 protege a las tortugas marinas en Costa Rica. En Moín participan SINAC, Guardacostas, Fuerza Pública, la municipalidad y grupos de voluntariado. El letrero informa, pero no vigila: de noche no hay nadie que haga cumplir la norma.",
     src:"Diario Extra (2025)", short:"Mecanismo informativo institucional (Ley 8325, SINAC, Guardacostas). Informa, pero no vigila.", tag:"Institucionalidad"},
-  voluntaria:{zone:"final", title:"Voluntaria del vivero", who:"Voluntaria del vivero", action:"Registrar testimonio",
-    lines:["«Hoy me toca el turno de noche. Usamos luz roja para no desorientar a las tortugas ni a las crías.»",
-           "«En la temporada 2023, el vivero de Moín liberó 14.593 crías. En nueve años de proyecto van 128.406.»",
-           "«Cuando hay gente en la playa, los nidos llegan al vivero. Cuando no hay nadie, llegan otros primero.»"],
-    scan:"Testimonio respaldado por el informe de temporada. Muestra el resultado del trabajo voluntario y repite un patrón que ya apareció en el caso: la presencia de personas en la playa protege los nidos.",
-    src:"LAST (2023)", short:"2023: 14.593 crías liberadas; 128.406 en nueve años. Sin presencia en la playa, los nidos se pierden.", tag:"Testimonio + datos"},
+  voluntaria:{zone:"final", title:"Pizarra del vivero", action:"Leer la pizarra",
+    lines:["Una pizarra blanca cuelga junto al vivero. Alguien anotó los turnos y el conteo de la temporada con marcador verde.",
+           "«Turno de noche: usar solo luz roja (no desorienta a tortugas ni crías).»",
+           "«Crías liberadas en 2023: 14.593 · Total en nueve años de proyecto: 128.406.»"],
+    scan:"Registro del vivero respaldado por el informe de temporada. Muestra el resultado del trabajo voluntario y repite un patrón del caso: cuando hay personas vigilando la playa, los nidos llegan al vivero.",
+    src:"LAST (2023)", short:"2023: 14.593 crías liberadas; 128.406 en nueve años. Sin presencia en la playa, los nidos se pierden.", tag:"Registro de campo"},
   tortuga:{zone:"final", title:"Tortuga baula desovando", action:"Escanear con el reloj",
     lines:["Una baula enorme sale del mar, cava con las aletas traseras y empieza a desovar. Nadie habla; solo se oye la marea."],
     scan:"Una baula pone entre 80 y 100 huevos por nido. En 2025, el programa de conservación de Moín protegió 102 nidos con un promedio de 81 huevos cada uno: unas 8.262 crías posibles. A cada hembra que llega a la arena también la espera la red de saqueo.",
     src:"Mongabay (2013); Diario Extra (2025)", short:"Desove de baula: 80 a 100 huevos por nido. 2025: 102 nidos protegidos, ~81 huevos cada uno.", tag:"Biodiversidad"},
-  patrulla:{zone:"final", title:"Patrulla de Guardacostas", who:"Oficial de Guardacostas", action:"Registrar testimonio",
-    lines:["«La temporada pasada patrullamos junto con SINAC, Fuerza Pública, el OIJ, la municipalidad y voluntariado de la UCR y la UNED.»",
-           "«No podemos cubrir todos los kilómetros todas las noches. Por eso cada aviso de la comunidad cuenta.»"],
-    scan:"Testimonio institucional. En 2025, el programa de conservación de Moín sumó a la Terminal de Contenedores de Moín, SINAC, Guardacostas, Fuerza Pública, OIJ, la municipalidad y voluntariado universitario. La presencia del Estado existe, pero depende de alianzas y no alcanza toda la playa.",
-    src:"Diario Extra (2025)", short:"Patrullaje conjunto (SINAC, Guardacostas, Fuerza Pública, OIJ, voluntariado). Cobertura limitada.", tag:"Institucionalidad"},
+  patrulla:{zone:"final", title:"Acta de patrullaje conjunto", action:"Escanear el acta",
+    lines:["Sobre una hielera hay un radio encendido y una tabla con un acta de patrullaje. El radio repite cada tanto: «Unidad dos, sector muelle, sin novedad».",
+           "«Instituciones participantes: SINAC, Servicio Nacional de Guardacostas, Fuerza Pública, OIJ, Municipalidad de Limón y voluntariado universitario (UCR y UNED).»"],
+    scan:"Documento institucional. En 2025, el programa de conservación de Moín sumó a la Terminal de Contenedores de Moín, SINAC, Guardacostas, Fuerza Pública, OIJ, la municipalidad y voluntariado universitario. La presencia del Estado existe, pero depende de alianzas y no alcanza toda la playa.",
+    src:"Diario Extra (2025)", short:"Patrullaje conjunto (SINAC, Guardacostas, Fuerza Pública, OIJ, voluntariado). Cobertura limitada.", tag:"Documento institucional"},
   placa:{zone:"final", title:"Placa en memoria de Jairo Mora", action:"Archivar en el reloj",
     lines:["Una placa sencilla entre la vegetación, con flores secas: «Jairo Mora Sandoval, 1987–2013. Defensor de las tortugas marinas.»"],
     scan:"A trece años del crimen, organizaciones ambientalistas señalan que muchas demandas de justicia siguen pendientes, y que el desarrollo portuario e industrial, la erosión costera y la alteración del hábitat afectan zonas clave de anidación de la baula.",
@@ -864,6 +894,94 @@ function renderRepo(key){
 R.repo1 = () => renderRepo("repo1");
 
 /* ---------- Desafío 1: La codificación de hallazgos ---------- */
+/* Guía de cada desafío: qué hacer, pasos, pistas progresivas, cómo se construyó y fuentes en APA 7 */
+const REFS = {
+  caceres:"Cáceres, P. (2003). Análisis cualitativo de contenido: Una alternativa metodológica alcanzable. <em>Psicoperspectivas, 2</em>, 53–82. https://doi.org/10.5027/psicoperspectivas-vol2-issue1-fulltext-3",
+  rueda:"Rueda Sánchez, M. P., Armas, W. J., &amp; Sigala-Paparella, S.-P. (2023). Análisis cualitativo por categorías a priori: Reducción de datos para estudios gerenciales. <em>Ciencia y Sociedad, 48</em>(2), 83–96. https://doi.org/10.22206/cys.2023.v48i2.pp83-96",
+  chazaro:"Cházaro-Arellano, E. H. (2024). Análisis de datos en las investigaciones cualitativas: El reto frente al investigador. <em>Revista Arbitrada Interdisciplinaria Koinonía, 9</em>(17), 168–182. https://doi.org/10.35381/r.k.v8i17.3163",
+  bermudez:"Bermúdez Rubio, D., Cuenca Rivera, P. E., García Murillo, P. G., Gutiérrez Gómez, G., &amp; Portela Ramírez, A. J. (2021). Sugerencias para escribir análisis de resultados, conclusiones y recomendaciones en tesis y trabajos de grado. <em>CITAS, 7</em>(1). https://doi.org/10.15332/24224529.6608",
+  hernandez:"Hernández-Sampieri, R., &amp; Mendoza, C. P. (2018). <em>Metodología de la investigación: Las rutas cuantitativa, cualitativa y mixta</em>. McGraw-Hill.",
+  lincoln:"Lincoln, Y. S., &amp; Guba, E. G. (1985). <em>Naturalistic inquiry</em>. Sage.",
+  denzin:"Denzin, N. K. (1978). <em>The research act: A theoretical introduction to sociological methods</em> (2.ª ed.). McGraw-Hill.",
+  cohen:"Cohen, L. E., &amp; Felson, M. (1979). Social change and crime rate trends: A routine activity approach. <em>American Sociological Review, 44</em>(4), 588–608.",
+  semanario:"El espíritu de Jairo Mora Sandoval, 10 años después de su asesinato. (2023). <em>Semanario Universidad</em>. https://semanariouniversidad.com/pais/el-espiritu-de-jairo-mora-sandoval-10-anos-despues-de-su-asesinato/",
+  mongabay:"Medioambientalista costarricense paga con su vida su dedicación a las tortugas marinas. (2013, julio). <em>Mongabay</em>. https://es.mongabay.com/2013/07/medioambientalista-costarricense-paga-con-su-vida-su-dedicacion-a-las-tortugas-marinas/",
+  universo:"Saquean nidos de tortuga en peligro de extinción en Costa Rica. (2012, 17 de abril). <em>El Universo</em>. https://www.eluniverso.com/2012/04/17/1/1430/saquean-nidos-tortuga-extincion-costa-rica.html",
+  last:"Latin American Sea Turtles. (2023). <em>Informe de temporada Moín–Pacuare 2023</em> [Informe técnico]. https://latinamericanseaturtles.com/archivos/documentos/2023-informe-moin-pacuare.pdf",
+  extra:"¡Más de 8 mil tortugas al mar! Playa Moín es vida y esperanza. (2025). <em>Diario Extra</em>. https://www.diarioextra.com/noticia/mas-de-8-mil-tortugas-al-mar-playa-moin-es-vida-y-esperanza/",
+  surcos:"Bloque Verde. (2026, 31 de mayo). Jairo Mora, trece años después: La impunidad y la violencia contra quienes defienden la vida continúan. <em>SURCOS Digital</em>. https://surcosdigital.com/jairo-mora-trece-anos-despues-la-impunidad-y-la-violencia-contra-quienes-defienden-la-vida-continuan/",
+  nacion:"Patrullando Moín con Jairo Mora. (s.f.). <em>La Nación</em>. https://www.nacion.com/revista-dominical/patrullando-moin-con-jairo-mora/USAGLPP7R5EN7K264TCEOPQMDQ/story/",
+  delfino:"¿Cuánto ha avanzado Costa Rica en ciberseguridad tras la ola de ataques del 2022? (2024, abril). <em>Delfino.cr</em>. https://delfino.cr/2024/04/cuanto-ha-avanzado-costa-rica-en-ciberseguridad-tras-la-ola-de-ataques-del-2022"
+};
+const CASE_REFS = ["universo","mongabay","semanario","last","extra","surcos","nacion","delfino"];
+const GUIDE = {
+  game1:{title:"La codificación de hallazgos", goal:"Asociar cada fragmento de información con la categoría de análisis que mejor lo describe.",
+    steps:["Leé el fragmento completo y preguntate de qué habla: del miedo y de cómo operan las bandas, de lo que hace o deja de hacer el Estado, o del daño a las tortugas y a la naturaleza.",
+           "Arrastralo hasta esa categoría. En pantallas táctiles, tocá el fragmento y luego la categoría.",
+           "Al acertar aparece su código: categoría (PI, CI o AS), escenario (C comunidad, P playa) y fuente. Así se arma la matriz de análisis.",
+           "Si un fragmento no habla de ninguno de los tres temas, guardalo en «Ninguna encaja todavía»: puede ser el inicio de una categoría emergente."],
+    hints:["Percepción de inseguridad: miedo de la comunidad, armas, carros desconocidos de noche, venta ilegal de huevos y carne.",
+           "Capacidad institucional estatal: policía, patrullas, tribunales y la respuesta (o falta de respuesta) del Estado.",
+           "Afectación socioambiental: nidos, huevos, crías, especies y biodiversidad.",
+           "El fragmento del puerto (empleos, luces y tráfico) no encaja en ninguna: va en «Ninguna encaja todavía».",
+           "Si fallás dos veces con el mismo fragmento, el juego te dice dónde va y por qué."],
+    made:"Las tres categorías de análisis vienen del guion técnico del proyecto Kinética. Los fragmentos resumen datos de las fuentes del caso (prensa e informes) y frases de testimonios ficticios escritos para practicar. El sistema de códigos se adaptó de Rueda Sánchez et al. (2023) y el proceso de segmentar, codificar y categorizar sigue a Cáceres (2003).",
+    refs:["caceres","rueda","chazaro","universo","mongabay","semanario"]},
+  game2:{title:"El radar de la información", goal:"Decidir si cada fragmento de entrevista sirve como evidencia (validar) o se descarta por su sesgo.",
+    steps:["Leé el testimonio y fijate en quién habla.",
+           "Hacé cuatro preguntas: ¿la persona vio o vivió lo que cuenta? ¿Generaliza con «todo», «siempre» o «nadie»? ¿Afirma una causa solo porque dos cosas pasaron al mismo tiempo? ¿Aporta un dato o solo una opinión?",
+           "Si pasa las cuatro preguntas, validalo. Si falla en alguna, descartalo.",
+           "Leé la explicación de cada respuesta. Si fallaste, ese testimonio vuelve al final de la fila para que lo intentes otra vez."],
+    hints:["Se validan los testimonios directos y concretos (con lugar, fecha o método) y los documentos que se pueden revisar.",
+           "Se descartan los rumores de oídas, las generalizaciones, la falsa causalidad y las opiniones sin datos.",
+           "De los ocho testimonios se validan cuatro: la lideresa comunal, el biólogo de campo, el pescador artesanal y el informe del vivero (LAST, 2023). Los otros cuatro se descartan."],
+    made:"Los testimonios son ficticios, escritos a partir de situaciones descritas en las fuentes del caso. Los criterios para validar o descartar siguen los criterios de rigor de Lincoln y Guba (1985), la guía para analizar entrevistas de Hernández-Sampieri y Mendoza (2018) y los criterios de confiabilidad y validez de Cáceres (2003).",
+    refs:["lincoln","hernandez","caceres","last"]},
+  game3:{title:"Lentes del conocimiento gráfico", goal:"Responder preguntas sobre gráficos construidos con datos reales del caso.",
+    steps:["Leé el título del gráfico y su fuente.",
+           "Revisá qué mide cada barra o punto y en qué unidades.",
+           "Si la pregunta pide «cuántas veces», dividí. Si pide un porcentaje, dividí la parte entre el total y multiplicá por 100.",
+           "Antes de elegir una conclusión, preguntate si el gráfico prueba una causa o solo muestra una asociación."],
+    hints:["Pregunta 1: 1.750 ÷ 6 ≈ 292, o sea, unas 290 veces más.",
+           "Pregunta 2: comparar dos temporadas muestra una asociación fuerte, no una causa única.",
+           "Pregunta 3: 316 ÷ (316 + 4 + 3) ≈ 0,98, o sea, cerca del 98 %.",
+           "Pregunta 4: especies y nidos son biodiversidad: afectación socioambiental.",
+           "Pregunta 5: 1.000 crías ÷ 100 huevos por nido = 10 nidos."],
+    made:"Los gráficos se construyeron con cifras publicadas: nidos salvados con y sin patrullaje (WIDECAST, citado por Mongabay, 2013) y nidos reubicados por especie (Latin American Sea Turtles, 2023). El diagrama de puntos representa el dato de 1 de cada 1.000 crías (Mongabay, 2013). La lectura de asociación frente a causa sigue a Hernández-Sampieri y Mendoza (2018).",
+    refs:["mongabay","last","hernandez"]},
+  game4:{title:"Triangulando la realidad", goal:"Confirmar hallazgos con tres fuentes independientes y redactar la conclusión del caso.",
+    steps:["Leé la afirmación que hay que confirmar.",
+           "Elegí tres fuentes de tipos distintos: un testimonio directo, una evidencia física o un documento, y un registro del terreno.",
+           "Descartá las fuentes de oídas, las generalizaciones y las que repiten lo que dijo otra fuente: no son independientes.",
+           "En el tercer acertijo decidí si las fuentes confirman, no alcanzan o contradicen la afirmación.",
+           "Al final, redactá la conclusión siguiendo la lista de revisión de la derecha."],
+    hints:["Acertijo 1: pescador artesanal + huellas en la arena + perro guardián.",
+           "Acertijo 2: registro de WIDECAST + biólogo de campo + lideresa comunal. La nota de prensa repite a WIDECAST, así que no cuenta.",
+           "Acertijo 3: las tres fuentes muestran patrullas que llegaban y se iban. La afirmación con «siempre» queda contradicha.",
+           "Redacción: usá las frases de apoyo. Si te trabás, abrí el ejemplo y reescribilo con tus palabras."],
+    made:"La triangulación de fuentes sigue a Denzin (1978) y a Cáceres (2003). La redacción de conclusiones sigue a Bermúdez Rubio et al. (2021): responder la pregunta, apoyarse en los resultados, no traer datos nuevos y señalar limitaciones. Las afirmaciones combinan datos publicados con testimonios ficticios escritos para practicar.",
+    refs:["denzin","caceres","bermudez","chazaro","mongabay","universo"]}
+};
+function openGuide(key){
+  const G = GUIDE[key]; if(!G) return; let shown = 1;
+  A.click();
+  const render = () => {
+    openModal(`<div class="sheet" role="dialog" aria-modal="true" aria-label="Pistas y fuentes">
+     <div class="sheet-h"><h3>${esc(G.title)} · Pistas y fuentes</h3><button class="x" data-close aria-label="Cerrar">${X_ICON}</button></div>
+     <div class="sheet-b refs guide">
+      <div class="kv"><div><b>Qué hay que hacer</b><span>${esc(G.goal)}</span></div></div>
+      <h4>Cómo se resuelve</h4><ol class="gsteps">${G.steps.map(x=>`<li>${esc(x)}</li>`).join("")}</ol>
+      <h4>Pistas</h4>${G.hints.slice(0, shown).map((h,k)=>`<p class="ghint"><b>Pista ${k+1}.</b> ${esc(h)}</p>`).join("")}
+      ${shown < G.hints.length ? `<div><button class="btn ghost" type="button" id="gMore">Mostrar otra pista (${shown} de ${G.hints.length})</button></div>` : `<p class="src">Ya ves todas las pistas.</p>`}
+      <h4>Cómo se construyó este desafío</h4><p class="gmade">${esc(G.made)}</p>
+      <h4>Fuentes (APA 7)</h4>${G.refs.map(k=>`<p>${REFS[k]}</p>`).join("")}
+     </div></div>`);
+    const m = $("#gMore"); if(m) m.onclick = () => { shown++; render(); };
+  };
+  render();
+}
+document.addEventListener("click", e => { const g = e.target.closest && e.target.closest("[data-guide]"); if(g) openGuide(g.dataset.guide); });
+const guideBtn = key => `<div><button class="btn ghost hintbtn" type="button" data-guide="${key}">Pistas, explicación y fuentes</button></div>`;
 const CATS = {
   inseg:{s:"Inseguridad", t:"Percepción de inseguridad mediante la presencia criminal", d:"Cómo perciben los habitantes las dinámicas y el modo de operar de las bandas criminales."},
   inst:{s:"Institucional", t:"Capacidad institucional estatal", d:"Cómo se ejerce la institucionalidad en la zona: limitaciones, acciones y presencia."},
@@ -886,13 +1004,27 @@ const FRAGS = [
   {c:"none", code:"NEW-C-VE", t:"Un vecino cuenta que el puerto trajo empleos, pero también más luces y tráfico cerca de la playa.", n:"Es un tema nuevo: los efectos del puerto en la comunidad. Podría ser una categoría emergente (fragmento de práctica, ficticio)."}
 ];
 const HINT = {inseg:"Habla de miedo o del modo de operar de las bandas.", inst:"Habla de la policía, los tribunales o la presencia del Estado.", socio:"Habla de las tortugas, los nidos o la biodiversidad.", none:"No habla de miedo, de instituciones ni de las tortugas: ¿será otro tema?"};
+const WHY1 = {
+  "Los vecinos ya no bajan a la playa de noche por miedo.":"Describe cómo se siente la comunidad: es percepción de inseguridad.",
+  "Las redes criminales comercializan los huevos y la carne de tortuga.":"Describe el modo de operar de las bandas criminales.",
+  "Un grupo armado con fusiles AK-47 saqueó 19 nidos de baula en 2012.":"Muestra la presencia armada de las bandas en la playa (El Universo, 2012).",
+  "Entran carros desconocidos de madrugada, algunos con las luces apagadas.":"Es una dinámica criminal que la comunidad observa y teme.",
+  "Con patrullaje policial se salvaron ~1.750 nidos; sin él, ~6.":"Habla de la presencia policial y de su efecto (Mongabay, 2013).",
+  "Las voluntarias pidieron ayuda policial durante semanas sin respuesta.":"Muestra una limitación en la respuesta del Estado (El Universo, 2012).",
+  "En 2015 se absolvió a los siete acusados por errores en la investigación.":"Habla del sistema judicial, que es una institución del Estado (Semanario Universidad, 2023).",
+  "Las patrullas llegan unas semanas y después se van.":"Describe una presencia institucional intermitente.",
+  "Jairo Mora identificó cerca de 1.474 nidos de baula en Moín.":"Mide la importancia de la playa para la anidación de la baula (Semanario Universidad, 2023).",
+  "Solo cerca de 1 de cada 1.000 crías llega a ser adulta.":"Es un dato sobre la supervivencia de la especie (Mongabay, 2013).",
+  "Un nido saqueado equivale a unas 100 crías que no llegan al mar.":"Cuantifica el daño de cada saqueo a la biodiversidad.",
+  "En Moín anidan la baula, la tortuga verde y la carey.":"Describe la biodiversidad de la zona (Latin American Sea Turtles, 2023)."
+};
 const cap = c => FRAGS.filter(f=>f.c===c).length;
 R.game1 = () => {
   const order = FRAGS.map((f,i)=>i).sort(()=>Math.random()-.5);
-  const fill = {inseg:0, inst:0, socio:0, none:0}; let placed = 0, sel = null;
+  const fill = {inseg:0, inst:0, socio:0, none:0}; let placed = 0, sel = null; const ERR1 = {};
   stage.innerHTML = `<section class="screen"><div class="g1 wrap">
     <div style="display:grid;gap:6px"><p class="eyebrow">Desafío 1 de 4 · Dinámica de asociación</p><h2>La codificación de hallazgos</h2>
-    <p class="muted">Arrastrá cada fragmento flotante hasta su categoría de análisis. En pantallas táctiles también podés tocar el fragmento y luego la categoría. Cada acierto carga la categoría con energía de conocimiento. Cada fragmento tiene un código de tres partes: categoría (PI inseguridad, CI institucional, AS socioambiental), escenario (C comunidad, P playa) y fuente. Uno no encaja en ninguna categoría: guardalo aparte.</p></div>
+    <p class="muted">Arrastrá cada fragmento flotante hasta su categoría de análisis. En pantallas táctiles también podés tocar el fragmento y luego la categoría. Cada acierto carga la categoría con energía de conocimiento. Cada fragmento tiene un código de tres partes: categoría (PI inseguridad, CI institucional, AS socioambiental), escenario (C comunidad, P playa) y fuente. Uno no encaja en ninguna categoría: guardalo aparte.</p>${guideBtn("game1")}</div>
     <div class="cloud" id="cloud">${order.map(i=>`<div class="frag" tabindex="0" role="button" data-i="${i}">${esc(FRAGS[i].t)}</div>`).join("")}</div>
     <p class="fb" id="fb" aria-live="polite"></p>
     <div class="bins">${Object.entries(CATS).map(([k,c])=>`<button class="bin" type="button" data-c="${k}"><h3><span class="long">${c.t}</span><span class="short">${c.s}</span></h3><p>${c.d}</p><div class="energy"><i></i></div><span class="src" data-n="${k}">0/${cap(k)}</span></button>`).join("")}</div>
@@ -906,12 +1038,15 @@ R.game1 = () => {
       const bin = $(`.bin[data-c="${cat}"]`);
       bin.querySelector(".energy i").style.width = (fill[cat]/cap(cat)*100)+"%";
       $(`[data-n="${cat}"]`).textContent = `${fill[cat]}/${cap(cat)}`;
-      fb.className = "fb ok"; fb.textContent = cat === "none" ? `Guardado aparte. ${f.n} Código provisional: ${f.code}.` : `Bien codificado. Código: ${f.code}.`;
+      $$(".bin").forEach(x=>x.classList.remove("hint"));
+      fb.className = "fb ok"; fb.textContent = cat === "none" ? `Guardado aparte. ${f.n} Código provisional: ${f.code}.` : `Bien codificado (${f.code}). ${WHY1[f.t] || ""}`;
       if(fill[cat] === cap(cat)){ bin.classList.add("full"); A.fanfare(); if(cat !== "none") fb.textContent = `Categoría completa: ${CATS[cat].t}.`; }
       if(placed === FRAGS.length) setTimeout(()=>earnBadge("conocimiento", "¡Felicidades, has superado el desafío 1!", "explore2", "Ver el resumen de la zona"), 900);
     } else {
       A.bad(); fragEl.classList.remove("bad"); void fragEl.offsetWidth; fragEl.classList.add("bad");
-      fb.className = "fb no"; fb.textContent = `Ese fragmento va en otra categoría. Pista: ${HINT[f.c]}`;
+      const ix = +fragEl.dataset.i; ERR1[ix] = (ERR1[ix] || 0) + 1; fb.className = "fb no";
+      if(ERR1[ix] >= 2){ fb.textContent = `Respuesta: este fragmento va en «${CATS[f.c].t}». ${WHY1[f.t] || f.n || ""} Tocá esa categoría (está resaltada) para colocarlo.`; $$(".bin").forEach(x=>x.classList.toggle("hint", x.dataset.c === f.c)); }
+      else fb.textContent = `Ese fragmento va en otra categoría. Pista: ${HINT[f.c]}`;
     }
   };
   // tocar para seleccionar
@@ -1006,6 +1141,7 @@ function openMenu(){
       <button class="btn ghost" type="button" id="kmC">Cambiar de personaje y ver controles</button>
       <button class="btn ghost" type="button" id="kmS">Configuración</button>
       <p class="src">Esta versión recorre la comunidad de Moín y el desafío 1. Tu avance se guarda en este navegador.</p>
+      <p class="src">Profesor del curso: Cristian Alonso Silva Jiménez · Desarrollo: Luis Alonso Solórzano Vásquez · Curso 05477, UNED, en alianza con el PEM.</p>
     </div></div>`);
   $("#kmW").onclick = openWatch; $("#kmS").onclick = openSettings;
   $("#kmC").onclick = () => { $("#modal").hidden = true; showStart(); };
