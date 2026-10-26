@@ -180,6 +180,7 @@ a{color:var(--neon)}
 .sheet-f{padding:0 18px 18px;display:flex;flex-wrap:wrap;gap:10px;justify-content:flex-end}
 .quote{font-size:17px;border-left:3px solid var(--sunset);padding-left:12px}
 .src{font-family:var(--f-mono);font-size:12px;color:var(--muted)}
+.refl{display:grid;gap:4px;margin-top:10px;border-top:1px dashed var(--line);padding-top:8px}.refl p.src{font-family:inherit;font-size:12.5px;line-height:1.45;padding-left:1.4em;text-indent:-1.4em}
 .scan{position:relative;border:1px solid var(--neon-dim);border-radius:10px;padding:16px;background:linear-gradient(180deg,rgba(61,245,142,.08),rgba(61,245,142,.02));display:grid;gap:10px;overflow:hidden}
 .scan.run::after{content:"";position:absolute;left:0;right:0;height:40%;top:-40%;background:linear-gradient(180deg,transparent,rgba(61,245,142,.35),transparent);animation:sweep 1.1s ease-in-out 2}
 @keyframes sweep{to{top:100%}}
@@ -814,67 +815,67 @@ const CLUES = {
     lines:["«Yo nací aquí, en Moín. Antes uno bajaba a la playa de noche a ver a las baulas desovar. Ahora casi nadie baja.»",
            "«Desde que mataron a Jairo, en 2013, la gente aprendió a quedarse callada. Entran carros de madrugada y nadie pregunta de quién son.»",
            "«Hemos pedido patrullas muchas veces. Vienen unas semanas y después se van.»"],
-    scan:"Testimonio cualitativo histórico. Ideas clave: miedo a salir de noche, silencio de la comunidad desde 2013, vehículos desconocidos y presencia policial intermitente.",
+    scan:"Testimonio cualitativo histórico. Ideas clave: miedo a salir de noche, silencio de la comunidad desde 2013, vehículos desconocidos y presencia policial intermitente. Doña Marta es un personaje ficticio; su relato se construyó a partir de lo que reportó la prensa sobre el caso (El Universo, 2012; Semanario Universidad, 2023).", refs:["propia","universo","semanario"],
     short:"Miedo a bajar a la playa de noche; silencio desde 2013; patrullas que llegan y se van.", tag:"Testimonio"},
   herramientas:{zone:"comunidad", title:"Herramientas abandonadas", action:"Escanear con el reloj",
     lines:["Detrás del matorral hay algo tapado con sacos de gangoche. Huele a arena mojada."],
-    scan:"Palas de mango corto, sacos, una linterna de luz roja y una varilla de metal. Con la varilla se sondea la arena hasta dar con la cámara del nido. Un nido de baula guarda cerca de 100 huevos; en 2013 cada huevo se vendía en el mercado ilegal a cerca de 1 dólar.",
-    src:"Mongabay (2013)", short:"Implementos de saqueo: palas, sacos, varilla para sondear nidos. ~100 huevos por nido, ~$1 por huevo.", tag:"Evidencia física"},
+    scan:"Palas de mango corto, sacos, una linterna de luz roja y una varilla de metal. Con la varilla se sondea la arena hasta dar con la cámara del nido. Un nido de baula guarda cerca de 100 huevos; en 2013 cada huevo se vendía en el mercado ilegal a cerca de 1 dólar (Mongabay, 2013).",
+    src:"Mongabay (2013)", refs:["mongabay"], short:"Implementos de saqueo: palas, sacos, varilla para sondear nidos. ~100 huevos por nido, ~$1 por huevo.", tag:"Evidencia física"},
   lora:{zone:"comunidad", title:"Lora parlanchina", action:"Traducir con el reloj",
     lines:["«¡Baula, baula! ¡Pesa como una vaca! ¡Baula, baula!»", "La lora frentirroja repite lo que escucha en el pueblo. El reloj convierte su parloteo en datos."],
-    scan:"La baula (Dermochelys coriacea) es la tortuga marina más grande del mundo. En Moín también desovan la tortuga verde y la carey. Se estima que solo 1 de cada 1.000 crías llega a adulta, así que cada nido perdido pesa en la población.",
-    src:"Mongabay (2013); LAST (2023)", short:"En Moín anidan baula, verde y carey. Solo ~1 de cada 1.000 crías llega a adulta.", tag:"Biodiversidad"},
+    scan:"La baula (Dermochelys coriacea) es la tortuga marina más grande del mundo. En Moín también desovan la tortuga verde y la carey (Latin American Sea Turtles [LAST], 2023). Se estima que solo 1 de cada 1.000 crías llega a adulta (Mongabay, 2013), así que cada nido perdido pesa en la población.",
+    src:"Mongabay (2013); LAST (2023)", refs:["mongabay","last"], short:"En Moín anidan baula, verde y carey. Solo ~1 de cada 1.000 crías llega a adulta.", tag:"Biodiversidad"},
   rotulo:{zone:"comunidad", title:"Rótulo de señalización vandalizado", action:"Escanear con el reloj",
     lines:["Un rótulo oficial dice «Prohibida la extracción de huevos de tortuga». Alguien lo tachó con una equis roja de pintura en aerosol."],
-    scan:"La pintura es reciente. El reloj registra la tensión entre conservacionistas y bandas delictivas: en abril de 2012 un grupo armado con fusiles AK-47 saqueó 19 nidos de baula en Moín y se llevó unos 1.500 huevos.",
-    src:"El Universo (2012)", short:"Rótulo de prohibición tachado. Antecedente: 19 nidos saqueados por un grupo armado en 2012.", tag:"Tensión social"},
+    scan:"La pintura es reciente. El reloj registra la tensión entre conservacionistas y bandas delictivas: en abril de 2012 un grupo armado con fusiles AK-47 saqueó 19 nidos de baula en Moín y se llevó unos 1.500 huevos (El Universo, 2012).",
+    src:"El Universo (2012)", refs:["universo"], short:"Rótulo de prohibición tachado. Antecedente: 19 nidos saqueados por un grupo armado en 2012.", tag:"Tensión social"},
   periodico:{zone:"comunidad", title:"Periódico comunitario", action:"Archivar en el reloj", news:true,
     lines:["Asesinan a ambientalista en playa Moín",
            "Jairo Mora Sandoval, de 26 años, patrullaba la playa para la organización WIDECAST la madrugada del 31 de mayo de 2013. Fue secuestrado junto con cuatro voluntarias extranjeras; ellas lograron escapar y él murió.",
            "En 2015 un tribunal absolvió a los siete acusados por errores en la investigación. En 2016, un nuevo juicio condenó a cuatro de ellos a 50 años de prisión."],
-    scan:"Documento histórico. Sirve como antecedente del caso y muestra cómo respondió el sistema judicial.",
-    src:"Semanario Universidad (2023)", short:"Jairo Mora (26) asesinado el 31/05/2013. 2015: 7 absueltos. 2016: 4 condenados a 50 años.", tag:"Documento histórico"},
+    scan:"Documento histórico. Sirve como antecedente del caso y muestra cómo respondió el sistema judicial. La nota del periódico es una recreación; los hechos y las fechas se tomaron de Semanario Universidad (2023).",
+    src:"Semanario Universidad (2023)", refs:["semanario"], short:"Jairo Mora (26) asesinado el 31/05/2013. 2015: 7 absueltos. 2016: 4 condenados a 50 años.", tag:"Documento histórico"},
   perro:{zone:"comunidad", title:"Perro guardián de la entrada", action:"Escanear con el reloj",
     lines:["El perro de la entrada no se mueve de su sitio. Dicen los vecinos que ladra distinto cuando pasa un carro que no es del pueblo."],
-    scan:"El reloj cruza los ladridos nocturnos con el sonido de motores: hay entradas de vehículos ajenos a la comunidad entre la medianoche y el amanecer, varias con las luces apagadas, rumbo a la playa.",
+    scan:"El reloj cruza los ladridos nocturnos con el sonido de motores: hay entradas de vehículos ajenos a la comunidad entre la medianoche y el amanecer, varias con las luces apagadas, rumbo a la playa. Es una observación ficticia del juego (elaboración propia), pensada para practicar la triangulación.", refs:["propia"],
     short:"Vehículos ajenos a la comunidad entran de madrugada, algunos sin luces, rumbo a la playa.", tag:"Observación"},
   biologo:{zone:"playa", title:"Bitácora del biólogo de campo", action:"Leer la bitácora",
     lines:["Sobre una caja de madera hay una bitácora abierta. La letra es apurada, como de quien escribe de noche con la linterna en la mano.",
            "«Temporada 2023 · Moín: 323 nidos reubicados al vivero. Baula 316 · Verde 4 · Carey 3.»",
            "«Nota al margen: temporada con patrullaje policial ≈ 1.750 nidos salvados. Temporada siguiente, sin patrullaje ≈ 6.»"],
-    scan:"Documento de campo. Registra cuántos nidos se protegieron y relaciona los nidos salvados con la presencia de patrullaje. Al ser un registro sistemático, se puede contrastar con otros informes.",
-    src:"LAST (2023); Mongabay (2013)", short:"2023: 323 nidos al vivero (316 baula, 4 verde, 3 carey). Con patrullaje ~1.750 nidos salvados; sin él, ~6.", tag:"Documento de campo"},
+    scan:"Documento de campo. Registra cuántos nidos se protegieron y relaciona los nidos salvados con la presencia de patrullaje. Al ser un registro sistemático, se puede contrastar con otros informes. Las cifras de 2023 vienen de Latin American Sea Turtles (2023); las de patrullaje, del registro de WIDECAST citado por Mongabay (2013).",
+    src:"LAST (2023); Mongabay (2013)", refs:["last","mongabay"], short:"2023: 323 nidos al vivero (316 baula, 4 verde, 3 carey). Con patrullaje ~1.750 nidos salvados; sin él, ~6.", tag:"Documento de campo"},
   zopilotes:{zone:"playa", title:"Aves carroñeras (zopilotes)", action:"Escanear con el reloj",
     lines:["Tres zopilotes picotean alrededor de un hueco en la arena. Otros dos vuelan en círculos."],
-    scan:"Nido extraído: hueco profundo, arena revuelta y cascarones rotos alrededor. Los zopilotes se comen los huevos que quedaron. Un nido saqueado equivale a cerca de 100 crías que nunca llegarán al mar.",
+    scan:"Nido extraído: hueco profundo, arena revuelta y cascarones rotos alrededor. Los zopilotes se comen los huevos que quedaron. Un nido saqueado equivale a cerca de 100 crías que nunca llegarán al mar, porque cada nido de baula guarda unos 100 huevos (Mongabay, 2013).", src:"Mongabay (2013)", refs:["mongabay"],
     short:"Nido extraído con cascarones rotos: ~100 crías perdidas por nido. Impacto socioambiental.", tag:"Impacto socioambiental"},
   huellas:{zone:"playa", title:"Huellas de vehículos", action:"Escanear con el reloj",
     lines:["Dos marcas de llanta cruzan la arena desde el camino del muelle. Entre ellas avanza una tortuguita desorientada."],
-    scan:"Huellas de doble llanta que entran y salen de la playa durante la noche. Las zanjas que dejan las llantas atrapan a las crías que buscan el mar. El reloj guía a la cría hasta el agua.",
+    scan:"Huellas de doble llanta que entran y salen de la playa durante la noche. Las zanjas que dejan las llantas atrapan a las crías que buscan el mar. El reloj guía a la cría hasta el agua. La escena es ficticia (elaboración propia).", refs:["propia"],
     short:"Tránsito nocturno de vehículos en la playa; las zanjas atrapan a las crías.", tag:"Evidencia física"},
   letrero:{zone:"playa", title:"Letrero informativo de protección", action:"Escanear con el reloj",
     lines:["«Zona protegida. Prohibida la extracción de huevos de tortuga.» El letrero está entero y bien pintado."],
-    scan:"La Ley 8325 protege a las tortugas marinas en Costa Rica. En Moín participan SINAC, Guardacostas, Fuerza Pública, la municipalidad y grupos de voluntariado. El letrero informa, pero no vigila: de noche no hay nadie que haga cumplir la norma.",
-    src:"Diario Extra (2025)", short:"Mecanismo informativo institucional (Ley 8325, SINAC, Guardacostas). Informa, pero no vigila.", tag:"Institucionalidad"},
+    scan:"La Ley 8325 protege a las tortugas marinas en Costa Rica (Ley N.º 8325, 2002). En Moín participan SINAC, Guardacostas, Fuerza Pública, la municipalidad y grupos de voluntariado (Diario Extra, 2025). El letrero informa, pero no vigila: de noche no hay nadie que haga cumplir la norma.",
+    src:"Ley N.º 8325 (2002); Diario Extra (2025)", refs:["ley8325","extra"], short:"Mecanismo informativo institucional (Ley 8325, SINAC, Guardacostas). Informa, pero no vigila.", tag:"Institucionalidad"},
   voluntaria:{zone:"final", title:"Pizarra del vivero", action:"Leer la pizarra",
     lines:["Una pizarra blanca cuelga junto al vivero. Alguien anotó los turnos y el conteo de la temporada con marcador verde.",
            "«Turno de noche: usar solo luz roja (no desorienta a tortugas ni crías).»",
            "«Crías liberadas en 2023: 14.593 · Total en nueve años de proyecto: 128.406.»"],
-    scan:"Registro del vivero respaldado por el informe de temporada. Muestra el resultado del trabajo voluntario y repite un patrón del caso: cuando hay personas vigilando la playa, los nidos llegan al vivero.",
-    src:"LAST (2023)", short:"2023: 14.593 crías liberadas; 128.406 en nueve años. Sin presencia en la playa, los nidos se pierden.", tag:"Registro de campo"},
+    scan:"Registro del vivero respaldado por el informe de temporada. Muestra el resultado del trabajo voluntario y repite un patrón del caso: cuando hay personas vigilando la playa, los nidos llegan al vivero. Las cifras de crías liberadas provienen de Latin American Sea Turtles (2023).",
+    src:"LAST (2023)", refs:["last"], short:"2023: 14.593 crías liberadas; 128.406 en nueve años. Sin presencia en la playa, los nidos se pierden.", tag:"Registro de campo"},
   tortuga:{zone:"final", title:"Tortuga baula desovando", action:"Escanear con el reloj",
     lines:["Una baula enorme sale del mar, cava con las aletas traseras y empieza a desovar. Nadie habla; solo se oye la marea."],
-    scan:"Una baula pone entre 80 y 100 huevos por nido. En 2025, el programa de conservación de Moín protegió 102 nidos con un promedio de 81 huevos cada uno: unas 8.262 crías posibles. A cada hembra que llega a la arena también la espera la red de saqueo.",
-    src:"Mongabay (2013); Diario Extra (2025)", short:"Desove de baula: 80 a 100 huevos por nido. 2025: 102 nidos protegidos, ~81 huevos cada uno.", tag:"Biodiversidad"},
+    scan:"Una baula pone entre 80 y 100 huevos por nido (Mongabay, 2013). En 2025, el programa de conservación de Moín protegió 102 nidos con un promedio de 81 huevos cada uno: unas 8.262 crías posibles (Diario Extra, 2025). A cada hembra que llega a la arena también la espera la red de saqueo.",
+    src:"Mongabay (2013); Diario Extra (2025)", refs:["mongabay","extra"], short:"Desove de baula: 80 a 100 huevos por nido. 2025: 102 nidos protegidos, ~81 huevos cada uno.", tag:"Biodiversidad"},
   patrulla:{zone:"final", title:"Acta de patrullaje conjunto", action:"Escanear el acta",
     lines:["Sobre una hielera hay un radio encendido y una tabla con un acta de patrullaje. El radio repite cada tanto: «Unidad dos, sector muelle, sin novedad».",
            "«Instituciones participantes: SINAC, Servicio Nacional de Guardacostas, Fuerza Pública, OIJ, Municipalidad de Limón y voluntariado universitario (UCR y UNED).»"],
-    scan:"Documento institucional. En 2025, el programa de conservación de Moín sumó a la Terminal de Contenedores de Moín, SINAC, Guardacostas, Fuerza Pública, OIJ, la municipalidad y voluntariado universitario. La presencia del Estado existe, pero depende de alianzas y no alcanza toda la playa.",
-    src:"Diario Extra (2025)", short:"Patrullaje conjunto (SINAC, Guardacostas, Fuerza Pública, OIJ, voluntariado). Cobertura limitada.", tag:"Documento institucional"},
+    scan:"Documento institucional. En 2025, el programa de conservación de Moín sumó a la Terminal de Contenedores de Moín, SINAC, Guardacostas, Fuerza Pública, OIJ, la municipalidad y voluntariado universitario. La presencia del Estado existe, pero depende de alianzas y no alcanza toda la playa (Diario Extra, 2025). El acta es una recreación del juego con los datos de esa nota.",
+    src:"Diario Extra (2025)", refs:["extra"], short:"Patrullaje conjunto (SINAC, Guardacostas, Fuerza Pública, OIJ, voluntariado). Cobertura limitada.", tag:"Documento institucional"},
   placa:{zone:"final", title:"Placa en memoria de Jairo Mora", action:"Archivar en el reloj",
     lines:["Una placa sencilla entre la vegetación, con flores secas: «Jairo Mora Sandoval, 1987–2013. Defensor de las tortugas marinas.»"],
-    scan:"A trece años del crimen, organizaciones ambientalistas señalan que muchas demandas de justicia siguen pendientes, y que el desarrollo portuario e industrial, la erosión costera y la alteración del hábitat afectan zonas clave de anidación de la baula.",
-    src:"SURCOS Digital (2026)", short:"Trece años después: demandas pendientes; puerto, erosión y pérdida de hábitat afectan la anidación.", tag:"Documento histórico"}
+    scan:"A trece años del crimen, organizaciones ambientalistas señalan que muchas demandas de justicia siguen pendientes, y que el desarrollo portuario e industrial, la erosión costera y la alteración del hábitat afectan zonas clave de anidación de la baula (Bloque Verde, 2026).",
+    src:"Bloque Verde, en SURCOS Digital (2026)", refs:["surcos"], short:"Trece años después: demandas pendientes; puerto, erosión y pérdida de hábitat afectan la anidación.", tag:"Documento histórico"}
 };
 
 /* ============ Navegación ============ */
@@ -962,6 +963,7 @@ function openCredits(){
     <p>Hernández-Sampieri, R., &amp; Mendoza, C. P. (2018). <em>Metodología de la investigación: Las rutas cuantitativa, cualitativa y mixta</em>. McGraw-Hill.</p>
     <p>Lincoln, Y. S., &amp; Guba, E. G. (1985). <em>Naturalistic inquiry</em>. Sage.</p>
     <p>Lynch, M. J. (1990). The greening of criminology: A perspective for the 1990s. <em>The Critical Criminologist, 2</em>(3).</p>
+    <p>Asamblea Legislativa de la República de Costa Rica. (2002). <em>Ley de protección, conservación y recuperación de las poblaciones de tortugas marinas</em> (Ley N.º 8325).</p>
     <h4>Perfil del estudiantado y tecnología educativa</h4>
     <p>Berrocal, V. (2021). <em>Características del estudiantado de la UNED.</em> https://multimedia.uned.ac.cr/pem/libros/criterios-asignaturas-cursos-en-linea/chapter/caracteristicas-del-estudiantado-de-la-uned/</p>
     <p>Torres Cañizález, P. C., &amp; Cobo Beltrán, J. K. (2017). Tecnología educativa y su papel en el logro de los fines de la educación. <em>Educere, 21</em>(68), 31–40.</p>
@@ -1260,7 +1262,7 @@ function openClue(id, onDone){
   openModal(`<div class="sheet" role="dialog" aria-modal="true" aria-label="${esc(c.title)}">
     <div class="sheet-h"><h3>${esc(c.title)}</h3><span class="tag sun">${esc(c.tag)}</span><button class="x" data-close aria-label="Cerrar">${X_ICON}</button></div>
     <div class="sheet-b">${body}
-      <div class="scan" id="scanBox" ${already?"":"hidden"}><h4>Registro del reloj</h4><p>${esc(c.scan)}</p>${c.src?`<span class="src">Fuente: ${esc(c.src)}</span>`:""}</div></div>
+      <div class="scan" id="scanBox" ${already?"":"hidden"}><h4>Registro del reloj</h4><p>${esc(c.scan)}</p>${(c.refs||[]).length?`<div class="refl"><span class="src">Referencias (APA 7)</span>${c.refs.map(k=>`<p class="src">${REFS[k]}</p>`).join("")}</div>`:(c.src?`<span class="src">Fuente: ${esc(c.src)}</span>`:"")}</div></div>
     <div class="sheet-f">${already?`<button class="btn ghost" type="button" data-close>Cerrar</button>`:`<button class="btn" type="button" id="doScan">${esc(c.action)}</button>`}</div></div>`);
   if(isTalk) V.say(c.lines.join(" "), {pitch:1, rate:1.02});
   const b = $("#doScan");
@@ -1295,21 +1297,21 @@ const REPOS = {
     done:"Leíste toda la biblioteca. El agente de desafío ya te espera en la comunidad.",
     docs:[
       {t:"¿Qué es el análisis de resultados?", k:"Biblioteca · Unidad 4", b:[
-        "Analizar resultados es transformar los datos recogidos en respuestas a la pregunta de investigación. No consiste en resumir lo que se encontró, sino en ordenarlo, compararlo e interpretarlo.",
-        "En la investigación cualitativa se trabaja con palabras, imágenes y observaciones: se codifican fragmentos, se agrupan en categorías y se buscan patrones, contradicciones y casos que no encajan. En la cuantitativa se trabaja con números: frecuencias, proporciones, tendencias y comparaciones entre grupos.",
-        "Un mismo caso puede combinar ambos enfoques. En Moín, el testimonio de la lideresa es un dato cualitativo; los 1.750 nidos salvados con patrullaje son un dato cuantitativo."], ref:[REF.hs]},
-      {t:"Del dato a la categoría", k:"Guía de método · Cáceres (2003); Cházaro-Arellano (2024)", b:["Se segmenta el material (cada fragmento útil), se etiqueta cada segmento con un código corto y se agrupan las etiquetas parecidas en categorías.","Las categorías de Moín están definidas de antemano (a priori), a partir de la teoría: percepción de inseguridad, capacidad institucional estatal y afectación socioambiental. Un fragmento puede alimentar más de una categoría. Si uno valioso no encaja en ninguna, hay que revisar el sistema: puede ser el comienzo de una categoría emergente."]},
-      {t:"Cómo se escribe un código", k:"Guía de método · adaptado de Rueda Sánchez et al. (2023)", b:["Cada código dice tres cosas: categoría (PI, CI o AS), escenario (C comunidad, P playa) y fuente (la sigla del elemento). Por ejemplo, PI-C-LC es una pista de percepción de inseguridad, en la comunidad, dicha por la lideresa.","Con los códigos se arma una matriz que reúne, por categoría, todos los fragmentos asociados."]},
+        "Analizar resultados es transformar los datos recogidos en respuestas a la pregunta de investigación. No consiste en resumir lo que se encontró, sino en ordenarlo, compararlo e interpretarlo (Hernández-Sampieri y Mendoza, 2018).",
+        "En la investigación cualitativa se trabaja con palabras, imágenes y observaciones: se codifican fragmentos, se agrupan en categorías y se buscan patrones, contradicciones y casos que no encajan. En la cuantitativa se trabaja con números: frecuencias, proporciones, tendencias y comparaciones entre grupos (Hernández-Sampieri y Mendoza, 2018).",
+        "Un mismo caso puede combinar ambos enfoques. En Moín, el testimonio de la lideresa es un dato cualitativo; los 1.750 nidos salvados con patrullaje (Mongabay, 2013) son un dato cuantitativo."], ref:["hernandez","mongabay"]},
+      {t:"Del dato a la categoría", k:"Guía de método · Cáceres (2003); Cházaro-Arellano (2024)", b:["Según Cáceres (2003), se segmenta el material (cada fragmento útil), se etiqueta cada segmento con un código corto y se agrupan las etiquetas parecidas en categorías.","Las categorías de Moín están definidas de antemano (a priori), a partir de la teoría, como proponen Rueda Sánchez et al. (2023): percepción de inseguridad, capacidad institucional estatal y afectación socioambiental. Un fragmento puede alimentar más de una categoría. Si uno valioso no encaja en ninguna, hay que revisar el sistema: puede ser el comienzo de una categoría emergente (Cáceres, 2003; Cházaro-Arellano, 2024)."], ref:["caceres","rueda","chazaro"]},
+      {t:"Cómo se escribe un código", k:"Guía de método · adaptado de Rueda Sánchez et al. (2023)", b:["Cada código dice tres cosas: categoría (PI, CI o AS), escenario (C comunidad, P playa) y fuente (la sigla del elemento). Por ejemplo, PI-C-LC es una pista de percepción de inseguridad, en la comunidad, dicha por la lideresa. Este formato es una adaptación propia de la codificación por categorías a priori de Rueda Sánchez et al. (2023).","Con los códigos se arma una matriz que reúne, por categoría, todos los fragmentos asociados (Rueda Sánchez et al., 2023)."], ref:["rueda"]},
       {t:"Teoría de criminología ambiental", k:"Biblioteca · Marco teórico", b:[
-        "La criminología ambiental estudia dónde, cuándo y en qué condiciones ocurren los delitos, además de quién los comete.",
-        "Una de sus herramientas es la teoría de las actividades rutinarias: un delito ocurre cuando coinciden en tiempo y lugar una persona motivada para delinquir, un objetivo atractivo y la ausencia de un guardián capaz.",
-        "Aplicada a Moín: redes de saqueo motivadas por la venta ilegal, nidos con cerca de 100 huevos cada uno y noches sin patrullaje. Cuando la policía patrulló, el guardián estaba presente y los nidos salvados se contaron por cientos.",
-        "La criminología verde complementa esta mirada: estudia los daños contra el ambiente y las especies, aunque no siempre estén tipificados como delito."],
-        ref:["Brantingham, P. J., & Brantingham, P. L. (Eds.). (1981). Environmental criminology. Sage.","Cohen, L. E., & Felson, M. (1979). Social change and crime rate trends: A routine activity approach. American Sociological Review, 44(4), 588–608.","Lynch, M. J. (1990). The greening of criminology: A perspective for the 1990s. The Critical Criminologist, 2(3)."]},
-      {t:"Diez años después", k:"Nota periodística · Semanario Universidad, 2023", b:["Jairo Mora identificó cerca de 1.474 nidos de baula en Moín a partir de 2012, lo que convertía la playa en uno de los sitios de anidación más grandes del país. Para comparar, el Parque Nacional Marino Las Baulas, en Guanacaste, registraba algo más de 200 nidos.","Diez años después del crimen, personas consultadas por el semanario señalan que los autores intelectuales nunca se investigaron a fondo."]},
-      {t:"Patrullar o no patrullar", k:"Reportaje · Mongabay, 2013", b:["Durante la temporada en que una unidad policial patrulló con WIDECAST se salvaron unos 1.750 nidos. En la temporada siguiente, sin patrullaje, el proyecto solo pudo salvar unos seis.","Cada nido tiene unos 100 huevos y cada huevo se vendía a cerca de 1 dólar. Alrededor de 1 de cada 1.000 crías llega a adulta."]},
-      {t:"Saqueo armado", k:"Nota · El Universo, 2012", b:["En abril de 2012 un grupo armado con fusiles AK-47 saqueó 19 nidos de baula en Moín y se llevó unos 1.500 huevos a punto de nacer.","La dirigente Vanessa Lizano contó que el grupo de voluntariado había pedido ayuda policial durante semanas por amenazas constantes."]},
-      {t:"Transcripción de campo", k:"Testimonio · Lideresa comunal (personaje)", b:["«Antes uno bajaba a la playa de noche a ver a las baulas desovar. Ahora casi nadie baja.»","«Hemos pedido patrullas muchas veces. Vienen unas semanas y después se van.»"]}
+        "La criminología ambiental estudia dónde, cuándo y en qué condiciones ocurren los delitos, además de quién los comete (Brantingham y Brantingham, 1981).",
+        "Una de sus herramientas es la teoría de las actividades rutinarias: un delito ocurre cuando coinciden en tiempo y lugar una persona motivada para delinquir, un objetivo atractivo y la ausencia de un guardián capaz (Cohen y Felson, 1979).",
+        "Aplicada a Moín: redes de saqueo motivadas por la venta ilegal, nidos con cerca de 100 huevos cada uno y noches sin patrullaje. Cuando la policía patrulló, el guardián estaba presente y los nidos salvados se contaron por cientos (Mongabay, 2013).",
+        "La criminología verde complementa esta mirada: estudia los daños contra el ambiente y las especies, aunque no siempre estén tipificados como delito (Lynch, 1990)."],
+        ref:["brant","cohen","lynch","mongabay"]},
+      {t:"Diez años después", k:"Nota periodística · Semanario Universidad, 2023", b:["Jairo Mora identificó cerca de 1.474 nidos de baula en Moín a partir de 2012, lo que convertía la playa en uno de los sitios de anidación más grandes del país. Para comparar, el Parque Nacional Marino Las Baulas, en Guanacaste, registraba algo más de 200 nidos (Semanario Universidad, 2023).","Diez años después del crimen, personas consultadas por el semanario señalan que los autores intelectuales nunca se investigaron a fondo (Semanario Universidad, 2023)."], ref:["semanario"]},
+      {t:"Patrullar o no patrullar", k:"Reportaje · Mongabay, 2013", b:["Durante la temporada en que una unidad policial patrulló con WIDECAST se salvaron unos 1.750 nidos. En la temporada siguiente, sin patrullaje, el proyecto solo pudo salvar unos seis (WIDECAST, citado por Mongabay, 2013).","Cada nido tiene unos 100 huevos y cada huevo se vendía a cerca de 1 dólar. Alrededor de 1 de cada 1.000 crías llega a adulta (Mongabay, 2013)."], ref:["mongabay"]},
+      {t:"Saqueo armado", k:"Nota · El Universo, 2012", b:["En abril de 2012 un grupo armado con fusiles AK-47 saqueó 19 nidos de baula en Moín y se llevó unos 1.500 huevos a punto de nacer (El Universo, 2012).","La dirigente Vanessa Lizano contó que el grupo de voluntariado había pedido ayuda policial durante semanas por amenazas constantes (El Universo, 2012)."], ref:["universo"]},
+      {t:"Transcripción de campo", k:"Testimonio · Lideresa comunal (personaje)", b:["«Antes uno bajaba a la playa de noche a ver a las baulas desovar. Ahora casi nadie baja.»","«Hemos pedido patrullas muchas veces. Vienen unas semanas y después se van.»","Esta transcripción es ficticia (elaboración propia). Se escribió para practicar la codificación y se apoya en hechos reportados por El Universo (2012) y Semanario Universidad (2023)."], ref:["propia","universo","semanario"]}
     ]},
   repo2:{title:"Biblioteca de la playa", back:"explore2", backLabel:"Volver a la playa",
     intro:"Antes de evaluar testimonios, revisá qué es el rigor científico y cómo se analizan entrevistas.",
@@ -1318,16 +1320,16 @@ const REPOS = {
     docs:[
       {t:"¿Qué es el rigor científico?", k:"Biblioteca · Unidad 4", b:[
         "El rigor es lo que permite confiar en los resultados: otra persona puede seguir tus pasos, revisar tus fuentes y llegar a conclusiones parecidas.",
-        "En la investigación cuantitativa se habla de validez y confiabilidad. En la cualitativa se usan cuatro criterios: credibilidad, transferibilidad, dependencia y confirmabilidad.",
-        "En la práctica: anotá de dónde viene cada dato, separá lo que viste de lo que te contaron, buscá casos que contradigan tu idea y no descartés un dato solo porque no te gusta."], ref:[REF.lg]},
-      {t:"Confiabilidad y validez", k:"Guía de método · Cáceres (2003)", b:["Confiabilidad: que dos personas que clasifican el mismo texto lleguen a los mismos resultados. Se mide con el acuerdo entre codificadores y se espera un coeficiente kappa de 0,80 o más.","Validez: que las inferencias se sostengan frente a otros datos obtenidos de forma independiente. Se logra con triangulación, saturación y consulta de los resultados a informantes y coinvestigadores."]},
+        "En la investigación cuantitativa se habla de validez y confiabilidad (Hernández-Sampieri y Mendoza, 2018). En la cualitativa, Lincoln y Guba (1985) proponen cuatro criterios: credibilidad, transferibilidad, dependencia y confirmabilidad.",
+        "En la práctica: anotá de dónde viene cada dato, separá lo que viste de lo que te contaron, buscá casos que contradigan tu idea y no descartés un dato solo porque no te gusta."], ref:["lincoln","hernandez"]},
+      {t:"Confiabilidad y validez", k:"Guía de método · Cáceres (2003)", b:["Confiabilidad: que dos personas que clasifican el mismo texto lleguen a los mismos resultados. Se mide con el acuerdo entre codificadores y se espera un coeficiente kappa de 0,80 o más (Cáceres, 2003).","Validez: que las inferencias se sostengan frente a otros datos obtenidos de forma independiente. Se logra con triangulación, saturación y consulta de los resultados a informantes y coinvestigadores (Cáceres, 2003)."], ref:["caceres"]},
       {t:"¿Cómo analizar entrevistas?", k:"Biblioteca · Unidad 4", b:[
-        "Transcribí sin corregir lo que dijo la persona. Leé todo una vez sin marcar nada. Después marcá fragmentos, asignales un código y agrupá los códigos en categorías. Al final compará entre entrevistas: qué se repite y qué se contradice.",
-        "Un testimonio de oídas no se tira a la basura: se anota como pista para verificar, pero no se usa como evidencia por sí solo."], ref:[REF.hs]},
-      {t:"Fuente directa o de oídas", k:"Guía de método · Kinética", b:["Una fuente directa vio o vivió lo que cuenta. Una fuente de oídas repite lo que otra persona le dijo. La segunda puede orientar la búsqueda, pero no sirve como evidencia por sí sola."]},
-      {t:"Generalizaciones", k:"Guía de método · Kinética", b:["Frases como «todo el mundo», «siempre» o «nadie» rara vez se pueden comprobar. Cuando un testimonio generaliza sin datos, se anota como opinión."]},
-      {t:"Falsa causalidad", k:"Guía de método · Kinética", b:["Que dos hechos ocurran al mismo tiempo no prueba que uno cause el otro. Antes de aceptar una causa, buscá otras explicaciones posibles."]},
-      {t:"Fuentes documentales", k:"Informe · LAST, temporada 2023", b:["En 2023 se reubicaron al vivero 323 nidos en Moín: 316 de baula, 4 de verde y 3 de carey, puestos por 218 hembras distintas. Un informe con método publicado se puede revisar y contrastar."]}
+        "Transcribí sin corregir lo que dijo la persona. Leé todo una vez sin marcar nada. Después marcá fragmentos, asignales un código y agrupá los códigos en categorías. Al final compará entre entrevistas: qué se repite y qué se contradice (Hernández-Sampieri y Mendoza, 2018).",
+        "Un testimonio de oídas no se tira a la basura: se anota como pista para verificar, pero no se usa como evidencia por sí solo."], ref:["hernandez"]},
+      {t:"Fuente directa o de oídas", k:"Guía de método · elaboración propia", b:["Una fuente directa vio o vivió lo que cuenta. Una fuente de oídas repite lo que otra persona le dijo. La segunda puede orientar la búsqueda, pero no sirve como evidencia por sí sola.","Esta guía es una síntesis propia del equipo; aplica el criterio de credibilidad de Lincoln y Guba (1985)."], ref:["lincoln"]},
+      {t:"Generalizaciones", k:"Guía de método · elaboración propia", b:["Frases como «todo el mundo», «siempre» o «nadie» rara vez se pueden comprobar. Cuando un testimonio generaliza sin datos, se anota como opinión.","Síntesis propia del equipo, a partir de la idea de buscar casos negativos que pongan a prueba una afirmación (Lincoln y Guba, 1985)."], ref:["lincoln"]},
+      {t:"Falsa causalidad", k:"Guía de método · elaboración propia", b:["Que dos hechos ocurran al mismo tiempo no prueba que uno cause el otro. Antes de aceptar una causa, buscá otras explicaciones posibles.","Hernández-Sampieri y Mendoza (2018) lo explican así: una correlación entre dos variables no basta para afirmar causalidad."], ref:["hernandez"]},
+      {t:"Fuentes documentales", k:"Informe · LAST, temporada 2023", b:["En 2023 se reubicaron al vivero 323 nidos en Moín: 316 de baula, 4 de verde y 3 de carey, puestos por 218 hembras distintas (Latin American Sea Turtles, 2023). Un informe con método publicado se puede revisar y contrastar."], ref:["last"]}
     ]},
   repo4:{title:"Biblioteca final · Triangulación", back:"explore3", backLabel:"Volver a la playa",
     intro:"Antes del último desafío, repasá cómo se sintetiza, cómo se confirma un hallazgo y cómo se cierra un caso.",
@@ -1335,12 +1337,13 @@ const REPOS = {
     done:"Leíste la biblioteca final. El agente de desafío te espera en la playa para Triangulando la realidad.",
     docs:[
       {t:"Síntesis de hallazgos", k:"Biblioteca · Unidad 4", b:[
-        "Sintetizar es juntar los hallazgos de todas las fuentes en pocas ideas centrales que respondan la pregunta de investigación. No es repetir cada dato, sino decir qué significan juntos.",
-        "Una síntesis útil se arma por categorías: para cada una, qué se encontró, con qué evidencia y qué tan sólida es esa evidencia."], ref:[REF.hs]},
-      {t:"Qué es triangular", k:"Guía de método · Cáceres (2003)", b:["Triangular es contrastar un hallazgo con otras fuentes obtenidas de forma independiente. Cuando coinciden, la inferencia gana validez.","No basta con tener muchas fuentes: tienen que ser independientes. Una nota que repite lo que dijo un vecino no suma una segunda fuente."], ref:[REF.dz]},
-      {t:"Tres tipos de fuente", k:"Guía de método · Kinética", b:["Testimonio directo: alguien vio o vivió lo que cuenta. Evidencia física: huellas, objetos o registros del terreno. Documento: un informe o registro con método, que se puede revisar.","Un triángulo sólido combina tipos distintos. Si los tres vértices dependen del mismo origen, es un solo dato repetido."]},
-      {t:"Qué hacer cuando no coinciden", k:"Guía de método · Cáceres (2003)", b:["Si las fuentes se contradicen, el hallazgo no se acepta ni se descarta sin más: se reformula o se anota como no confirmado y se buscan más datos. La saturación (cuando los datos nuevos ya no aportan nada distinto) y la consulta a informantes ayudan a decidir.","Una palabra como «siempre» o «nadie» exige evidencia que casi nunca existe."]},
-      {t:"Resultados, conclusiones y recomendaciones", k:"Guía de redacción · Bermúdez Rubio et al. (2021); Cházaro-Arellano (2024)", b:["Los resultados responden qué se encontró: en pasado y sin interpretar. Las conclusiones responden la pregunta principal y los objetivos, sin datos nuevos. Las recomendaciones salen de las conclusiones y dicen qué, quién y cómo.","«Se registraron seis pistas de percepción de inseguridad» es un resultado. «Hay más inseguridad porque el Estado no vigila» es una interpretación."]}
+        "Sintetizar es juntar los hallazgos de todas las fuentes en pocas ideas centrales que respondan la pregunta de investigación. No es repetir cada dato, sino decir qué significan juntos (Hernández-Sampieri y Mendoza, 2018).",
+        "Una síntesis útil se arma por categorías: para cada una, qué se encontró, con qué evidencia y qué tan sólida es esa evidencia (Cházaro-Arellano, 2024)."], ref:["hernandez","chazaro"]},
+      {t:"Qué es triangular", k:"Guía de método · Cáceres (2003)", b:["Triangular es contrastar un hallazgo con otras fuentes obtenidas de forma independiente. Cuando coinciden, la inferencia gana validez (Cáceres, 2003; Denzin, 1978).","No basta con tener muchas fuentes: tienen que ser independientes. Una nota que repite lo que dijo un vecino no suma una segunda fuente."], ref:["denzin","caceres"]},
+      {t:"Tres tipos de fuente", k:"Guía de método · elaboración propia a partir de Denzin (1978)", b:["Testimonio directo: alguien vio o vivió lo que cuenta. Evidencia física: huellas, objetos o registros del terreno. Documento: un informe o registro con método, que se puede revisar.","Un triángulo sólido combina tipos distintos. Si los tres vértices dependen del mismo origen, es un solo dato repetido. Esta clasificación es una adaptación propia de la triangulación de datos que describe Denzin (1978)."], ref:["denzin"]},
+      {t:"Qué hacer cuando no coinciden", k:"Guía de método · Cáceres (2003)", b:["Si las fuentes se contradicen, el hallazgo no se acepta ni se descarta sin más: se reformula o se anota como no confirmado y se buscan más datos. La saturación (cuando los datos nuevos ya no aportan nada distinto) y la consulta a informantes ayudan a decidir (Cáceres, 2003).","Una palabra como «siempre» o «nadie» exige evidencia que casi nunca existe."], ref:["caceres"]},
+      {t:"Resultados, conclusiones y recomendaciones", k:"Guía de redacción · Bermúdez Rubio et al. (2021); Cházaro-Arellano (2024)", b:["Los resultados responden qué se encontró: en pasado y sin interpretar. Las conclusiones responden la pregunta principal y los objetivos, sin datos nuevos. Las recomendaciones salen de las conclusiones y dicen qué, quién y cómo (Bermúdez Rubio et al., 2021).","«Se registraron seis pistas de percepción de inseguridad» es un resultado. «Hay más inseguridad porque el Estado no vigila» es una interpretación (Cházaro-Arellano, 2024)."], ref:["bermudez","chazaro"]},
+      {t:"Cómo citar en tu conclusión", k:"Guía de redacción · APA 7", b:["Cada dato que no es tuyo lleva su cita: apellido o institución y año. Puede ir entre paréntesis al final de la idea, como (Mongabay, 2013), o dentro de la frase, como «Según Mongabay (2013)…».","Si leíste un dato dentro de otra fuente, se cita así: (WIDECAST, citado por Mongabay, 2013). Con tres o más autores se escribe el primero y «et al.»: (Bermúdez Rubio et al., 2021).","Al final del trabajo, cada cita del texto debe aparecer completa en la lista de referencias, y cada referencia de la lista debe estar citada en el texto."]}
     ]}
 };
 function renderRepo(key){
@@ -1355,7 +1358,7 @@ function renderRepo(key){
   const show = i => {
     const d = R0.docs[i]; read.add(i); A.click();
     $$(".file").forEach(f=>f.setAttribute("aria-current", f.dataset.i==i));
-    $("#viewer").innerHTML = `<p class="eyebrow">${esc(d.k)}</p><h3>${esc(d.t)}</h3>${d.b.map(p=>`<p>${esc(p)}</p>`).join("")}${(d.ref||[]).length?`<div style="display:grid;gap:4px;border-top:1px dashed var(--line);padding-top:10px">${d.ref.map(r=>`<p class="src">${esc(r)}</p>`).join("")}</div>`:""}`;
+    $("#viewer").innerHTML = `<p class="eyebrow">${esc(d.k)}</p><h3>${esc(d.t)}</h3>${d.b.map(p=>`<p>${esc(p)}</p>`).join("")}${(d.ref||[]).length?`<div class="refl"><span class="src">Referencias (APA 7)</span>${d.ref.map(r=>`<p class="src">${REFS[r]||esc(r)}</p>`).join("")}</div>`:""}`;
     $(`[data-r="${i}"]`).textContent = "LEÍDO";
     $("#left").textContent = `Textos leídos: ${read.size}/${R0.docs.length}`;
     if(read.size === R0.docs.length && !S.read[key]){ S.read[key] = true; save(); $("#phrase").hidden = false; A.ok(); buzzWatch(); toast("Desafío desbloqueado: volvé con el agente de desafío"); }
@@ -1378,6 +1381,10 @@ const REFS = {
   hernandez:"Hernández-Sampieri, R., &amp; Mendoza, C. P. (2018). <em>Metodología de la investigación: Las rutas cuantitativa, cualitativa y mixta</em>. McGraw-Hill.",
   lincoln:"Lincoln, Y. S., &amp; Guba, E. G. (1985). <em>Naturalistic inquiry</em>. Sage.",
   denzin:"Denzin, N. K. (1978). <em>The research act: A theoretical introduction to sociological methods</em> (2.ª ed.). McGraw-Hill.",
+  brant:"Brantingham, P. J., &amp; Brantingham, P. L. (Eds.). (1981). <em>Environmental criminology</em>. Sage.",
+  lynch:"Lynch, M. J. (1990). The greening of criminology: A perspective for the 1990s. <em>The Critical Criminologist, 2</em>(3).",
+  ley8325:"Asamblea Legislativa de la República de Costa Rica. (2002). <em>Ley de protección, conservación y recuperación de las poblaciones de tortugas marinas</em> (Ley N.º 8325).",
+  propia:"Elaboración propia para el juego Kinética (personajes, escenas y testimonios ficticios basados en las fuentes del caso).",
   cohen:"Cohen, L. E., &amp; Felson, M. (1979). Social change and crime rate trends: A routine activity approach. <em>American Sociological Review, 44</em>(4), 588–608.",
   semanario:"El espíritu de Jairo Mora Sandoval, 10 años después de su asesinato. (2023). <em>Semanario Universidad</em>. https://semanariouniversidad.com/pais/el-espiritu-de-jairo-mora-sandoval-10-anos-despues-de-su-asesinato/",
   mongabay:"Medioambientalista costarricense paga con su vida su dedicación a las tortugas marinas. (2013, julio). <em>Mongabay</em>. https://es.mongabay.com/2013/07/medioambientalista-costarricense-paga-con-su-vida-su-dedicacion-a-las-tortugas-marinas/",
@@ -1429,11 +1436,11 @@ const GUIDE = {
            "Elegí tres fuentes de tipos distintos: un testimonio directo, una evidencia física o un documento, y un registro del terreno.",
            "Descartá las fuentes de oídas, las generalizaciones y las que repiten lo que dijo otra fuente: no son independientes.",
            "En el tercer acertijo decidí si las fuentes confirman, no alcanzan o contradicen la afirmación.",
-           "Al final, redactá la conclusión siguiendo la lista de revisión de la derecha."],
+           "Al final, redactá la conclusión siguiendo la lista de revisión de la derecha. Cada dato tomado de una fuente lleva su cita en APA 7."],
     hints:["Acertijo 1: pescador artesanal + huellas en la arena + perro guardián.",
            "Acertijo 2: registro de WIDECAST + biólogo de campo + lideresa comunal. La nota de prensa repite a WIDECAST, así que no cuenta.",
            "Acertijo 3: las tres fuentes muestran patrullas que llegaban y se iban. La afirmación con «siempre» queda contradicha.",
-           "Redacción: usá las frases de apoyo. Si te trabás, abrí el ejemplo y reescribilo con tus palabras."],
+           "Redacción: usá las frases de apoyo y citá el dato que usés, por ejemplo (WIDECAST, citado por Mongabay, 2013). Si te trabás, abrí el ejemplo y reescribilo con tus palabras."],
     made:"La triangulación de fuentes sigue a Denzin (1978) y a Cáceres (2003). La redacción de conclusiones sigue a Bermúdez Rubio et al. (2021): responder la pregunta, apoyarse en los resultados, no traer datos nuevos y señalar limitaciones. Las afirmaciones combinan datos publicados con testimonios ficticios escritos para practicar.",
     refs:["denzin","caceres","bermudez","chazaro","mongabay","universo"]}
 };
@@ -1481,7 +1488,7 @@ const FRAGS = [
 const HINT = {inseg:"Habla de miedo o del modo de operar de las bandas.", inst:"Habla de la policía, los tribunales o la presencia del Estado.", socio:"Habla de las tortugas, los nidos o la biodiversidad.", none:"No habla de miedo, de instituciones ni de las tortugas: ¿será otro tema?"};
 const WHY1 = {
   "Los vecinos ya no bajan a la playa de noche por miedo.":"Describe cómo se siente la comunidad: es percepción de inseguridad.",
-  "Las redes criminales comercializan los huevos y la carne de tortuga.":"Describe el modo de operar de las bandas criminales.",
+  "Las redes criminales comercializan los huevos y la carne de tortuga.":"Describe el modo de operar de las bandas criminales (Mongabay, 2013).",
   "Un grupo armado con fusiles AK-47 saqueó 19 nidos de baula en 2012.":"Muestra la presencia armada de las bandas en la playa (El Universo, 2012).",
   "Entran carros desconocidos de madrugada, algunos con las luces apagadas.":"Es una dinámica criminal que la comunidad observa y teme.",
   "Con patrullaje policial se salvaron ~1.750 nidos; sin él, ~6.":"Habla de la presencia policial y de su efecto (Mongabay, 2013).",
@@ -1490,7 +1497,7 @@ const WHY1 = {
   "Las patrullas llegan unas semanas y después se van.":"Describe una presencia institucional intermitente.",
   "Jairo Mora identificó cerca de 1.474 nidos de baula en Moín.":"Mide la importancia de la playa para la anidación de la baula (Semanario Universidad, 2023).",
   "Solo cerca de 1 de cada 1.000 crías llega a ser adulta.":"Es un dato sobre la supervivencia de la especie (Mongabay, 2013).",
-  "Un nido saqueado equivale a unas 100 crías que no llegan al mar.":"Cuantifica el daño de cada saqueo a la biodiversidad.",
+  "Un nido saqueado equivale a unas 100 crías que no llegan al mar.":"Cuantifica el daño de cada saqueo a la biodiversidad (Mongabay, 2013).",
   "En Moín anidan la baula, la tortuga verde y la carey.":"Describe la biodiversidad de la zona (Latin American Sea Turtles, 2023)."
 };
 const cap = c => FRAGS.filter(f=>f.c===c).length;
@@ -1689,7 +1696,7 @@ const Q3 = [
    why:"1.750 ÷ 6 ≈ 292. La diferencia relativa es enorme aunque la barra pequeña casi no se vea."},
   {chart:null, q:"Con ese mismo gráfico, ¿cuál conclusión es la más rigurosa?",
    o:["El patrullaje policial fue la única causa de la diferencia.","Hay una asociación fuerte entre la presencia policial y los nidos salvados, aunque otros factores también pudieron influir.","En la temporada sin patrullaje solo llegaron 6 tortugas a la playa.","El gráfico demuestra que los saqueadores desaparecen cuando hay policía."], a:1,
-   why:"El gráfico compara dos temporadas. Muestra una asociación clara, pero no controla otras variables (número de voluntarios, clima, cantidad de hembras). Por eso se habla de asociación, no de causa única."},
+   why:"El gráfico compara dos temporadas. Muestra una asociación clara, pero no controla otras variables (número de voluntarios, clima, cantidad de hembras). Por eso se habla de asociación, no de causa única (Hernández-Sampieri y Mendoza, 2018)."},
   {chart:()=>barChart({title:"Nidos reubicados al vivero de Moín en 2023, por especie", src:"LAST, informe de temporada 2023", max:400,
      data:[{l:"Baula",v:316},{l:"Verde",v:4,c:"#6fe3ff"},{l:"Carey",v:3,c:"#ff8f45"}]}),
    q:"¿Qué porcentaje aproximado de los nidos reubicados fue de tortuga baula?",
@@ -1697,7 +1704,7 @@ const Q3 = [
    why:"El total es 316 + 4 + 3 = 323. Entonces 316 ÷ 323 ≈ 0,978, o sea cerca del 98 %."},
   {chart:null, q:"¿Con cuál categoría de análisis se relaciona más directamente este gráfico de especies?",
    o:["Percepción de inseguridad mediante la presencia criminal","Capacidad institucional estatal","Afectación socioambiental"], a:2,
-   why:"Describe qué especies dependen de la playa y cuántos nidos hubo que proteger: es información sobre biodiversidad y conservación."},
+   why:"Describe qué especies dependen de la playa y cuántos nidos hubo que proteger (Latin American Sea Turtles, 2023): es información sobre biodiversidad y conservación."},
   {chart:dotsChart, q:"Si un nido tiene unos 100 huevos y solo 1 de cada 1.000 crías llega a adulta, ¿cuántos nidos hacen falta, en promedio, para que una tortuga llegue a adulta?",
    o:["1 nido","5 nidos","10 nidos","100 nidos"], a:2,
    why:"1.000 crías ÷ 100 por nido = 10 nidos. Por eso un solo nido saqueado ya resta una parte importante de la próxima generación."}
@@ -1760,7 +1767,7 @@ const TRI = [
   {claim:"Cuando hay patrullaje policial se salvan muchos más nidos.",
    win:"Un documento con cifras, un testimonio de campo y la voz de la comunidad coinciden. Eso es triangular. Ojo: confirma una asociación fuerte, no una causa única.",
    cards:[
-    {t:"Documento", who:"Registro de WIDECAST", q:"Con una unidad policial patrullando se salvaron unos 1.750 nidos; en la temporada siguiente, sin patrullaje, unos seis.", ok:true},
+    {t:"Documento", who:"Registro de WIDECAST", q:"Con una unidad policial patrullando se salvaron unos 1.750 nidos; en la temporada siguiente, sin patrullaje, unos seis (WIDECAST, citado por Mongabay, 2013).", ok:true},
     {t:"Testimonio directo", who:"Biólogo de campo", q:"«Cuando la policía patrulla con nosotros, llegamos a los nidos antes de que lleguen los saqueadores.»", ok:true},
     {t:"Testimonio comunitario", who:"Lideresa comunal", q:"«Mientras vino la patrulla, la gente volvió a bajar a la playa. Cuando se fue, volvió el miedo.»", ok:true},
     {t:"Nota de prensa", who:"Reportaje que cita a WIDECAST", q:"«Según WIDECAST, con patrullaje se salvaron unos 1.750 nidos y sin él, unos seis.»", ok:false, why:"Reproduce el mismo registro de WIDECAST. Es la misma fuente, no una segunda."},
@@ -1769,7 +1776,7 @@ const TRI = [
   {verdict:true, claim:"La policía siempre responde a las denuncias de la comunidad.",
    cards:[
     {t:"Testimonio directo", who:"Lideresa comunal", q:"«Hemos pedido patrullas muchas veces. Vienen unas semanas y después se van.»"},
-    {t:"Nota de prensa", who:"El Universo, 2012", q:"El grupo de voluntariado había pedido ayuda policial durante semanas por amenazas constantes."},
+    {t:"Nota de prensa", who:"El Universo, 2012", q:"El grupo de voluntariado había pedido ayuda policial durante semanas por amenazas constantes (El Universo, 2012)."},
     {t:"Documento", who:"WIDECAST, citado por Mongabay (2013)", q:"Con patrullaje se salvaron unos 1.750 nidos; sin patrullaje, unos seis."}],
    o:["Confirmada: las tres fuentes la respaldan.","No se puede confirmar: faltan datos.","Contradicha: las fuentes muestran una respuesta intermitente, no constante."], a:2,
    win:"Tres fuentes independientes apuntan a lo mismo: la presencia policial fue intermitente. El «siempre» no se sostiene, así que el hallazgo se reformula: la respuesta fue intermitente."}
@@ -1780,7 +1787,7 @@ const WHY4 = {
   "Pescador artesanal":"Testimonio directo: lo vio con sus propios ojos y da fecha, hora y lugar.",
   "Huellas en la arena":"Evidencia física: las marcas existen aunque nadie las cuente, y no dependen del pescador.",
   "Perro guardián":"Registro del terreno: el reloj cruzó ladridos y motores sin depender de lo que dijeron las personas.",
-  "Registro de WIDECAST":"Documento con cifras de dos temporadas, producido por el proyecto de conservación.",
+  "Registro de WIDECAST":"Documento con cifras de dos temporadas, producido por el proyecto de conservación (WIDECAST, citado por Mongabay, 2013).",
   "Biólogo de campo":"Testimonio de quien trabaja cada noche en la playa: conoce el efecto del patrullaje de primera mano.",
   "Lideresa comunal":"Voz de la comunidad: describe cómo cambia la vida diaria cuando la patrulla llega o se va."
 };
@@ -1850,12 +1857,13 @@ R.game4 = () => {
   const writeStage = () => {
     $("#tp").style.width = "100%";
     $("#tIntro").textContent = "Última parte: redactá la conclusión del caso con lo que confirmaste en los acertijos.";
-    const CHIPS = ["Las fuentes revisadas muestran que", "El testimonio de", "coincide con", "Además, el registro de WIDECAST indica que", "Sin embargo, estos datos no permiten afirmar que", "Haría falta"];
-    const MODEL = "Las fuentes revisadas muestran que vehículos ajenos a la comunidad entran de noche a la playa de Moín: el testimonio del pescador, las huellas de llanta en la arena y el registro del perro guardián coinciden, aunque no dependen unas de otras. Además, el registro de WIDECAST indica que con patrullaje policial se salvaron unos 1.750 nidos y sin él unos seis, lo que sugiere una asociación entre la vigilancia nocturna y la protección de los nidos. Sin embargo, estos datos no permiten afirmar que el patrullaje sea la única causa; haría falta comparar más temporadas y entrevistar a más personas de la comunidad.";
+    const CHIPS = ["Las fuentes revisadas muestran que", "El testimonio de", "coincide con", "Además, el registro de WIDECAST (citado por Mongabay, 2013) indica que", "(Mongabay, 2013)", "(Latin American Sea Turtles, 2023)", "Sin embargo, estos datos no permiten afirmar que", "Haría falta"];
+    const MODEL = "Las fuentes revisadas muestran que vehículos ajenos a la comunidad entran de noche a la playa de Moín: el testimonio del pescador, las huellas de llanta en la arena y el registro del perro guardián coinciden, aunque no dependen unas de otras. Además, el registro de WIDECAST indica que con patrullaje policial se salvaron unos 1.750 nidos y sin él unos seis (WIDECAST, citado por Mongabay, 2013), lo que sugiere una asociación entre la vigilancia nocturna y la protección de los nidos. Sin embargo, estos datos no permiten afirmar que el patrullaje sea la única causa; haría falta comparar más temporadas y entrevistar a más personas de la comunidad.";
     const CHECKS = [
       {id:"len", t:"Tiene entre 60 y 180 palabras.", f:(x,w) => w >= 60 && w <= 180, tip:"Ajustá la extensión: entre 60 y 180 palabras."},
       {id:"hal", t:"Responde con un hallazgo del caso (vigilancia, vehículos, nidos).", f:x => /(veh[ií]cul|carro|patrull|vigilanc|nido|saque)/i.test(x), tip:"Decí qué se encontró: por ejemplo, que entran vehículos de noche o que con patrullaje se salvan más nidos."},
       {id:"src", t:"Menciona al menos dos tipos de fuente.", f:x => [/(testimonio|pescador|lideresa|bi[oó]logo|vecin|entrevist)/i, /(registro|widecast|documento|informe|dato|cifra|1\.?750)/i, /(huella|perro|observ|evidencia|reloj)/i].filter(rx => rx.test(x)).length >= 2, tip:"Nombrá las fuentes que coinciden: un testimonio, un documento o dato, una evidencia física u observación."},
+      {id:"cit", t:"Cita al menos una fuente con autor y año, como (Mongabay, 2013).", f:x => /\([^()]*\b(19|20)\d{2}\)/.test(x), tip:"Agregá la cita del dato que usás: (Mongabay, 2013), (El Universo, 2012) o (WIDECAST, citado por Mongabay, 2013)."},
       {id:"cau", t:"Usa lenguaje de evidencia (muestra, sugiere, indica, coincide).", f:x => /(muestra|sugiere|indica|se asocia|asociaci|coincid|apunta)/i.test(x), tip:"Usá verbos prudentes: «muestra», «sugiere», «indica», «coincide»."},
       {id:"lim", t:"Reconoce una limitación.", f:x => /(sin embargo|aunque|limitaci|no permite|no prueba|no demuestra|har[ií]a falta|no alcanza)/i.test(x), tip:"Agregá un límite: «Sin embargo, estos datos no permiten afirmar que…» o «Haría falta…»."},
       {id:"abs", t:"Evita palabras absolutas (siempre, nunca, demostrado).", f:x => x.trim().length > 0 && !/(\bsiempre\b|\bnunca\b|demostrad|comprobad|todo el mundo|\bnadie\b|definitivamente|sin duda)/i.test(x), tip:"Quitá palabras absolutas como «siempre», «nunca», «demostrado» o «sin duda»."}
@@ -1871,7 +1879,7 @@ R.game4 = () => {
           <div id="wfb" aria-live="polite"></div>
         </div>
         <aside class="wr-side"><p class="eyebrow">Lista de revisión</p><ul class="checks" id="wChecks"></ul>
-          <p class="src">Una buena conclusión responde la pregunta, se apoya en los resultados, no trae datos nuevos y señala sus límites (Bermúdez Rubio et al., 2021).</p></aside>
+          <p class="src">Una buena conclusión responde la pregunta, se apoya en los resultados, no trae datos nuevos, señala sus límites (Bermúdez Rubio et al., 2021) y cita cada dato que no es propio (APA 7).</p></aside>
       </div>`;
     const ta = $("#wTxt");
     const words = () => (ta.value.trim().match(/\S+/g) || []).length;
