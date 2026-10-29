@@ -249,10 +249,29 @@ a{color:var(--neon)}
 @keyframes shake{20%{transform:translateX(-6px)}40%{transform:translateX(6px)}60%{transform:translateX(-4px)}80%{transform:translateX(4px)}}
 .bins{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px}
 @media (max-width:760px){.bins{grid-template-columns:1fr}}
-.bin{position:relative;border:1px solid var(--line);border-radius:12px;padding:14px;background:var(--deep);display:grid;gap:8px;cursor:pointer;text-align:left;overflow:hidden;transition:border-color .2s,box-shadow .3s}
+.bin{position:relative;border:1px solid var(--line);border-radius:12px;padding:14px;background:var(--deep);display:grid;gap:8px;align-content:start;cursor:pointer;text-align:left;overflow:hidden;transition:border-color .2s,box-shadow .3s}
 .bin.hover{border-color:var(--neon)}
 .bin h3{font-size:17px}
 .bin p{font-size:13px;color:var(--muted)}
+.bin .stack{display:grid;gap:6px;align-content:start}
+.bin .stack .it{display:flex;gap:8px;align-items:flex-start;background:rgba(61,245,142,.08);border:1px solid rgba(61,245,142,.45);border-radius:6px;padding:6px 8px;font-size:12.5px;line-height:1.35;color:var(--text);animation:pop .35s ease-out}
+.bin .stack .it .n{flex:none;min-width:20px;height:20px;border-radius:50%;background:var(--neon);color:var(--ink);font-family:var(--f-mono);font-size:11px;font-weight:600;display:grid;place-items:center}
+.bin .stack .it b{font-family:var(--f-mono);font-size:11px;color:var(--neon);font-weight:600;margin-right:2px}
+.bin[data-c="none"] .stack .it{background:rgba(255,143,69,.08);border-color:rgba(255,143,69,.5)}
+.bin[data-c="none"] .stack .it .n{background:var(--sunset)}
+.bin[data-c="none"] .stack .it b{color:var(--sunset)}
+@media (max-width:760px){
+  .bin .stack{display:flex;flex-wrap:wrap;gap:4px}
+  .bin .stack .it{padding:2px 7px 2px 2px;gap:4px;border-radius:999px;align-items:center}
+  .bin .stack .it .tx{font-size:0}
+  .bin .stack .it .tx b{font-size:10px;margin:0}
+  .bin .stack .it .n{min-width:16px;height:16px;font-size:9.5px}
+  .g1.done .bins{position:static}
+  .g1.done .bin .stack{display:grid}
+  .g1.done .bin .stack .it{border-radius:6px;padding:5px;align-items:flex-start}
+  .g1.done .bin .stack .it .tx{font-size:11.5px}
+  .g1.done .bin .stack .it .tx b{display:block}
+}
 .bin .energy{height:10px;border-radius:5px;background:#081820;border:1px solid var(--line);overflow:hidden}
 .bin .energy i{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--neon-dim),var(--neon));transition:width .6s}
 .bin.full{border-color:var(--neon);box-shadow:0 0 0 1px var(--neon),0 0 36px -6px var(--neon)}
@@ -1899,7 +1918,7 @@ R.game1 = () => {
     <p class="muted">Arrastrá cada fragmento flotante hasta su categoría de análisis. En pantallas táctiles también podés tocar el fragmento y luego la categoría. Cada acierto carga la categoría con energía de conocimiento. Cada fragmento tiene un código de tres partes: categoría (PI inseguridad, CI institucional, AS socioambiental), escenario (C comunidad, P playa) y fuente. Uno no encaja en ninguna categoría: guardalo aparte.</p>${guideBtn("game1")}</div>
     <div class="cloud" id="cloud">${order.map(i=>`<div class="frag" tabindex="0" role="button" data-i="${i}">${esc(FRAGS[i].t)}</div>`).join("")}</div>
     <p class="fb" id="fb" aria-live="polite"></p>
-    <div class="bins">${Object.entries(CATS).map(([k,c])=>`<button class="bin" type="button" data-c="${k}"><h3><span class="long">${c.t}</span><span class="short">${c.s}</span></h3><p>${c.d}</p><div class="energy"><i></i></div><span class="src" data-n="${k}">0/${cap(k)}</span></button>`).join("")}</div>
+    <div class="bins">${Object.entries(CATS).map(([k,c])=>`<button class="bin" type="button" data-c="${k}"><h3><span class="long">${c.t}</span><span class="short">${c.s}</span></h3><p>${c.d}</p><div class="energy"><i></i></div><span class="src" data-n="${k}">0/${cap(k)}</span><span class="stack" data-s="${k}" aria-live="polite"></span></button>`).join("")}</div>
   </div></section>`;
   const fb = $("#fb");
   const tryPlace = (fragEl, cat) => {
@@ -1908,12 +1927,15 @@ R.game1 = () => {
       A.ok(); fill[cat]++; placed++;
       fragEl.remove(); sel = null;
       const bin = $(`.bin[data-c="${cat}"]`);
+      const it = document.createElement("span"); it.className = "it";
+      it.innerHTML = `<span class="n">${placed}</span><span class="tx"><b>${esc(f.code)}</b> ${esc(f.t)}</span>`;
+      it.title = f.t; bin.querySelector(".stack").appendChild(it);
       bin.querySelector(".energy i").style.width = (fill[cat]/cap(cat)*100)+"%";
       $(`[data-n="${cat}"]`).textContent = `${fill[cat]}/${cap(cat)}`;
       $$(".bin").forEach(x=>x.classList.remove("hint"));
       fb.className = "fb ok"; fb.textContent = cat === "none" ? `Guardado aparte. ${f.n} Código provisional: ${f.code}.` : `Bien codificado (${f.code}). ${WHY1[f.t] || ""}`;
       if(fill[cat] === cap(cat)){ bin.classList.add("full"); A.fanfare(); if(cat !== "none") fb.textContent = `Categoría completa: ${CATS[cat].t}.`; }
-      if(placed === FRAGS.length) setTimeout(()=>earnBadge("conocimiento", "¡Felicidades, has superado el desafío 1!", "explore2", "Ir a la playa"), 900);
+      if(placed === FRAGS.length){ $(".g1").classList.add("done"); fb.className = "fb ok"; fb.textContent = "¡Codificaste los 13 fragmentos! Así quedó tu matriz, en el orden en que los encontraste."; setTimeout(()=>earnBadge("conocimiento", "¡Felicidades, has superado el desafío 1!", "explore2", "Ir a la playa"), 3200); }
     } else {
       A.bad(); fragEl.classList.remove("bad"); void fragEl.offsetWidth; fragEl.classList.add("bad");
       const ix = +fragEl.dataset.i; ERR1[ix] = (ERR1[ix] || 0) + 1; fb.className = "fb no";
