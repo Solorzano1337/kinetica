@@ -24,7 +24,7 @@ Se necesita conexión a internet para las tipografías (Google Fonts) y, en la v
 
 ## Controles
 
-**2D:** se juega con clic o toque. El avance se guarda en el navegador; en Configuración → Ir a un capítulo se puede volver a cualquier parte ya desbloqueada.
+**2D:** en las zonas se camina con flechas o WASD (en celular, con el mando flotante de abajo a la izquierda) y se investiga con Enter o E. También se puede hacer clic o tocar cada elemento. El avance se guarda en el navegador; en Configuración → Saltar a se puede volver a cualquier parte ya desbloqueada.
 
 **3D:** WASD o flechas para caminar, Shift para correr, arrastrar el mouse para girar la cámara, rueda para acercar y E para interactuar. En celular, palanca a la izquierda y botón de acción a la derecha.
 
@@ -57,3 +57,7 @@ Los personajes del terreno son ficticios. Las cifras y los hechos del caso viene
 ## Tecnología
 
 HTML, CSS y JavaScript sin dependencias de compilación. Música y efectos generados con Web Audio; locución opcional con la síntesis de voz del navegador. La versión 3D usa Three.js r128.
+
+## Herramientas para desarrollo
+
+La carpeta `herramientas/` trae el script que arma el 3D a partir del 2D (`armar3d.py`) y las pruebas automáticas de punta a punta (`probar2d.mjs`, `probar3d.mjs`). Las instrucciones están en `herramientas/LEEME.md`.

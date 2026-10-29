@@ -1,0 +1,9 @@
+{
+  "name": "kinetica-herramientas",
+  "private": true,
+  "type": "module",
+  "description": "Herramientas de prueba del juego Kinética",
+  "dependencies": {
+    "playwright": "^1.56.0"
+  }
+}
