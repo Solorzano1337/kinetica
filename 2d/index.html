@@ -291,11 +291,7 @@ a{color:var(--neon)}
 .tip{border:1px solid var(--line);border-radius:10px;padding:18px;background:var(--deep);display:grid;gap:8px;min-height:150px}
 .tip b{font-family:var(--f-display);font-size:20px;color:var(--neon)}
 
-/* ---------- Holograma ---------- */
-.holo{position:absolute;right:8%;top:8%;width:min(30%,260px);z-index:2;animation:flick 3.5s steps(1) infinite;opacity:.92}
-.holo svg{width:100%;height:auto;filter:drop-shadow(0 0 14px rgba(110,230,255,.8))}
 @keyframes flick{0%,100%{opacity:.92}47%{opacity:.5}48%{opacity:.92}72%{opacity:.7}73%{opacity:.92}}
-@media (max-width:620px){.holo{width:34%;top:4%}}
 
 /* ---------- Final ---------- */
 .endscr{max-width:900px;margin:0 auto;padding-block:30px 110px;display:grid;gap:20px}
@@ -520,7 +516,7 @@ const esc = s => String(s).replace(/[&<>"]/g, c => ({"&":"&amp;","<":"&lt;",">":
 
 /* ============ Estado ============ */
 const ORDER = ["desk","enter","cmds","intro","select","equip","map","brief","explore1","repo1","game1","explore2","repo2","game2","holo","repo3","game3","explore3","repo4","game4","grado","gracias","auto","end"];
-const CHAPTER = {enter:"Ingreso a la computadora",cmds:"Comandos",intro:"Video inicial",select:"Selección de personaje",equip:"Pantalla de carga de equipamiento",map:"Mapa de Costa Rica",brief:"Mensaje de Kinética",explore1:"Exploración de la comunidad",repo1:"Repositorio 1",game1:"Desafío 1 · Codificación de hallazgos",explore2:"Exploración en la playa",repo2:"Repositorio 2",game2:"Desafío 2 · Radar de la información",holo:"Mensaje del holograma",repo3:"Repositorio 3",game3:"Desafío 3 · Lentes del conocimiento gráfico",explore3:"Exploración en la playa (final)",repo4:"Repositorio 4 · Triangulación",game4:"Desafío 4 · Triangulando la realidad",grado:"Obtención del grado",gracias:"Agradecimiento",auto:"Autoevaluación",end:"Expediente"};
+const CHAPTER = {enter:"Ingreso a la computadora",cmds:"Comandos",intro:"Video inicial",select:"Selección de personaje",equip:"Pantalla de carga de equipamiento",map:"Mapa de Costa Rica",brief:"Mensaje de Kinética",explore1:"Exploración de la comunidad",repo1:"Repositorio 1",game1:"Desafío 1 · Codificación de hallazgos",explore2:"Exploración en la playa",repo2:"Repositorio 2",game2:"Desafío 2 · Radar de la información",holo:"Mensaje de Kinética (avances y logros)",repo3:"Repositorio 3",game3:"Desafío 3 · Lentes del conocimiento gráfico",explore3:"Exploración en la playa (final)",repo4:"Repositorio 4 · Triangulación",game4:"Desafío 4 · Triangulando la realidad",grado:"Obtención del grado",gracias:"Agradecimiento",auto:"Autoevaluación",end:"Expediente"};
 const BK = ["conocimiento","rigurosidad","interpretacion","cuarta"];
 const phase = st => { const i = ORDER.indexOf(st); return i <= ORDER.indexOf("brief") ? "Partida" : i < ORDER.indexOf("grado") ? "Iniciación" : "Regreso"; };
 const fresh = () => ({v:2, stage:"desk", max:0, char:null, name:"", conclusion:"", read:{}, clues:{}, badges:[], items:[], auto:null, warned:false, settings:{music:true, sfx:true, voice:true, speed:"normal", vol:0.5}});
@@ -2010,16 +2006,10 @@ R.game2 = () => {
   show();
 };
 
-/* ---------- Mensaje del holograma ---------- */
-const HOLO = `<svg viewBox="0 0 200 300" aria-hidden="true"><defs><linearGradient id="hg" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#9ff3ff" stop-opacity=".9"/><stop offset="1" stop-color="#3df58e" stop-opacity=".2"/></linearGradient>
-  <pattern id="hl" width="4" height="4" patternUnits="userSpaceOnUse"><rect width="4" height="2" fill="#9ff3ff" opacity=".35"/></pattern></defs>
-  <ellipse cx="100" cy="280" rx="70" ry="12" fill="none" stroke="#9ff3ff" stroke-width="3"/><path d="M40 280 L70 120 H130 L160 280z" fill="url(#hg)" opacity=".18"/>
-  <g fill="url(#hg)" stroke="#9ff3ff" stroke-width="2"><rect x="60" y="40" width="80" height="64" rx="18"/><rect x="66" y="112" width="68" height="96" rx="20"/><rect x="40" y="120" width="18" height="70" rx="9"/><rect x="142" y="120" width="18" height="70" rx="9"/></g>
-  <rect x="60" y="40" width="80" height="170" fill="url(#hl)"/><circle cx="84" cy="72" r="7" fill="#062"/><circle cx="116" cy="72" r="7" fill="#062"/><path d="M84 90 q16 10 32 0" stroke="#062" stroke-width="4" fill="none"/><path d="M100 40 V22" stroke="#9ff3ff" stroke-width="3"/><circle cx="100" cy="18" r="6" fill="#3df58e"/>
-  <circle cx="100" cy="150" r="14" fill="none" stroke="#3df58e" stroke-width="3"/></svg>`;
+/* ---------- Mensaje de Kinética (avances y logros) ---------- */
 R.holo = () => {
-  stage.innerHTML = `<section class="screen" style="position:absolute;inset:0"><div class="cine dusk"><img class="bg" src="assets/moin.jpg" alt="Playa de Moín al atardecer"></div><div class="holo">${HOLO}</div><div class="rec"><i></i>ASISTENTE KINÉTICA · AVANCES</div><div id="nar"></div></section>`;
-  narrate($("#nar"), {who:"Asistente holográfico de Kinética", voice:{pitch:1.6, rate:1.05}, endLabel:"Ponerme los lentes", onEnd:giveLenses, paras:[
+  stage.innerHTML = `<section class="screen" style="position:absolute;inset:0"><div class="cine glitch"><img class="bg" src="assets/intro.jpg" alt="Silueta anónima de Kinética frente a paneles de investigación"></div><div class="rec"><i></i>TRANSMISIÓN · KINÉTICA · AVANCES</div><div id="nar"></div></section>`;
+  narrate($("#nar"), {who:"Voz de Kinética · Avances y logros", voice:{pitch:.35, rate:.88}, endLabel:"Ponerme los lentes", onEnd:giveLenses, paras:[
     "¡Diagnóstico impecable! Has completado 2 de los 4 desafíos de la investigación. Con la superación de La codificación de hallazgos y El radar de la información, demostraste una capacidad analítica excepcional.",
     "Mirá en la pantalla de tu reloj: ya lucís con orgullo la Insignia del Conocimiento y la Insignia de la Rigurosidad. ¡Tu progreso está a la mitad y la evidencia de Moín empieza a tomar forma!",
     "Pero el camino a la sabiduría no se detiene aquí. Tu siguiente paso es colocarte los Lentes del conocimiento gráfico para descifrar las tendencias y correlaciones estadísticas del caso.",
@@ -2112,7 +2102,7 @@ R.game3 = () => {
   const advance = () => { i++; if(i < Q3.length){ A.click(); show(); } else { $("#qp").style.width = "100%"; earnBadge("interpretacion","¡Felicidades, has superado el desafío 3!","explore3","Ir a la playa (final)"); } };
   stage.innerHTML = `<section class="screen"><div class="g3 wrap">
     <div style="display:grid;gap:6px"><p class="eyebrow">Desafío 3 de 4 · Selección única</p><h2>Lentes del conocimiento gráfico</h2>
-    <p class="muted">El asistente de Kinética te propone preguntas sobre cada gráfico. Elegí una respuesta; si fallás, leé la pista y volvé a intentar.</p>${guideBtn("game3")}</div>
+    <p class="muted">Kinética te propone preguntas sobre cada gráfico. Elegí una respuesta; si fallás, leé la pista y volvé a intentar.</p>${guideBtn("game3")}</div>
     <div class="progress"><i id="qp" style="width:0%"></i></div>
     <div class="chart" id="chart"></div><h3 id="qq" style="font-size:20px;font-family:var(--f-body);font-weight:700;line-height:1.35"></h3>
     <div class="opts" id="opts"></div><div id="qfb"></div>
