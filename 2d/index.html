@@ -1656,7 +1656,7 @@ function openClue(id, onDone){
   openModal(`<div class="sheet" role="dialog" aria-modal="true" aria-label="${esc(c.title)}">
     <div class="sheet-h"><h3>${esc(c.title)}</h3><span class="tag sun">${esc(c.tag)}</span><button class="x" data-close aria-label="Cerrar">${X_ICON}</button></div>
     <div class="sheet-b">${body}
-      <div class="scan" id="scanBox" ${already?"":"hidden"}><h4>Registro del reloj</h4><p>${esc(c.scan)}</p>${(c.refs||[]).length?`<div class="refl"><span class="src">Referencias (APA 7)</span>${c.refs.map(k=>`<p class="src">${REFS[k]}</p>`).join("")}</div>`:(c.src?`<span class="src">Fuente: ${esc(c.src)}</span>`:"")}</div></div>
+      <div class="scan" id="scanBox" ${already?"":"hidden"}><h4>Registro del reloj</h4><p>${esc(c.scan)}</p>${(c.refs||[]).length?`<div class="refl"><span class="src">Referencias</span>${c.refs.map(k=>`<p class="src">${REFS[k]}</p>`).join("")}</div>`:(c.src?`<span class="src">Fuente: ${esc(c.src)}</span>`:"")}</div></div>
     <div class="sheet-f">${already?`<button class="btn ghost" type="button" data-close>Cerrar</button>`:`<button class="btn" type="button" id="doScan">${esc(c.action)}</button>`}</div></div>`);
   if(isTalk) V.say(c.lines.join(" "), {pitch:1, rate:1.02});
   const b = $("#doScan");
@@ -1737,7 +1737,7 @@ const REPOS = {
       {t:"Tres tipos de fuente", k:"Guía de método · elaboración propia a partir de Denzin (1978)", b:["Testimonio directo: alguien vio o vivió lo que cuenta. Evidencia física: huellas, objetos o registros del terreno. Documento: un informe o registro con método, que se puede revisar.","Un triángulo sólido combina tipos distintos. Si los tres vértices dependen del mismo origen, es un solo dato repetido. Esta clasificación es una adaptación propia de la triangulación de datos que describe Denzin (1978)."], ref:["denzin"]},
       {t:"Qué hacer cuando no coinciden", k:"Guía de método · Cáceres (2003)", b:["Si las fuentes se contradicen, el hallazgo no se acepta ni se descarta sin más: se reformula o se anota como no confirmado y se buscan más datos. La saturación (cuando los datos nuevos ya no aportan nada distinto) y la consulta a informantes ayudan a decidir (Cáceres, 2003).","Una palabra como «siempre» o «nadie» exige evidencia que casi nunca existe."], ref:["caceres"]},
       {t:"Resultados, conclusiones y recomendaciones", k:"Guía de redacción · Bermúdez Rubio et al. (2021); Cházaro-Arellano (2024)", b:["Los resultados responden qué se encontró: en pasado y sin interpretar. Las conclusiones responden la pregunta principal y los objetivos, sin datos nuevos. Las recomendaciones salen de las conclusiones y dicen qué, quién y cómo (Bermúdez Rubio et al., 2021).","«Se registraron seis pistas de percepción de inseguridad» es un resultado. «Hay más inseguridad porque el Estado no vigila» es una interpretación (Cházaro-Arellano, 2024)."], ref:["bermudez","chazaro"]},
-      {t:"Cómo citar en tu conclusión", k:"Guía de redacción · APA 7", b:["Cada dato que no es tuyo lleva su cita: apellido o institución y año. Puede ir entre paréntesis al final de la idea, como (Mongabay, 2013), o dentro de la frase, como «Según Mongabay (2013)…».","Si leíste un dato dentro de otra fuente, se cita así: (WIDECAST, citado por Mongabay, 2013). Con tres o más autores se escribe el primero y «et al.»: (Bermúdez Rubio et al., 2021).","Al final del trabajo, cada cita del texto debe aparecer completa en la lista de referencias, y cada referencia de la lista debe estar citada en el texto."]}
+      {t:"Cómo citar en tu conclusión", k:"Guía de redacción · Citas", b:["Cada dato que no es tuyo lleva su cita: apellido o institución y año. Puede ir entre paréntesis al final de la idea, como (Mongabay, 2013), o dentro de la frase, como «Según Mongabay (2013)…».","Si leíste un dato dentro de otra fuente, se cita así: (WIDECAST, citado por Mongabay, 2013). Con tres o más autores se escribe el primero y «et al.»: (Bermúdez Rubio et al., 2021).","Al final del trabajo, cada cita del texto debe aparecer completa en la lista de referencias, y cada referencia de la lista debe estar citada en el texto."]}
     ]}
 };
 function renderRepo(key){
@@ -1752,7 +1752,7 @@ function renderRepo(key){
   const show = i => {
     const d = R0.docs[i]; read.add(i); A.click();
     $$(".file").forEach(f=>f.setAttribute("aria-current", f.dataset.i==i));
-    $("#viewer").innerHTML = `<p class="eyebrow">${esc(d.k)}</p><h3>${esc(d.t)}</h3>${d.b.map(p=>`<p>${esc(p)}</p>`).join("")}${(d.ref||[]).length?`<div class="refl"><span class="src">Referencias (APA 7)</span>${d.ref.map(r=>`<p class="src">${REFS[r]||esc(r)}</p>`).join("")}</div>`:""}`;
+    $("#viewer").innerHTML = `<p class="eyebrow">${esc(d.k)}</p><h3>${esc(d.t)}</h3>${d.b.map(p=>`<p>${esc(p)}</p>`).join("")}${(d.ref||[]).length?`<div class="refl"><span class="src">Referencias</span>${d.ref.map(r=>`<p class="src">${REFS[r]||esc(r)}</p>`).join("")}</div>`:""}`;
     $(`[data-r="${i}"]`).textContent = "LEÍDO";
     $("#left").textContent = `Textos leídos: ${read.size}/${R0.docs.length}`;
     if(read.size === R0.docs.length && !S.read[key]){ S.read[key] = true; save(); $("#phrase").hidden = false; A.ok(); buzzWatch(); toast("Desafío desbloqueado: volvé con el agente de desafío"); }
@@ -1830,7 +1830,7 @@ const GUIDE = {
            "Elegí tres fuentes de tipos distintos: un testimonio directo, una evidencia física o un documento, y un registro del terreno.",
            "Descartá las fuentes de oídas, las generalizaciones y las que repiten lo que dijo otra fuente: no son independientes.",
            "En el tercer acertijo decidí si las fuentes confirman, no alcanzan o contradicen la afirmación.",
-           "Al final, redactá la conclusión siguiendo la lista de revisión de la derecha. Cada dato tomado de una fuente lleva su cita en APA 7."],
+           "Al final, redactá la conclusión siguiendo la lista de revisión de la derecha. Cada dato tomado de una fuente lleva su cita."],
     hints:["Acertijo 1: pescador artesanal + huellas en la arena + perro guardián.",
            "Acertijo 2: registro de WIDECAST + biólogo de campo + lideresa comunal. La nota de prensa repite a WIDECAST, así que no cuenta.",
            "Acertijo 3: las tres fuentes muestran patrullas que llegaban y se iban. La afirmación con «siempre» queda contradicha.",
@@ -1850,7 +1850,7 @@ function openGuide(key){
       <h4>Pistas</h4>${G.hints.slice(0, shown).map((h,k)=>`<p class="ghint"><b>Pista ${k+1}.</b> ${esc(h)}</p>`).join("")}
       ${shown < G.hints.length ? `<div><button class="btn ghost" type="button" id="gMore">Mostrar otra pista (${shown} de ${G.hints.length})</button></div>` : `<p class="src">Ya ves todas las pistas.</p>`}
       <h4>Cómo se construyó este desafío</h4><p class="gmade">${esc(G.made)}</p>
-      <h4>Fuentes (APA 7)</h4>${G.refs.map(k=>`<p>${REFS[k]}</p>`).join("")}
+      <h4>Fuentes</h4>${G.refs.map(k=>`<p>${REFS[k]}</p>`).join("")}
      </div></div>`);
     const m = $("#gMore"); if(m) m.onclick = () => { shown++; render(); };
   };
@@ -2272,7 +2272,7 @@ R.game4 = () => {
           <div id="wfb" aria-live="polite"></div>
         </div>
         <aside class="wr-side"><p class="eyebrow">Lista de revisión</p><ul class="checks" id="wChecks"></ul>
-          <p class="src">Una buena conclusión responde la pregunta, se apoya en los resultados, no trae datos nuevos, señala sus límites (Bermúdez Rubio et al., 2021) y cita cada dato que no es propio (APA 7).</p></aside>
+          <p class="src">Una buena conclusión responde la pregunta, se apoya en los resultados, no trae datos nuevos, señala sus límites (Bermúdez Rubio et al., 2021) y cita cada dato que no es propio.</p></aside>
       </div>`;
     const ta = $("#wTxt");
     const words = () => (ta.value.trim().match(/\S+/g) || []).length;
