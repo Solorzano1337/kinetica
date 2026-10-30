@@ -66,6 +66,22 @@
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
 <script>
+/* =====================================================================
+   KINÉTICA 3D · prototipo de la zona de la comunidad (Three.js r128)
+   Este archivo NO se publica tal cual: herramientas/armar3d.py reemplaza las
+   marcas /*@@NOMBRE@@*\/ con bloques copiados del juego 2D (estilos, audio,
+   utilidades, arte, pistas, biblioteca y desafío 1). Así el contenido es el
+   mismo en las dos versiones. Lo propio del 3D está aquí:
+
+   1. Estado ............ guardado propio (kinetica-moin-3d-v1)
+   2. Paneles ........... biblioteca y desafío se abren encima del mundo 3D
+   3. Reloj y menús ..... reloj, configuración y menú
+   4. Inicio ............ selección de personaje
+   5. Mundo 3D .......... escena, casas, camino, sprites (ilustraciones planas)
+   6. Interacción ....... acercarse a un elemento y presionar E o el botón
+   7. Controles ......... teclado, mouse y mando táctil
+   8. Bucle ............. movimiento, colisiones, cámara y minimapa
+   ===================================================================== */
 (() => {
 "use strict";
 const $ = (s, r = document) => r.querySelector(s);
@@ -75,6 +91,7 @@ const esc = s => String(s).replace(/[&<>"]/g, c => ({"&":"&amp;","<":"&lt;",">":
 const stage = $("#stage");
 
 /* ============ Estado ============ */
+/* Guardado separado del 2D, para que las dos versiones no se pisen. */
 const KEY = "kinetica-moin-3d-v1";
 const fresh = () => ({char:null, clues:{}, read:{}, badges:[], items:["reloj"], settings:{music:true, sfx:true, voice:true, speed:"normal", vol:0.5}});
 let S = fresh();
@@ -82,12 +99,14 @@ function save(){ try{ localStorage.setItem(KEY, JSON.stringify(S)); }catch(e){} 
 function load(){ try{ const t = localStorage.getItem(KEY); if(t){ const o = JSON.parse(t); return Object.assign(fresh(), o, {settings:Object.assign(fresh().settings, o.settings||{})}); } }catch(e){} return null; }
 { const o = load(); if(o) S = o; }
 
+/* Bloques compartidos con el 2D (los inserta armar3d.py). No editar aquí: editar el 2D. */
 /*@@AUDIO@@*/
 /*@@UI@@*/
 /*@@ART@@*/
 /*@@CLUES@@*/
 
 const R = {};
+/* Elementos investigables de la comunidad y condiciones de cada paso. */
 const ZONE_IDS = ["lideresa","herramientas","lora","rotulo","periodico","perro"];
 const secDone = () => ZONE_IDS.every(id => S.clues[id]);
 const repoDone = () => !!S.read.repo1;
@@ -105,6 +124,9 @@ function updateWatch(){
 function buzzWatch(){ A.buzz(); const b = $("#hWatch"); b.animate([{transform:"translateX(0)"},{transform:"translateX(-3px)"},{transform:"translateX(3px)"},{transform:"translateX(0)"}],{duration:120,iterations:8}); }
 function openPanel(){ $("#panel").hidden = false; $("#panel").scrollTop = 0; stage.innerHTML = ""; }
 function closePanel(){ $("#panel").hidden = true; stage.innerHTML = ""; document.body.classList.remove("ingame"); }
+/* go(): en 3D las pantallas del 2D (biblioteca, desafío 1) se abren en un panel
+   encima del mundo. go("explore1") cierra el panel y vuelve a caminar;
+   go("explore2") muestra el cierre del prototipo (fin3d). */
 function go(st){
   A.click(); V.stop();
   $("#modal").hidden = true; $("#modal").innerHTML = "";
@@ -118,6 +140,7 @@ function go(st){
 /*@@REPOS@@*/
 /*@@GAME1@@*/
 
+/* Cierre del prototipo: resumen de la zona tras ganar la insignia. */
 R.fin3d = () => {
   const n = ZONE_IDS.filter(id => S.clues[id]).length;
   stage.innerHTML = `<section class="screen"><div class="endscr wrap">
@@ -183,6 +206,7 @@ const CHARS = [
   {name:"Bitácora", txt:"Anota todo, con su fuente."},
   {name:"Horizonte", txt:"Mira lejos y lee mapas."}
 ];
+/* Pantalla de inicio: elegir personaje y entrar al mundo. */
 function showStart(){
   const st = $("#start"); st.hidden = false;
   if(S.char === null) S.char = 0;
@@ -209,6 +233,9 @@ function showStart(){
 }
 
 /* ============ Mundo 3D ============ */
+/* Mundo 3D. Unidades en metros aproximados; el personaje empieza en START.
+   world.obs = obstáculos (círculos y rectángulos) para las colisiones;
+   world.inter = elementos con los que se puede interactuar. */
 const TOUCH = matchMedia("(pointer:coarse)").matches || "ontouchstart" in window;
 const START = {x:5.3, z:35.5};
 let renderer, scene, camera, sun, player, pShadow, playerTex = [], world = {obs:[], inter:[], houses:[]};
@@ -219,6 +246,8 @@ const blocked = () => !$("#modal").hidden || !$("#panel").hidden || !$("#start")
 function mat(color, opts={}){ return new THREE.MeshLambertMaterial(Object.assign({color, flatShading:true}, opts)); }
 function box(w,h,d,color,x,y,z,parent,shadow=true){ const m = new THREE.Mesh(new THREE.BoxGeometry(w,h,d), typeof color === "number" || typeof color === "string" ? mat(color) : color); m.position.set(x,y,z); m.castShadow = shadow; m.receiveShadow = true; parent.add(m); return m; }
 function canvasTex(w, h, draw){ const c = document.createElement("canvas"); c.width = w; c.height = h; draw(c.getContext("2d"), w, h); const t = new THREE.CanvasTexture(c); t.anisotropy = 4; return t; }
+/* Convierte un SVG del 2D en textura. Así los personajes y objetos 3D son las
+   mismas ilustraciones del 2D, dibujadas como sprites que siempre miran a la cámara. */
 function svgTex(svg, w, h){
   const c = document.createElement("canvas"); c.width = w; c.height = h;
   const t = new THREE.CanvasTexture(c);
@@ -243,6 +272,7 @@ const NPC_LOOK = {
   agente:{skin:"#c08a5f",shirt:"#0f2a2a",pants:"#111",hair:'<path d="M-24 -160 q24 -30 48 0 q-6 -8 -24 -10 q-18 2 -24 10z" fill="#3b2a1a"/>',extra:'<circle cx="12" cy="-108" r="6" fill="#3df58e"/>'}
 };
 
+/* Camino de lastre: una cinta que sigue una curva suave entre puntos. */
 function makeRoad(points, width, color){
   const curve = new THREE.CatmullRomCurve3(points.map(p => new THREE.Vector3(p[0], 0, p[1])));
   const N = 140, pos = [], idx = [];
@@ -259,6 +289,7 @@ function makeRoad(points, width, color){
 function wallTex(color){
   return canvasTex(128, 128, (c,w,h) => { c.fillStyle = color; c.fillRect(0,0,w,h); c.strokeStyle = "rgba(0,0,0,.14)"; c.lineWidth = 3; for(let y=16;y<h;y+=21){ c.beginPath(); c.moveTo(0,y); c.lineTo(w,y); c.stroke(); } });
 }
+/* Casa de madera sobre pilotes, de bajo polígono; agrega su obstáculo. */
 function makeHouse({x, z, w, d, h, wall, roof, rot=0, porch=false, sign=null, stilt=1.2}){
   const g = new THREE.Group();
   const wood = 0x5a3d27;
@@ -308,6 +339,8 @@ function makePalm(x, z, s=1){
 function makeBush(x, z, r=.8, color=0x2f6b33){ const m = new THREE.Mesh(new THREE.IcosahedronGeometry(r, 0), mat(color)); m.position.set(x, r*.7, z); m.castShadow = true; scene.add(m); return m; }
 function boardTex(draw){ return canvasTex(512, 256, draw); }
 
+/* buildWorld(): arma toda la comunidad: suelo, camino, casas, árboles, NPC y los
+   seis elementos investigables. Para mover algo, cambiar sus coordenadas aquí. */
 function buildWorld(){
   scene = new THREE.Scene();
   scene.background = canvasTex(4, 256, (c,w,h) => { const g = c.createLinearGradient(0,0,0,h); g.addColorStop(0,"#2f3f6b"); g.addColorStop(.55,"#e98a5c"); g.addColorStop(1,"#f8c77f"); c.fillStyle = g; c.fillRect(0,0,w,h); });
@@ -407,6 +440,7 @@ const ASPECT = [287/620, 279/620, 310/620];
 function setPlayerChar(i){ if(!player) return; player.material.map = playerTex[i]; player.material.needsUpdate = true; player.scale.set(2.3*ASPECT[i]*facing, 2.3, 1); }
 function placePlayer(x, z){ if(!player) return; player.position.set(x, 0, z); pShadow.position.set(x, .04, z); }
 
+/* Actualiza los marcadores de los elementos según estén pendientes o ya investigados. */
 function refreshMarkers(){
   for(const i of world.inter){
     let color = 0x3df58e, show = true, op = .55;
@@ -419,6 +453,7 @@ function refreshMarkers(){
 
 /* ---------- Interacción ---------- */
 let near = null;
+/* Acción sobre el elemento cercano: ficha, biblioteca o desafío (con bloqueos). */
 function interact(i){
   if(!i || blocked()) return;
   A.click(); keys.w = keys.a = keys.s = keys.d = keys.arrowup = keys.arrowdown = keys.arrowleft = keys.arrowright = false;
@@ -487,6 +522,7 @@ $("#actBtn").onclick = () => interact(near);
 }
 
 /* ---------- Bucle ---------- */
+/* Empuja al personaje fuera de los obstáculos (círculos y rectángulos). */
 function collide(p){
   const pr = .42;
   for(const o of world.obs){
@@ -500,6 +536,8 @@ function collide(p){
 const clock = new THREE.Clock();
 const camTarget = new THREE.Vector3();
 let frame = 0;
+/* Bucle por cuadro: mueve al personaje, sigue con la cámara, detecta el elemento
+   cercano y dibuja. Si hay un panel abierto deja de dibujar para ahorrar batería. */
 function tick(){
   requestAnimationFrame(tick);
   const dt = Math.min(clock.getDelta(), .05), t = clock.elapsedTime;
@@ -547,6 +585,7 @@ function tick(){
   renderer.render(scene, camera);
   if(!$("#mini").hidden && (Math.floor(t*12) % 2 === 0)) drawMini();
 }
+/* Minimapa de la esquina: camino, casas, marcadores visibles y flecha del personaje. */
 function drawMini(){
   const c = $("#mini").getContext("2d"), W = 300, sc = W/72, X = x => (x + 34)*sc, Z = z => (z + 33)*sc;
   c.clearRect(0,0,W,W); c.fillStyle = "rgba(91,138,58,.35)"; c.fillRect(0,0,W,W);
@@ -556,6 +595,7 @@ function drawMini(){
   for(const i of world.inter){ if(!i.marker.visible) continue; c.fillStyle = "#" + i.marker.material.color.getHexString(); c.beginPath(); c.arc(X(i.x), Z(i.z), 9, 0, 7); c.fill(); }
   if(player){ const px = X(player.position.x), pz = Z(player.position.z); c.save(); c.translate(px, pz); c.rotate(-yaw); c.fillStyle = "#fff"; c.beginPath(); c.moveTo(0,-14); c.lineTo(9,10); c.lineTo(-9,10); c.closePath(); c.fill(); c.restore(); }
 }
+/* Calidad gráfica: en «baja» (por defecto en celulares) baja la resolución y quita las sombras. */
 function applyQuality(){
   if(!renderer) return;
   const low = (S.settings.quality || (TOUCH ? "baja" : "alta")) === "baja";
