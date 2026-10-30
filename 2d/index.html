@@ -438,8 +438,8 @@ select{background:#0a1d26;border:1px solid var(--line);border-radius:6px;padding
 @keyframes dissolve{0%{opacity:1;filter:none}40%{filter:drop-shadow(0 0 18px #3df58e) hue-rotate(60deg)}100%{opacity:0;transform:translate(160px,-120px) scale(.2);filter:blur(6px) drop-shadow(0 0 30px #6fe3ff)}}
 .abs-cap{position:absolute;left:50%;bottom:86px;transform:translateX(-50%);width:min(720px,calc(100% - 32px));text-align:center;font-family:var(--f-display);font-size:clamp(18px,2.6vw,24px);background:rgba(4,16,10,.7);border:1px solid var(--line);border-radius:8px;padding:10px 16px;margin:0}
 .abs-ctrl{position:absolute;right:var(--gut-r);bottom:24px}
-.cmds{max-width:900px;margin:0 auto;padding-block:28px 80px;display:grid;gap:18px}
-.cmd-title{font-family:var(--f-display);text-transform:uppercase;letter-spacing:.06em;color:transparent;-webkit-text-stroke:1.5px #6fe3ff;font-size:clamp(34px,6vw,56px);text-align:center}
+.cmds{max-width:1160px;margin:0 auto;padding-block:16px 60px;display:grid;gap:18px}
+.cmd-title{font-family:var(--f-display);text-transform:uppercase;letter-spacing:.06em;color:transparent;-webkit-text-stroke:1.5px #6fe3ff;font-size:clamp(30px,5vw,46px);text-align:center}
 .cmd-block h3{font-size:clamp(20px,3vw,26px);margin-bottom:10px}
 .cmd-goal{color:#6fe3ff;font-size:clamp(17px,2.2vw,21px);line-height:1.45;margin:0;padding-left:18px}
 .cmds hr{border:0;border-top:1px solid var(--line);width:100%}
@@ -453,6 +453,17 @@ select{background:#0a1d26;border:1px solid var(--line);border-radius:6px;padding
 .k{height:46px;border-radius:7px;display:grid;place-items:center;font-family:var(--f-display);font-size:20px;font-weight:600}
 .k.on{background:#6fe3ff;color:#0b1f33}
 .k.out{border:2px solid #6fe3ff;color:#6fe3ff}
+.cmd-steps{margin:0;padding-left:22px;display:grid;gap:8px;font-size:16px;line-height:1.45}
+.cmd-cols{display:grid;grid-template-columns:1.25fr 1fr;gap:28px;align-items:start}
+.cmd-col{display:grid;gap:18px}
+.cmd-ctrl{border-left:1px solid var(--line);padding-left:28px}
+.cmd-ctrl .cmd-block{display:grid;gap:12px}
+.cmd-ctrl p{margin:0}
+.cmd-ctrl .cmd-mob{display:flex;gap:14px;align-items:center;border:0;padding:0}
+.cmd-ctrl .cmd-mob svg{width:120px;flex:none}
+@media (max-width:860px){.cmd-cols{grid-template-columns:1fr}.cmd-ctrl{border-left:0;padding-left:0;border-top:1px solid var(--line);padding-top:16px}}
+.cmd-steps b{color:var(--neon)}
+.cmd-actions{display:flex;gap:12px;flex-wrap:wrap;justify-content:center}
 .cmd-go{justify-self:center;min-width:min(420px,100%);border-radius:999px;font-size:22px;padding:14px 28px;text-transform:uppercase}
 @media (max-width:700px){.cmd-grid{grid-template-columns:1fr}.cmd-mob{border-left:0;padding-left:0;border-top:1px solid var(--line);padding-top:16px}}
 .namescr{max-width:780px;margin:0 auto;padding-block:20px 80px;display:grid;gap:16px;justify-items:center}
@@ -534,16 +545,18 @@ const sleep = ms => new Promise(r => setTimeout(r, ms));
 const esc = s => String(s).replace(/[&<>"]/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
 
 /* ============ Estado ============ */
-const ORDER = ["desk","enter","cmds","intro","select","equip","map","brief","explore1","repo1","game1","explore2","repo2","game2","holo","repo3","game3","explore3","repo4","game4","grado","gracias","auto","end"];
+const ORDER = ["cmds","desk","enter","intro","select","equip","map","brief","explore1","repo1","game1","explore2","repo2","game2","holo","repo3","game3","explore3","repo4","game4","grado","gracias","auto","end"];
 const CHAPTER = {enter:"Ingreso a la computadora",cmds:"Comandos",intro:"Video inicial",select:"Selección de personaje",equip:"Pantalla de carga de equipamiento",map:"Mapa de Costa Rica",brief:"Mensaje de Kinética",explore1:"Exploración de la comunidad",repo1:"Repositorio 1",game1:"Desafío 1 · Codificación de hallazgos",explore2:"Exploración en la playa",repo2:"Repositorio 2",game2:"Desafío 2 · Radar de la información",holo:"Mensaje de Kinética (avances y logros)",repo3:"Repositorio 3",game3:"Desafío 3 · Lentes del conocimiento gráfico",explore3:"Exploración en la playa (final)",repo4:"Repositorio 4 · Triangulación",game4:"Desafío 4 · Triangulando la realidad",grado:"Obtención del grado",gracias:"Agradecimiento",auto:"Autoevaluación",end:"Expediente"};
 const BK = ["conocimiento","rigurosidad","interpretacion","cuarta"];
 const phase = st => { const i = ORDER.indexOf(st); return i <= ORDER.indexOf("brief") ? "Partida" : i < ORDER.indexOf("grado") ? "Iniciación" : "Regreso"; };
-const fresh = () => ({v:2, stage:"desk", max:0, char:null, name:"", conclusion:"", read:{}, clues:{}, badges:[], items:[], auto:null, warned:false, settings:{music:true, sfx:true, voice:true, speed:"normal", vol:0.5}});
+const fresh = () => ({v:3, stage:"cmds", max:0, char:null, name:"", conclusion:"", read:{}, clues:{}, badges:[], items:[], auto:null, warned:false, settings:{music:true, sfx:true, voice:true, speed:"normal", vol:0.5}});
 let S = fresh();
 const KEY = "kinetica-moin-v1";
 function save(){ try{ localStorage.setItem(KEY, JSON.stringify(S)); }catch(e){} }
 const OLD_ORDER = ["desk","intro","select","map","brief","explore1","repo1","game1","explore2","repo2","game2","holo","repo3","game3","explore3","repo4","game4","grado","gracias","auto","end"];
-function load(){ try{ const t = localStorage.getItem(KEY); if(t){ const o = JSON.parse(t); if(!o.v){ o.max = Math.max(0, ORDER.indexOf(OLD_ORDER[o.max] || "desk")); o.v = 2; } return Object.assign(fresh(), o, {settings:Object.assign(fresh().settings, o.settings||{})}); } }catch(e){} return null; }
+const V2_ORDER = ["desk","enter","cmds","intro","select","equip","map","brief","explore1","repo1","game1","explore2","repo2","game2","holo","repo3","game3","explore3","repo4","game4","grado","gracias","auto","end"];
+const resumeStage = () => ["cmds","desk","enter"].includes(S.stage) ? ORDER[Math.max(S.max, ORDER.indexOf("intro"))] : S.stage;
+function load(){ try{ const t = localStorage.getItem(KEY); if(t){ const o = JSON.parse(t); if(!o.v){ o.max = Math.max(0, ORDER.indexOf(OLD_ORDER[o.max] || "desk")); o.v = 3; } else if(o.v === 2){ o.max = Math.max(0, ORDER.indexOf(V2_ORDER[o.max] || "desk")); o.v = 3; } return Object.assign(fresh(), o, {settings:Object.assign(fresh().settings, o.settings||{})}); } }catch(e){} return null; }
 
 /* ============ Audio (música generada + efectos) ============ */
 const A = {
@@ -1189,7 +1202,7 @@ $("#hBrand").onclick = () => {
   $("#kmM").onclick = () => go("map");
   $("#kmS").onclick = openSettings;
   $("#kmC").onclick = openCredits;
-  $("#kmX").onclick = () => go("desk");
+  $("#kmX").onclick = () => go("cmds");
 };
 $("#hMap").onclick = () => go("map");
 function openSettings(){
@@ -1215,10 +1228,10 @@ function openSettings(){
   $("#sVoice").onchange = e => { st.voice = e.target.checked; if(!st.voice) V.stop(); save(); };
   $("#sSpeed").onchange = e => { st.speed = e.target.value; save(); };
   $("#sJump").onchange = e => go(e.target.value);
-  $("#sExit").onclick = () => go("desk");
+  $("#sExit").onclick = () => go("cmds");
   $("#sReset").onclick = e => {
     const b = e.currentTarget;
-    if(b.dataset.armed){ const keep = S.settings; S = fresh(); S.settings = keep; save(); go("desk"); }
+    if(b.dataset.armed){ const keep = S.settings; S = fresh(); S.settings = keep; save(); go("cmds"); }
     else { b.dataset.armed = "1"; b.textContent = "Tocá otra vez para confirmar"; }
   };
 }
@@ -1227,7 +1240,7 @@ function openSettings(){
 const R = {};
 
 R.desk = () => {
-  const has = S.max > 1;
+  const has = S.max > ORDER.indexOf("enter");
   const now = new Date();
   stage.innerHTML = `<section class="screen" style="position:absolute;inset:0"><div class="desk">
     <div class="desk-body">
@@ -1257,7 +1270,7 @@ R.desk = () => {
   $("[data-start]").onclick = start;
   $("[data-open]").onclick = () => { A.resume(); showPop(); };
   $("[data-note]").onclick = () => toast("notas.txt: «Si aparece un mensaje de Kinética, presionalo.»");
-  const c = $("[data-cont]"); if(c) c.onclick = () => { A.resume(); go(S.stage === "desk" ? ORDER[S.max] : S.stage); };
+  const c = $("[data-cont]"); if(c) c.onclick = () => { A.resume(); go(resumeStage()); };
 };
 
 /* Ingreso a la computadora: la pantalla absorbe a la persona */
@@ -1291,7 +1304,7 @@ R.enter = () => {
     <div class="abs-ctrl"><button class="btn ghost" type="button" id="absSkip">Saltar</button></div>
   </div></section>`;
   let done = false;
-  const finish = () => { if(done) return; done = true; go("cmds"); };
+  const finish = () => { if(done) return; done = true; go("intro"); };
   $("#absSkip").onclick = finish;
   const cv = $("#abs"), ctx = cv.getContext("2d"), root = $(".absorb");
   const fit = () => { cv.width = root.clientWidth*devicePixelRatio; cv.height = root.clientHeight*devicePixelRatio; };
@@ -1332,23 +1345,36 @@ R.enter = () => {
 R.cmds = () => {
   stage.innerHTML = `<section class="screen"><div class="cmds wrap">
     <h2 class="cmd-title">Instrucciones</h2>
-    <div class="cmd-block"><h3>Objetivo de la misión</h3>
-      <p class="cmd-goal">Resolver el caso de Moín: explorá cada zona, investigá con el reloj a personas, animales y objetos, leé los repositorios y superá los cuatro desafíos del análisis de resultados. Con las cuatro insignias te convertís en miembro oficial de Kinética.</p></div>
-    <hr>
-    <div class="cmd-block"><h3>Controles</h3>
-      <div class="cmd-grid">
-        <div><p>En computadora usá las teclas para caminar por cada zona:</p>
+    <div class="cmd-cols">
+      <div class="cmd-col">
+        <div class="cmd-block"><h3>Objetivo de la misión</h3>
+          <p class="cmd-goal">Resolver el caso de Moín: explorá cada zona, investigá con el reloj a personas, animales y objetos, leé los repositorios y superá los cuatro desafíos del análisis de resultados. Con las cuatro insignias te convertís en miembro oficial de Kinética.</p></div>
+        <div class="cmd-block"><h3>Cómo se juega</h3>
+          <ol class="cmd-steps">
+            <li><b>Explorá la zona.</b> Acercate a cada persona, animal u objeto marcado e investigalo con el reloj. Cada pista queda guardada con su fuente.</li>
+            <li><b>Leé la biblioteca.</b> Cuando investigás todo, el reloj vibra y la archivista de Kinética abre los textos de la zona.</li>
+            <li><b>Superá el desafío.</b> El agente de desafío te lleva al minijuego. Si te trabás, el botón «Pistas, explicación y fuentes» te guía hasta la respuesta.</li>
+            <li><b>Ganá las cuatro insignias.</b> Son tres zonas y cuatro desafíos; con las cuatro obtenés el grado de miembro oficial de Kinética.</li>
+          </ol></div>
+      </div>
+      <div class="cmd-col cmd-ctrl">
+        <div class="cmd-block"><h3>Controles</h3>
+          <p>En computadora usá las teclas para caminar por cada zona:</p>
           <div class="keys"><div class="kgrp"><span class="k"></span><span class="k on">↑</span><span class="k"></span><span class="k on">←</span><span class="k on">↓</span><span class="k on">→</span></div>
             <div class="kgrp"><span class="k"></span><span class="k out">W</span><span class="k"></span><span class="k out">A</span><span class="k out">S</span><span class="k out">D</span></div></div>
-          <p class="muted">Cuando estés cerca de algo, presioná <b>Enter</b> o <b>E</b> para investigarlo. También podés hacer clic sobre cada elemento. <b>Esc</b> cierra las ventanas.</p></div>
-        <div class="cmd-mob"><p>En móvil colocá el dispositivo en horizontal y usá el mando flotante de la parte inferior izquierda:</p>
-          <svg viewBox="0 0 220 120" aria-hidden="true"><rect x="10" y="10" width="200" height="100" rx="18" fill="none" stroke="#6fe3ff" stroke-width="6"/><rect x="22" y="22" width="160" height="76" rx="6" fill="none" stroke="#6fe3ff" stroke-width="3"/><circle cx="196" cy="60" r="7" fill="#6fe3ff"/><circle cx="48" cy="78" r="13" fill="none" stroke="#6fe3ff" stroke-width="3"/><path d="M48 68l4 5h-8zM48 88l4 -5h-8zM38 78l5 4v-8zM58 78l-5 4v-8z" fill="#6fe3ff"/></svg>
-          <p class="muted">También podés tocar directamente a las personas, animales y objetos.</p></div>
-      </div></div>
-    <button class="btn sun cmd-go" type="button" id="cmdGo">Comenzar</button>
+          <p class="muted">Cerca de algo, presioná <b>Enter</b> o <b>E</b> para investigarlo. También podés hacer clic sobre cada elemento. <b>Esc</b> cierra las ventanas.</p>
+          <div class="cmd-mob"><svg viewBox="0 0 220 120" aria-hidden="true"><rect x="10" y="10" width="200" height="100" rx="18" fill="none" stroke="#6fe3ff" stroke-width="6"/><rect x="22" y="22" width="160" height="76" rx="6" fill="none" stroke="#6fe3ff" stroke-width="3"/><circle cx="196" cy="60" r="7" fill="#6fe3ff"/><circle cx="48" cy="78" r="13" fill="none" stroke="#6fe3ff" stroke-width="3"/><path d="M48 68l4 5h-8zM48 88l4 -5h-8zM38 78l5 4v-8zM58 78l-5 4v-8z" fill="#6fe3ff"/></svg>
+            <p class="muted">En móvil colocá el dispositivo en horizontal y usá el mando flotante de abajo a la izquierda. También podés tocar cada elemento.</p></div>
+        </div>
+      </div>
+    </div>
+    <div class="cmd-actions"><button class="btn sun cmd-go" type="button" id="cmdGo">Comenzar</button>${S.max > ORDER.indexOf("enter") ? `<button class="btn ghost" type="button" id="cmdCont">Continuar mi expediente</button>` : ""}</div>
+    <p class="src" style="text-align:center;margin:0">Con música, efectos y voz. Podés cambiarlos en Configuración. Tu avance se guarda en este navegador.</p>
   </div></section>`;
-  $("#cmdGo").onclick = () => go("intro");
+  $("#cmdGo").onclick = () => { A.resume(); go("desk"); };
+  const cc = $("#cmdCont"); if(cc) cc.onclick = () => { A.resume(); go(resumeStage()); };
 };
+
 R.intro = () => {
   stage.innerHTML = `<section class="screen" style="position:absolute;inset:0"><div class="cine glitch"><img class="bg" src="assets/intro.jpg" alt="Silueta anónima de Kinética frente a paneles de investigación"></div>
     <div class="rec"><i></i>TRANSMISIÓN · KINÉTICA</div><div id="nar"></div></section>`;
@@ -2432,7 +2458,7 @@ function start(data){
   const saved = (data && data.state) || load();
   if(saved) S = Object.assign(fresh(), saved, {settings:Object.assign(fresh().settings, saved.settings||{})});
   window.claude?.hot?.snapshot?.(() => ({state:S}));
-  go(data && data.state ? S.stage : "desk");
+  go(data && data.state ? S.stage : "cmds");
 }
 window.claude?.hot?.ready ? window.claude.hot.ready(start) : start(window.claude?.hot?.data ?? {});
 })();

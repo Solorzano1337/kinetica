@@ -15,9 +15,9 @@ await p.goto(BASE + '/2d/index.html'); await p.waitForTimeout(600);
 const shot = async n => p.screenshot({path:`herramientas/capturas/${tag}-${n}.png`});
 const W = ms => p.waitForTimeout(ms);
 await shot('01desk');
-await W(1800); await shot('01desk');
-await p.click('[data-start]'); await W(2600); await shot('02enter'); await W(2200); await shot('02enter2'); await W(1800);
-await shot('03cmds'); await p.click('#cmdGo'); await W(800); await p.click('[data-skip]'); await W(300);
+await shot('00cmds'); await p.click('#cmdGo'); await W(1800); await shot('01desk');
+await p.click('[data-start]'); await W(2600); await shot('02enter'); await W(2200); await shot('02enter2'); await W(2400);
+await p.click('[data-skip]'); await W(300);
 await p.click('.pc[data-i="2"]'); await p.click('#selOk'); await W(400);
 for(const l of ['M','A','R','Í','A']) { await p.keyboard.press(l==='Í'?'i':l.toLowerCase()); await W(40); }
 await shot('03name'); await p.click('#nmOk'); await W(900); await shot('03equip');

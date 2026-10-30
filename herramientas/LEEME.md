@@ -33,7 +33,7 @@ node herramientas/probar2d.mjs            # computadora, 1280 × 800
 node herramientas/probar2d.mjs 390 844 m  # celular vertical
 ```
 
-Recorre el juego completo: escritorio, ingreso, comandos, nombre, equipamiento, mapa, las tres zonas, las cuatro bibliotecas, los cuatro desafíos (incluida la redacción), grado, agradecimiento, autoevaluación y expediente. Deja capturas en `herramientas/capturas/` y termina con `ERRORS []` si no hubo errores de consola.
+Recorre el juego completo: instrucciones, escritorio, ingreso, nombre, equipamiento, mapa, las tres zonas, las cuatro bibliotecas, los cuatro desafíos (incluida la redacción), grado, agradecimiento, autoevaluación y expediente. Deja capturas en `herramientas/capturas/` y termina con `ERRORS []` si no hubo errores de consola.
 
 Si se cambia el flujo (botones, ids, orden de pantallas), hay que ajustar el script.
 
