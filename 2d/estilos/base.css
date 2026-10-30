@@ -1,0 +1,55 @@
+/* =====================================================================
+   estilos/base.css · BASE: colores, tipografía, encabezado y botones
+   Los archivos de estilos se cargan en orden; el orden importa.
+   ===================================================================== */
+/* =====================================================================
+   ESTILOS DE KINÉTICA
+   - Los colores y fuentes están en :root (tokens). Cambiarlos ahí cambia todo el juego.
+   - Cada bloque de abajo corresponde a una pantalla o a un componente y lleva su título.
+   - Los @media (max-width:…) ajustan la vista para celular.
+   - Al final está el bloque «Cambios del guion (octubre)» con las pantallas nuevas.
+   ===================================================================== */
+/* Layout: una sola "app" a pantalla completa; HUD arriba, escenario al centro, reloj flotante abajo a la derecha.
+   Mundo visual: noche del Caribe + destello neón del reloj Kinética + atardecer de Moín. Tema oscuro deliberado. */
+:root{
+  --abyss:#06131b; --deep:#0c2431; --panel:#10303f; --line:#24505f;
+  --neon:#3df58e; --neon-dim:#1d8d55; --sunset:#ff8f45; --alert:#ff5466;
+  --text:#e5f3ef; --muted:#93b4ae; --sand:#ecd7a8; --ink:#04100a;
+  --f-display:"Chakra Petch", "Bahnschrift", "Segoe UI", system-ui, sans-serif;
+  --f-body:"Atkinson Hyperlegible", "Segoe UI", system-ui, sans-serif;
+  --f-mono:"JetBrains Mono", ui-monospace, "Cascadia Mono", Menlo, monospace;
+  --gut-l:max(16px, env(safe-area-inset-left, 0px));
+  --gut-r:max(16px, env(safe-area-inset-right, 0px));
+  color-scheme:dark;
+}
+html,body{height:100%}
+body{background:var(--abyss);color:var(--text);font-family:var(--f-body);font-size:16px;line-height:1.5;overflow:hidden}
+button{font:inherit;color:inherit}
+:focus-visible{outline:2px solid var(--neon);outline-offset:3px}
+h1,h2,h3{font-family:var(--f-display);text-wrap:balance;margin:0;line-height:1.1;letter-spacing:.01em}
+p{margin:0}
+a{color:var(--neon)}
+.eyebrow{font-family:var(--f-mono);font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--neon)}
+.muted{color:var(--muted)}
+.wrap{padding-left:var(--gut-l);padding-right:var(--gut-r)}
+
+#app{position:relative;height:100%;display:flex;flex-direction:column;overflow:hidden}
+#hud{display:flex;align-items:center;gap:12px;padding-block:10px;border-bottom:1px solid var(--line);background:linear-gradient(180deg,#0a1f2a,#071820);z-index:5}
+#hud .brand{display:flex;align-items:center;gap:10px;min-width:0;flex:1;background:none;border:0;padding:4px 0;cursor:pointer;text-align:left}
+#hud .brand:hover b{text-shadow:0 0 12px var(--neon)}
+#hud .brand b{font-family:var(--f-display);font-size:18px;letter-spacing:.06em;color:var(--neon)}
+#hud .brand span{font-family:var(--f-mono);font-size:12px;color:var(--muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.hbtn{display:inline-flex;align-items:center;gap:6px;background:transparent;border:1px solid var(--line);border-radius:6px;padding:7px 10px;font-size:13px;cursor:pointer;color:var(--text)}
+.hbtn:hover{border-color:var(--neon);color:var(--neon)}
+.hbtn svg{width:16px;height:16px}
+@media (max-width:620px){.hbtn .lbl{display:none}}
+#stage{flex:1;position:relative;overflow-y:auto;overflow-x:hidden}
+.screen{min-height:100%;position:relative;animation:fadeIn .5s ease both}
+@keyframes fadeIn{from{opacity:.0}to{opacity:1}}
+
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;border:0;border-radius:6px;padding:12px 20px;font-family:var(--f-display);font-weight:600;font-size:16px;letter-spacing:.03em;cursor:pointer;background:var(--neon);color:var(--ink);box-shadow:0 0 0 1px var(--neon),0 0 24px -6px var(--neon)}
+.btn:hover{filter:brightness(1.08)}
+.btn.ghost{background:transparent;color:var(--text);box-shadow:inset 0 0 0 1px var(--line)}
+.btn.ghost:hover{box-shadow:inset 0 0 0 1px var(--neon);color:var(--neon)}
+.btn.sun{background:var(--sunset);box-shadow:0 0 0 1px var(--sunset),0 0 24px -6px var(--sunset)}
+.btn[disabled]{opacity:.4;cursor:not-allowed}

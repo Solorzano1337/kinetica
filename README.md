@@ -18,7 +18,7 @@ Juego multimedia educativo para el curso 05477 Investigación en Ciencias Social
 Son páginas estáticas: no necesitan instalación ni servidor propio.
 
 - **En línea:** con GitHub Pages activado (Settings → Pages → rama `main`, carpeta raíz), el juego queda en `https://<usuario>.github.io/<repositorio>/`.
-- **En la computadora:** abrí la carpeta con cualquier servidor estático, por ejemplo `python -m http.server`, y entrá a `http://localhost:8000`. Abrir el archivo con doble clic también funciona en la mayoría de navegadores, aunque algunos bloquean las imágenes locales.
+- **En la computadora:** abrí la carpeta con cualquier servidor estático, por ejemplo `python -m http.server`, y entrá a `http://localhost:8000`. Abrir `2d/index.html` con doble clic también funciona.
 
 Se necesita conexión a internet para las tipografías (Google Fonts) y, en la versión 3D, para el motor Three.js r128 (cdnjs).
 
@@ -57,6 +57,23 @@ Los personajes del terreno son ficticios. Las cifras y los hechos del caso viene
 ## Tecnología
 
 HTML, CSS y JavaScript sin dependencias de compilación. Música y efectos generados con Web Audio; locución opcional con la síntesis de voz del navegador. La versión 3D usa Three.js r128.
+
+## Estructura del código (2D)
+
+El juego 2D está dividido en carpetas dentro de `2d/`. `index.html` solo arma la página y carga los archivos en orden; al inicio tiene un mapa de las carpetas.
+
+| Carpeta | Qué contiene |
+|---|---|
+| `estilos/` | Cómo se ve: colores, cada pantalla y ajustes para celular |
+| `motor/` | Lo que hace funcionar el juego: estado y guardado, sonido y voz, navegación entre pantallas, movimiento del personaje y arranque |
+| `arte/` | Dibujos en SVG: íconos, gráficos, figuras, las tres escenas y el mapa |
+| `contenido/` | Los textos del juego: narraciones, diálogos, pistas, bibliotecas, referencias, desafíos, insignias y autoevaluación |
+| `pantallas/` | Una o varias pantallas por archivo: inicio, exploración, reloj, menús, los cuatro desafíos y el regreso |
+| `assets/` | Fondos y personajes |
+
+Para cambiar lo que dice el juego, casi siempre basta con editar un archivo de `contenido/`. Los scripts son clásicos (no módulos), así que el juego también abre con doble clic; el orden de las etiquetas `<script>` en `index.html` importa y está explicado ahí mismo.
+
+La última versión en un solo archivo quedó guardada en la rama `version-archivo-unico`.
 
 ## Herramientas para desarrollo
 

@@ -51,7 +51,9 @@ Necesita internet, porque el 3D carga Three.js desde cdnjs.
 python3 herramientas/armar3d.py
 ```
 
-Toma bloques de `2d/index.html` (estilos, audio, utilidades, arte, pistas, biblioteca y desafío 1) y los inserta en las marcas `/*@@...@@*/` de `herramientas/src3d.html`. Escribe `3d/index.html`. Después de armarlo, probarlo con `probar3d.mjs` antes de subirlo.
+Toma archivos de `2d/` (todos los estilos, sonido, interfaz, íconos, gráficos, insignias, figuras, pistas, la ficha, la biblioteca, las referencias, los datos de los desafíos, la guía y el desafío 1) y los inserta en las marcas `/*@@...@@*/` de `herramientas/src3d.html`. La lista exacta está en `BLOQUES`, al inicio de `armar3d.py`. Escribe `3d/index.html` y copia las imágenes de personajes. Después de armarlo, probarlo con `probar3d.mjs` antes de subirlo.
+
+Si se agrega al 2D un archivo que el 3D necesita, hay que sumarlo al bloque correspondiente de `BLOQUES`.
 
 ## Variables opcionales
 

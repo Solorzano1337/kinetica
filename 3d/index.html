@@ -4,15 +4,24 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px);box-sizing:border-box}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
-</head>
-<body>
 <title>Kinética 3D Moín</title>
 <meta name="claude:viewport-fit-sides" content="cover">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@500;600;700&family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400&family=JetBrains+Mono:wght@400;600&display=swap">
 <style>
-
+/* ---- desde 2d/estilos/base.css ---- */
+/* =====================================================================
+   estilos/base.css · BASE: colores, tipografía, encabezado y botones
+   Los archivos de estilos se cargan en orden; el orden importa.
+   ===================================================================== */
+/* =====================================================================
+   ESTILOS DE KINÉTICA
+   - Los colores y fuentes están en :root (tokens). Cambiarlos ahí cambia todo el juego.
+   - Cada bloque de abajo corresponde a una pantalla o a un componente y lleva su título.
+   - Los @media (max-width:…) ajustan la vista para celular.
+   - Al final está el bloque «Cambios del guion (octubre)» con las pantallas nuevas.
+   ===================================================================== */
 /* Layout: una sola "app" a pantalla completa; HUD arriba, escenario al centro, reloj flotante abajo a la derecha.
    Mundo visual: noche del Caribe + destello neón del reloj Kinética + atardecer de Moín. Tema oscuro deliberado. */
 :root{
@@ -58,6 +67,11 @@ a{color:var(--neon)}
 .btn.sun{background:var(--sunset);box-shadow:0 0 0 1px var(--sunset),0 0 24px -6px var(--sunset)}
 .btn[disabled]{opacity:.4;cursor:not-allowed}
 
+/* ---- desde 2d/estilos/inicio.css ---- */
+/* =====================================================================
+   estilos/inicio.css · ESCRITORIO, VIDEO, SELECCIÓN Y MAPA
+   Los archivos de estilos se cargan en orden; el orden importa.
+   ===================================================================== */
 /* ---------- Escritorio ---------- */
 .desk{position:absolute;inset:0;background:
   radial-gradient(1200px 600px at 75% 20%,rgba(61,245,142,.10),transparent 60%),
@@ -138,6 +152,11 @@ a{color:var(--neon)}
 .others div{display:flex;justify-content:space-between;gap:10px;font-size:14px;color:var(--muted);border-top:1px dashed var(--line);padding-top:8px}
 .mapbar{display:flex;flex-wrap:wrap;gap:10px}
 
+/* ---- desde 2d/estilos/exploracion.css ---- */
+/* =====================================================================
+   estilos/exploracion.css · EXPLORACIÓN, VENTANAS Y RELOJ
+   Los archivos de estilos se cargan en orden; el orden importa.
+   ===================================================================== */
 /* ---------- Exploración ---------- */
 .explore{padding-block:18px 100px;max-width:1240px;margin:0 auto;display:grid;gap:14px}
 .ex-head{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:end;gap:12px}
@@ -220,6 +239,11 @@ a{color:var(--neon)}
 .progress{height:8px;border-radius:4px;background:#0a1d26;border:1px solid var(--line);overflow:hidden}
 .progress i{display:block;height:100%;background:var(--neon);box-shadow:0 0 12px var(--neon);transition:width .5s}
 
+/* ---- desde 2d/estilos/desafios.css ---- */
+/* =====================================================================
+   estilos/desafios.css · BIBLIOTECA Y DESAFÍOS
+   Los archivos de estilos se cargan en orden; el orden importa.
+   ===================================================================== */
 /* ---------- Repositorio ---------- */
 .repo{padding-block:20px 100px;max-width:1150px;margin:0 auto;display:grid;gap:16px}
 .repo h2{font-size:clamp(22px,3.4vw,34px)}
@@ -250,10 +274,29 @@ a{color:var(--neon)}
 @keyframes shake{20%{transform:translateX(-6px)}40%{transform:translateX(6px)}60%{transform:translateX(-4px)}80%{transform:translateX(4px)}}
 .bins{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px}
 @media (max-width:760px){.bins{grid-template-columns:1fr}}
-.bin{position:relative;border:1px solid var(--line);border-radius:12px;padding:14px;background:var(--deep);display:grid;gap:8px;cursor:pointer;text-align:left;overflow:hidden;transition:border-color .2s,box-shadow .3s}
+.bin{position:relative;border:1px solid var(--line);border-radius:12px;padding:14px;background:var(--deep);display:grid;gap:8px;align-content:start;cursor:pointer;text-align:left;overflow:hidden;transition:border-color .2s,box-shadow .3s}
 .bin.hover{border-color:var(--neon)}
 .bin h3{font-size:17px}
 .bin p{font-size:13px;color:var(--muted)}
+.bin .stack{display:grid;gap:6px;align-content:start}
+.bin .stack .it{display:flex;gap:8px;align-items:flex-start;background:rgba(61,245,142,.08);border:1px solid rgba(61,245,142,.45);border-radius:6px;padding:6px 8px;font-size:12.5px;line-height:1.35;color:var(--text);animation:pop .35s ease-out}
+.bin .stack .it .n{flex:none;min-width:20px;height:20px;border-radius:50%;background:var(--neon);color:var(--ink);font-family:var(--f-mono);font-size:11px;font-weight:600;display:grid;place-items:center}
+.bin .stack .it b{font-family:var(--f-mono);font-size:11px;color:var(--neon);font-weight:600;margin-right:2px}
+.bin[data-c="none"] .stack .it{background:rgba(255,143,69,.08);border-color:rgba(255,143,69,.5)}
+.bin[data-c="none"] .stack .it .n{background:var(--sunset)}
+.bin[data-c="none"] .stack .it b{color:var(--sunset)}
+@media (max-width:760px){
+  .bin .stack{display:flex;flex-wrap:wrap;gap:4px}
+  .bin .stack .it{padding:2px 7px 2px 2px;gap:4px;border-radius:999px;align-items:center}
+  .bin .stack .it .tx{font-size:0}
+  .bin .stack .it .tx b{font-size:10px;margin:0}
+  .bin .stack .it .n{min-width:16px;height:16px;font-size:9.5px}
+  .g1.done .bins{position:static}
+  .g1.done .bin .stack{display:grid}
+  .g1.done .bin .stack .it{border-radius:6px;padding:5px;align-items:flex-start}
+  .g1.done .bin .stack .it .tx{font-size:11.5px}
+  .g1.done .bin .stack .it .tx b{display:block}
+}
 .bin .energy{height:10px;border-radius:5px;background:#081820;border:1px solid var(--line);overflow:hidden}
 .bin .energy i{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--neon-dim),var(--neon));transition:width .6s}
 .bin.full{border-color:var(--neon);box-shadow:0 0 0 1px var(--neon),0 0 36px -6px var(--neon)}
@@ -292,12 +335,13 @@ a{color:var(--neon)}
 .tip{border:1px solid var(--line);border-radius:10px;padding:18px;background:var(--deep);display:grid;gap:8px;min-height:150px}
 .tip b{font-family:var(--f-display);font-size:20px;color:var(--neon)}
 
-/* ---------- Holograma ---------- */
-.holo{position:absolute;right:8%;top:8%;width:min(30%,260px);z-index:2;animation:flick 3.5s steps(1) infinite;opacity:.92}
-.holo svg{width:100%;height:auto;filter:drop-shadow(0 0 14px rgba(110,230,255,.8))}
 @keyframes flick{0%,100%{opacity:.92}47%{opacity:.5}48%{opacity:.92}72%{opacity:.7}73%{opacity:.92}}
-@media (max-width:620px){.holo{width:34%;top:4%}}
 
+/* ---- desde 2d/estilos/final.css ---- */
+/* =====================================================================
+   estilos/final.css · REGRESO Y AJUSTES GENERALES
+   Los archivos de estilos se cargan en orden; el orden importa.
+   ===================================================================== */
 /* ---------- Final ---------- */
 .endscr{max-width:900px;margin:0 auto;padding-block:30px 110px;display:grid;gap:20px}
 .endscr h2{font-size:clamp(26px,4vw,40px)}
@@ -401,6 +445,115 @@ select{background:#0a1d26;border:1px solid var(--line);border-radius:6px;padding
 .checks li.ok{color:var(--text)}.checks li.ok i{color:var(--neon)}
 @media (prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important}}
 
+/* ---- desde 2d/estilos/pantallas-nuevas.css ---- */
+/* =====================================================================
+   estilos/pantallas-nuevas.css · PANTALLAS DEL GUION DE OCTUBRE
+   Instrucciones, ingreso, nombre, equipamiento, radar, mando y desafío 1.
+   Los archivos de estilos se cargan en orden; el orden importa.
+   ===================================================================== */
+/* --- Cambios del guion (octubre) --- */
+.where-cap{position:absolute;top:24px;left:50%;transform:translateX(-50%);width:min(680px,calc(100% - 140px));text-align:center;font-family:var(--f-mono);font-size:14px;color:var(--sand);min-height:1.5em;margin:0}
+.popwin{animation:popIn .55s cubic-bezier(.2,1.4,.4,1) both}
+@keyframes popIn{from{transform:scale(.6) translateY(30px);opacity:0}to{transform:none;opacity:1}}
+.pop-msg{display:grid;gap:14px;width:100%;text-align:left;background:none;border:0;cursor:pointer}
+.pop-msg:hover .btn,.pop-msg:focus-visible .btn{box-shadow:0 0 0 2px var(--neon),0 0 30px var(--neon)}
+.pop-h1{font-family:var(--f-display);font-size:clamp(26px,4.6vw,38px);font-weight:700;line-height:1.1}
+.pop-h1 em{font-style:normal;color:var(--neon);display:block;font-size:1.25em}
+.pop-txt{font-size:18px}
+.pop-foot{padding:0 28px 22px}
+@media (max-width:620px){.where-cap{top:92px;width:calc(100% - 32px)}.desk .desk-body{padding-top:170px}}
+.absorb{position:absolute;inset:0;background:#000;overflow:hidden}
+.absorb .room{position:absolute;inset:0;width:100%;height:100%}
+.absorb canvas{position:absolute;inset:0;width:100%;height:100%;pointer-events:none}
+.absorb #monPop,.absorb #monScr{transition:opacity .6s}
+.vortex{opacity:0;transform-box:fill-box;transform-origin:center;transition:opacity .5s}
+.vortex.spin{opacity:1;animation:spin 1.1s linear infinite}
+#monScr.flash{animation:scrflash 1.6s ease-out forwards}
+@keyframes scrflash{0%{opacity:1;filter:brightness(3)}100%{opacity:.35;filter:none}}
+#who.dissolve{animation:dissolve 3.2s ease-in forwards;transform-box:fill-box;transform-origin:85% 30%}
+@keyframes dissolve{0%{opacity:1;filter:none}40%{filter:drop-shadow(0 0 18px #3df58e) hue-rotate(60deg)}100%{opacity:0;transform:translate(160px,-120px) scale(.2);filter:blur(6px) drop-shadow(0 0 30px #6fe3ff)}}
+.abs-cap{position:absolute;left:50%;bottom:86px;transform:translateX(-50%);width:min(720px,calc(100% - 32px));text-align:center;font-family:var(--f-display);font-size:clamp(18px,2.6vw,24px);background:rgba(4,16,10,.7);border:1px solid var(--line);border-radius:8px;padding:10px 16px;margin:0}
+.abs-ctrl{position:absolute;right:var(--gut-r);bottom:24px}
+.cmds{max-width:1160px;margin:0 auto;padding-block:16px 60px;display:grid;gap:18px}
+.cmd-title{font-family:var(--f-display);text-transform:uppercase;letter-spacing:.06em;color:transparent;-webkit-text-stroke:1.5px #6fe3ff;font-size:clamp(30px,5vw,46px);text-align:center}
+.cmd-block h3{font-size:clamp(20px,3vw,26px);margin-bottom:10px}
+.cmd-goal{color:#6fe3ff;font-size:clamp(17px,2.2vw,21px);line-height:1.45;margin:0;padding-left:18px}
+.cmds hr{border:0;border-top:1px solid var(--line);width:100%}
+.cmd-grid{display:grid;grid-template-columns:1.2fr 1fr;gap:22px}
+.cmd-grid>div{display:grid;gap:12px;align-content:start}
+.cmd-grid p{margin:0}
+.cmd-mob{border-left:1px solid var(--line);padding-left:22px}
+.cmd-mob svg{width:180px}
+.keys{display:flex;gap:26px;flex-wrap:wrap}
+.kgrp{display:grid;grid-template-columns:repeat(3,46px);gap:6px}
+.k{height:46px;border-radius:7px;display:grid;place-items:center;font-family:var(--f-display);font-size:20px;font-weight:600}
+.k.on{background:#6fe3ff;color:#0b1f33}
+.k.out{border:2px solid #6fe3ff;color:#6fe3ff}
+.cmd-steps{margin:0;padding-left:22px;display:grid;gap:8px;font-size:16px;line-height:1.45}
+.cmd-cols{display:grid;grid-template-columns:1.25fr 1fr;gap:28px;align-items:start}
+.cmd-col{display:grid;gap:18px}
+.cmd-ctrl{border-left:1px solid var(--line);padding-left:28px}
+.cmd-ctrl .cmd-block{display:grid;gap:12px}
+.cmd-ctrl p{margin:0}
+.cmd-ctrl .cmd-mob{display:flex;gap:14px;align-items:center;border:0;padding:0}
+.cmd-ctrl .cmd-mob svg{width:120px;flex:none}
+@media (max-width:860px){.cmd-cols{grid-template-columns:1fr}.cmd-ctrl{border-left:0;padding-left:0;border-top:1px solid var(--line);padding-top:16px}}
+.cmd-steps b{color:var(--neon)}
+.cmd-actions{display:flex;gap:12px;flex-wrap:wrap;justify-content:center}
+.cmd-go{justify-self:center;min-width:min(420px,100%);border-radius:999px;font-size:22px;padding:14px 28px;text-transform:uppercase}
+@media (max-width:700px){.cmd-grid{grid-template-columns:1fr}.cmd-mob{border-left:0;padding-left:0;border-top:1px solid var(--line);padding-top:16px}}
+.namescr{max-width:780px;margin:0 auto;padding-block:20px 80px;display:grid;gap:16px;justify-items:center}
+.nm-who{display:flex;align-items:center;gap:12px}
+.nm-who img{height:84px}
+.nm-who .code{font-family:var(--f-mono);font-size:12px;color:var(--muted)}
+.nm-line{min-width:min(520px,100%);border-bottom:4px solid #6fe3ff;text-align:center;font-family:var(--f-display);font-size:clamp(28px,5vw,40px);letter-spacing:.08em;min-height:1.4em;padding-bottom:4px}
+.nm-keys{display:grid;grid-template-columns:repeat(10,minmax(0,1fr));gap:8px;width:100%}
+.nk{aspect-ratio:1;border:0;border-radius:4px;background:#26c6d4;color:#162544;font-size:clamp(18px,3.4vw,34px);font-family:var(--f-display);cursor:pointer;display:grid;place-items:center;padding:0}
+.nk:hover,.nk:focus-visible{background:#6fe3ff;outline:2px solid #fff}
+.nk.del{background:#ff4a55;color:#fff}
+.nk.space{aspect-ratio:auto;width:min(320px,70%);height:52px}
+.nk.space span{width:50%;height:12px;border:3px solid #162544;border-top:0}
+.equip{position:absolute;inset:0;display:grid;grid-template-columns:1fr 1fr;gap:24px;padding:24px var(--gut-r) 24px var(--gut-l);background:radial-gradient(700px 500px at 30% 50%,rgba(61,245,142,.18),transparent 70%),#04140d;overflow:auto}
+.eq-stage{position:relative;display:grid;place-items:center;min-height:320px}
+.eq-char{position:relative;height:min(70vh,520px);max-width:100%;object-fit:contain;filter:drop-shadow(0 10px 20px rgba(0,0,0,.6));transition:filter .4s}
+.eq-rings{position:absolute;inset:0;display:grid;place-items:center;pointer-events:none}
+.eq-rings i{position:absolute;width:62%;aspect-ratio:3/1;border:3px solid rgba(61,245,142,.0);border-radius:50%;transition:border-color .4s}
+.eq-rings i:nth-child(1){top:30%}.eq-rings i:nth-child(2){top:52%}.eq-rings i:nth-child(3){top:74%}
+.charging .eq-rings i{border-color:rgba(61,245,142,.85);box-shadow:0 0 18px #3df58e;animation:ringup 1.1s linear infinite}
+.charging .eq-rings i:nth-child(2){animation-delay:-.37s}.charging .eq-rings i:nth-child(3){animation-delay:-.74s}
+@keyframes ringup{from{transform:translateY(60px) scale(.9);opacity:0}30%{opacity:1}to{transform:translateY(-120px) scale(1.05);opacity:0}}
+.charging .eq-char{filter:sepia(1) hue-rotate(80deg) saturate(4) brightness(1.15) drop-shadow(0 0 24px #3df58e);animation:flick .25s steps(2) infinite}
+.ready .eq-char{filter:drop-shadow(0 0 22px rgba(61,245,142,.55)) drop-shadow(0 10px 20px rgba(0,0,0,.6))}
+.eq-gear{position:absolute;inset:0;pointer-events:none}
+.eq-gear .g{position:absolute;width:58px;height:58px;color:#3df58e;opacity:0;transform:scale(.4);transition:opacity .4s,transform .4s}
+.eq-gear .g svg{width:100%;height:100%;filter:drop-shadow(0 0 8px #3df58e)}
+.eq-gear .g0{left:6%;top:12%}.eq-gear .g1{right:6%;top:12%}.eq-gear .g2{right:8%;top:46%}.eq-gear .g3{right:10%;bottom:12%}
+.charging .eq-gear .g,.ready .eq-gear .g{opacity:1;transform:none}
+.charging .eq-gear .g1{transition-delay:.5s}.charging .eq-gear .g2{transition-delay:1s}.charging .eq-gear .g3{transition-delay:1.5s}
+.eq-side{display:grid;gap:14px;align-content:center;max-width:560px}
+.eq-txt{font-size:18px;line-height:1.55;margin:0}
+.eq-watch{display:flex;align-items:center;gap:14px;background:none;border:1px solid var(--line);border-radius:12px;padding:10px 16px;cursor:pointer;justify-self:start;font-family:var(--f-display);font-size:18px;color:var(--neon)}
+.eq-watch svg{width:76px;height:76px;animation:glowpulse 1.6s ease-in-out infinite;border-radius:50%}
+.eq-watch.used{opacity:.6;pointer-events:none}
+@media (max-width:760px){.equip{grid-template-columns:1fr;grid-template-rows:auto auto;align-content:start}.eq-stage{height:38vh;min-height:0}.eq-char{height:36vh}.eq-gear .g{width:40px;height:40px}}
+.bdef{display:block;font-size:12px;color:var(--muted);line-height:1.35;margin-top:4px;text-align:center}
+.joy{position:absolute;left:10px;bottom:10px;width:96px;height:96px;border-radius:50%;background:rgba(4,16,10,.4);border:2px solid rgba(111,227,255,.7);z-index:2;touch-action:none}
+.joy i{width:40px!important;height:40px!important;margin:-20px 0 0 -20px!important}
+.joy i{position:absolute;left:50%;top:50%;width:46px;height:46px;margin:-23px 0 0 -23px;border-radius:50%;background:rgba(111,227,255,.85);box-shadow:0 0 14px #6fe3ff}
+.player.kb{transition:none}
+.hs.near{box-shadow:0 0 0 4px rgba(255,255,255,.85),0 0 22px var(--neon)}
+.hs.near .hl{opacity:1}
+.nearhint{position:absolute;z-index:5;transform:translate(-50%,-100%);background:rgba(4,16,10,.85);border:1px solid var(--neon);color:var(--text);font-family:var(--f-mono);font-size:12px;padding:4px 8px;border-radius:6px;white-space:nowrap;pointer-events:none}
+.radar{display:grid;gap:12px}
+.radar>svg{width:min(100%,560px);justify-self:center}
+.radar .rn{cursor:pointer}
+.radar svg.narrow text{display:none}
+.radar .rn:focus-visible circle{stroke:#fff}
+.rlist{display:flex;flex-wrap:wrap;gap:8px}
+.rlist span{display:inline-flex;align-items:center;gap:6px;border:1px solid var(--line);border-radius:999px;padding:4px 10px;font-size:13px}
+.rlist span i{width:10px;height:10px;border-radius:50%;border:2px solid var(--sunset)}
+.rlist span.ok i{background:var(--sunset)}
+
 /* ---------- Capa 3D: lienzo a pantalla completa, HUD encima, paneles para biblioteca y desafíos ---------- */
 #gl{position:fixed;inset:0;width:100%;height:100%;display:block;touch-action:none;background:#2b3a5a}
 #hud3{position:fixed;left:0;right:0;top:0;z-index:10;display:flex;align-items:center;gap:10px;padding-block:calc(10px + env(safe-area-inset-top,0px)) 10px;padding-left:var(--gut-l);padding-right:var(--gut-r);background:linear-gradient(180deg,rgba(4,14,20,.92),rgba(4,14,20,.0));pointer-events:none}
@@ -462,6 +615,23 @@ select{background:#0a1d26;border:1px solid var(--line);border-radius:6px;padding
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
 <script>
+/* =====================================================================
+   KINÉTICA 3D · prototipo de la zona de la comunidad (Three.js r128)
+   Este archivo NO se publica tal cual: herramientas/armar3d.py reemplaza las
+   marcas /*@@NOMBRE@@*\/ con archivos de la carpeta 2d/ (la lista está en
+   BLOQUES, al inicio de armar3d.py): estilos, sonido, interfaz, arte, pistas,
+   biblioteca y desafío 1. Así el contenido es el mismo en las dos versiones.
+   Lo propio del 3D está aquí:
+
+   1. Estado ............ guardado propio (kinetica-moin-3d-v1)
+   2. Paneles ........... biblioteca y desafío se abren encima del mundo 3D
+   3. Reloj y menús ..... reloj, configuración y menú
+   4. Inicio ............ selección de personaje
+   5. Mundo 3D .......... escena, casas, camino, sprites (ilustraciones planas)
+   6. Interacción ....... acercarse a un elemento y presionar E o el botón
+   7. Controles ......... teclado, mouse y mando táctil
+   8. Bucle ............. movimiento, colisiones, cámara y minimapa
+   ===================================================================== */
 (() => {
 "use strict";
 const $ = (s, r = document) => r.querySelector(s);
@@ -471,6 +641,7 @@ const esc = s => String(s).replace(/[&<>"]/g, c => ({"&":"&amp;","<":"&lt;",">":
 const stage = $("#stage");
 
 /* ============ Estado ============ */
+/* Guardado separado del 2D, para que las dos versiones no se pisen. */
 const KEY = "kinetica-moin-3d-v1";
 const fresh = () => ({char:null, clues:{}, read:{}, badges:[], items:["reloj"], settings:{music:true, sfx:true, voice:true, speed:"normal", vol:0.5}});
 let S = fresh();
@@ -478,7 +649,19 @@ function save(){ try{ localStorage.setItem(KEY, JSON.stringify(S)); }catch(e){} 
 function load(){ try{ const t = localStorage.getItem(KEY); if(t){ const o = JSON.parse(t); return Object.assign(fresh(), o, {settings:Object.assign(fresh().settings, o.settings||{})}); } }catch(e){} return null; }
 { const o = load(); if(o) S = o; }
 
+/* Bloques compartidos con el 2D (los inserta armar3d.py). No editar aquí: editar el 2D. */
+/* ---- desde 2d/motor/sonido.js ---- */
+/* =====================================================================
+   motor/sonido.js · MÚSICA, EFECTOS Y VOZ
+   Todo el sonido se genera en el navegador; no hay archivos de audio.
+   ===================================================================== */
+
 /* ============ Audio (música generada + efectos) ============ */
+/* A: todo el sonido del juego, generado en el navegador (no hay archivos de audio).
+   - master → music (música y mar) y sfx (efectos). Los volúmenes vienen de S.settings.
+   - La música arranca con el primer clic (los navegadores no permiten antes).
+   - Para cambiar la música: bars (acordes), mel (melodía) y beat() (qué suena en
+     cada corchea). Las notas están en números MIDI: 60 = do central. */
 const A = {
   ctx:null, master:null, music:null, sfx:null, timer:null, step:0, ocean:null,
   init(){
@@ -487,38 +670,87 @@ const A = {
     try{
       this.ctx = new C();
       this.master = this.ctx.createGain(); this.master.gain.value = S.settings.vol; this.master.connect(this.ctx.destination);
-      this.music = this.ctx.createGain(); this.music.gain.value = S.settings.music ? .55 : 0; this.music.connect(this.master);
+      this.music = this.ctx.createGain(); this.music.gain.value = S.settings.music ? .5 : 0; this.music.connect(this.master);
       this.sfx = this.ctx.createGain(); this.sfx.gain.value = S.settings.sfx ? .9 : 0; this.sfx.connect(this.master);
-      this.lp = this.ctx.createBiquadFilter(); this.lp.type = "lowpass"; this.lp.frequency.value = 1400; this.lp.connect(this.music);
+      this.lp = this.ctx.createBiquadFilter(); this.lp.type = "lowpass"; this.lp.frequency.value = 4200; this.lp.connect(this.music);
       this.startLoop();
     }catch(e){ this.ctx = null; }
   },
   resume(){ this.init(); if(this.ctx && this.ctx.state === "suspended") this.ctx.resume(); },
-  chords:[[110,130.81,164.81],[87.31,110,130.81],[130.81,164.81,196],[98,123.47,146.83]],
+  /* Música épica de aventura: ostinato de cuerdas, metales, tambores y melodía heroica (re menor) */
+  bars:[{b:38,c:[62,65,69]},{b:34,c:[58,62,65]},{b:41,c:[57,60,65]},{b:36,c:[55,60,64]},{b:38,c:[62,65,69]},{b:34,c:[58,62,65]},{b:36,c:[55,60,64]},{b:33,c:[57,61,64]}],
+  mel:[[[0,74,3],[3,69,1],[4,74,2],[6,77,2]],[[0,77,3],[3,76,1],[4,74,4]],[[0,72,3],[3,69,1],[4,72,2],[6,77,2]],[[0,76,6],[6,72,2]],
+       [[0,74,3],[3,77,1],[4,81,2],[6,79,2]],[[0,77,3],[3,74,1],[4,70,4]],[[0,72,2],[2,74,2],[4,76,4]],[[0,73,6],[6,69,2]]],
+  hz(m){ return 440*Math.pow(2,(m-69)/12); },
+  noiseBuf(){ if(this._nb) return this._nb; const n = this.ctx.sampleRate, b = this.ctx.createBuffer(1, n, n), d = b.getChannelData(0); for(let i=0;i<n;i++) d[i] = Math.random()*2-1; return this._nb = b; },
+  /* Planificador: cada 60 ms agenda las corcheas que caen en los próximos 0,3 s.
+     Así el ritmo no se atrasa aunque el navegador esté ocupado. */
   startLoop(){
+    const E = .3; // corchea a 100 ppm
+    this.next = this.ctx.currentTime + .1;
     const tick = () => {
       if(!this.ctx) return;
-      const t = this.ctx.currentTime + .05;
-      const ch = this.chords[Math.floor(this.step/8)%4];
-      if(this.step % 8 === 0) ch.forEach(f => this.pad(f*2, t, 4.2));
-      const notes = [ch[0]*4, ch[1]*4, ch[2]*4, ch[1]*4, ch[0]*8, ch[2]*4, ch[1]*4, ch[2]*2*2];
-      if(this.step % 2 === 0 || Math.random() < .3) this.pluck(notes[this.step%8], t);
-      this.step++;
+      const now = this.ctx.currentTime;
+      if(this.next < now - .5) this.next = now + .05;
+      while(this.next < now + .3){ this.beat(this.step, this.next, E); this.next += E; this.step++; }
     };
-    this.timer = setInterval(tick, 520);
+    this.timer = setInterval(tick, 60);
   },
-  pad(f, t, d){
+  /* beat(): decide qué instrumentos suenan en una corchea. Cada frase dura 8
+     compases; las frases impares (ph = 1) suman melodía, redoblante y más tambores. */
+  beat(step, t, E){
+    const e = step % 8, bar = Math.floor(step/8), B = this.bars[bar % 8], ph = Math.floor(bar/8) % 2;
+    const pat = [0,12,7,12,0,12,7,12];
+    this.str(this.hz(B.b + 12 + pat[e]), t, E*.9);
+    if(e === 0){ B.c.forEach(m => this.brass(this.hz(m), t, E*8)); this.str(this.hz(B.b), t, E*8, .05); }
+    const hits = ph ? [0,3,4,6] : [0,4];
+    if(hits.includes(e)) this.drum(t, e === 0 ? 1 : .6);
+    if(ph && (e === 2 || e === 6)) this.snare(t);
+    if(ph){ this.mel[bar % 8].forEach(([k, m, l]) => { if(k === e) this.lead(this.hz(m), t, E*l); }); }
+    if(bar % 8 === 7 && e === 4) this.swell(t, E*4);
+  },
+  str(f, t, d, v=.035){
     const o = this.ctx.createOscillator(), g = this.ctx.createGain();
-    o.type = "triangle"; o.frequency.value = f; o.detune.value = (Math.random()-.5)*12;
-    g.gain.setValueAtTime(0, t); g.gain.linearRampToValueAtTime(.07, t+1.4); g.gain.linearRampToValueAtTime(0, t+d);
-    o.connect(g); g.connect(this.lp); o.start(t); o.stop(t+d+.1);
+    o.type = "sawtooth"; o.frequency.value = f;
+    g.gain.setValueAtTime(0, t); g.gain.linearRampToValueAtTime(v, t+.02); g.gain.exponentialRampToValueAtTime(.0001, t+d);
+    o.connect(g); g.connect(this.lp); o.start(t); o.stop(t+d+.05);
   },
-  pluck(f, t){
+  brass(f, t, d){
+    const f1 = this.ctx.createBiquadFilter(), g = this.ctx.createGain();
+    f1.type = "lowpass"; f1.frequency.setValueAtTime(350, t); f1.frequency.linearRampToValueAtTime(1900, t+.35); f1.frequency.linearRampToValueAtTime(900, t+d);
+    g.gain.setValueAtTime(0, t); g.gain.linearRampToValueAtTime(.022, t+.12); g.gain.setValueAtTime(.022, t+d*.8); g.gain.linearRampToValueAtTime(0, t+d);
+    [-7,7].forEach(dt => { const o = this.ctx.createOscillator(); o.type = "sawtooth"; o.frequency.value = f; o.detune.value = dt; o.connect(f1); o.start(t); o.stop(t+d+.05); });
+    f1.connect(g); g.connect(this.lp);
+  },
+  lead(f, t, d){
+    const o = this.ctx.createOscillator(), o2 = this.ctx.createOscillator(), g = this.ctx.createGain(), lf = this.ctx.createOscillator(), lg = this.ctx.createGain();
+    o.type = "square"; o2.type = "triangle"; o.frequency.value = f; o2.frequency.value = f*2;
+    lf.frequency.value = 5.5; lg.gain.value = f*.006; lf.connect(lg); lg.connect(o.frequency); lg.connect(o2.frequency);
+    g.gain.setValueAtTime(0, t); g.gain.linearRampToValueAtTime(.03, t+.04); g.gain.setValueAtTime(.03, t+Math.max(.05, d-.08)); g.gain.linearRampToValueAtTime(0, t+d);
+    o.connect(g); o2.connect(g); g.connect(this.lp); [o,o2,lf].forEach(x => { x.start(t); x.stop(t+d+.05); });
+  },
+  drum(t, v){
     const o = this.ctx.createOscillator(), g = this.ctx.createGain();
-    o.type = "sine"; o.frequency.value = f;
-    g.gain.setValueAtTime(0, t); g.gain.linearRampToValueAtTime(.05, t+.01); g.gain.exponentialRampToValueAtTime(.0001, t+.9);
-    o.connect(g); g.connect(this.lp); o.start(t); o.stop(t+1);
+    o.type = "sine"; o.frequency.setValueAtTime(120, t); o.frequency.exponentialRampToValueAtTime(42, t+.45);
+    g.gain.setValueAtTime(.32*v, t); g.gain.exponentialRampToValueAtTime(.0001, t+.6);
+    o.connect(g); g.connect(this.music); o.start(t); o.stop(t+.65);
+    const n = this.ctx.createBufferSource(), nf = this.ctx.createBiquadFilter(), ng = this.ctx.createGain();
+    n.buffer = this.noiseBuf(); nf.type = "lowpass"; nf.frequency.value = 600; ng.gain.setValueAtTime(.12*v, t); ng.gain.exponentialRampToValueAtTime(.0001, t+.18);
+    n.connect(nf); nf.connect(ng); ng.connect(this.music); n.start(t); n.stop(t+.2);
   },
+  snare(t){
+    const n = this.ctx.createBufferSource(), nf = this.ctx.createBiquadFilter(), ng = this.ctx.createGain();
+    n.buffer = this.noiseBuf(); nf.type = "bandpass"; nf.frequency.value = 2200; nf.Q.value = .8;
+    ng.gain.setValueAtTime(.05, t); ng.gain.exponentialRampToValueAtTime(.0001, t+.14);
+    n.connect(nf); nf.connect(ng); ng.connect(this.music); n.start(t); n.stop(t+.16);
+  },
+  swell(t, d){
+    const n = this.ctx.createBufferSource(), nf = this.ctx.createBiquadFilter(), ng = this.ctx.createGain();
+    n.buffer = this.noiseBuf(); n.loop = true; nf.type = "highpass"; nf.frequency.value = 5000;
+    ng.gain.setValueAtTime(0, t); ng.gain.linearRampToValueAtTime(.05, t+d); ng.gain.linearRampToValueAtTime(0, t+d+.25);
+    n.connect(nf); nf.connect(ng); ng.connect(this.music); n.start(t); n.stop(t+d+.3);
+  },
+  /* Ruido de mar filtrado para las escenas de playa (lo activa go()). */
   setOcean(on){
     if(!this.ctx) return;
     if(on && !this.ocean){
@@ -532,6 +764,8 @@ const A = {
       this.ocean = {src, lfo};
     } else if(!on && this.ocean){ try{ this.ocean.src.stop(); this.ocean.lfo.stop(); }catch(e){} this.ocean = null; }
   },
+  /* tone(): nota simple para efectos (frecuencia, duración, forma, volumen,
+     retraso, deslizamiento). Los efectos de abajo combinan varios tonos. */
   tone(f, d=.15, type="sine", v=.2, when=0, slide){
     if(!this.ctx) return;
     const t = this.ctx.currentTime + when, o = this.ctx.createOscillator(), g = this.ctx.createGain();
@@ -544,16 +778,38 @@ const A = {
   ok(){ this.tone(660,.12,"triangle",.18); this.tone(990,.2,"triangle",.18,.1); },
   bad(){ this.tone(180,.25,"square",.08); },
   buzz(){ for(let i=0;i<5;i++) this.tone(110,.08,"square",.08,i*.12); try{ navigator.vibrate && navigator.vibrate([90,60,90,60,140]); }catch(e){} },
+  absorb(){
+    if(!this.ctx) return; const t = this.ctx.currentTime;
+    const n = this.ctx.createBufferSource(), f = this.ctx.createBiquadFilter(), g = this.ctx.createGain();
+    n.buffer = this.noiseBuf(); n.loop = true; f.type = "bandpass"; f.Q.value = 3; f.frequency.setValueAtTime(180, t); f.frequency.exponentialRampToValueAtTime(5200, t+2.6);
+    g.gain.setValueAtTime(0, t); g.gain.linearRampToValueAtTime(.5, t+2.2); g.gain.linearRampToValueAtTime(0, t+2.8);
+    n.connect(f); f.connect(g); g.connect(this.sfx); n.start(t); n.stop(t+2.9);
+    this.tone(70, 2.6, "sawtooth", .07, 0, 1400); this.tone(1800, .5, "sine", .2, 2.6, 90);
+  },
+  electric(){
+    if(!this.ctx) return; const t = this.ctx.currentTime;
+    for(let i=0;i<16;i++){
+      const at = t + Math.random()*2.2, n = this.ctx.createBufferSource(), f = this.ctx.createBiquadFilter(), g = this.ctx.createGain();
+      n.buffer = this.noiseBuf(); f.type = "highpass"; f.frequency.value = 1500 + Math.random()*4000;
+      g.gain.setValueAtTime(.25, at); g.gain.exponentialRampToValueAtTime(.0001, at+.03+Math.random()*.06);
+      n.connect(f); f.connect(g); g.connect(this.sfx); n.start(at); n.stop(at+.1);
+    }
+    this.tone(110, 2.3, "sawtooth", .06, 0, 1300); this.tone(220, 2.3, "square", .025, 0, 2600);
+    [784,988,1175,1568].forEach((f,i) => this.tone(f, .4, "triangle", .14, 2.3+i*.09));
+  },
+  popup(){ this.tone(740,.09,"sine",.15); this.tone(1110,.16,"sine",.13,.09); },
   fanfare(){ [523,659,784,1047].forEach((f,i)=>this.tone(f,.35,"triangle",.16,i*.13)); },
   apply(){
     if(!this.ctx) return;
     this.master.gain.value = S.settings.vol;
-    this.music.gain.value = S.settings.music ? .55 : 0;
+    this.music.gain.value = S.settings.music ? .5 : 0;
     this.sfx.gain.value = S.settings.sfx ? .9 : 0;
   }
 };
 
 /* ============ Voz (locución) ============ */
+/* V: locución con la voz del sistema. Prefiere español de Costa Rica, México o
+   Latinoamérica. say(texto, {pitch, rate}) lee en voz alta si la voz está activa. */
 const V = {
   voice:null,
   pick(){ try{ const vs = speechSynthesis.getVoices(); this.voice = vs.find(v=>/es[-_](CR|MX|US|419)/i.test(v.lang)) || vs.find(v=>/^es/i.test(v.lang)) || null; }catch(e){} },
@@ -573,9 +829,17 @@ const V = {
 };
 try{ speechSynthesis.onvoiceschanged = () => V.pick(); }catch(e){}
 
+/* ---- desde 2d/motor/interfaz.js ---- */
+/* =====================================================================
+   motor/interfaz.js · PIEZAS DE INTERFAZ
+   Avisos, ventanas y el narrador con Saltar y Siguiente.
+   ===================================================================== */
 
 /* ============ Utilidades UI ============ */
+/* toast(): aviso breve que desaparece solo. */
 function toast(msg, ms=2600){ const t = $("#toast"); t.textContent = msg; t.hidden = false; clearTimeout(toast._t); toast._t = setTimeout(()=>t.hidden = true, ms); }
+/* openModal(): abre una ventana sobre el juego con el HTML dado. Los botones con
+   data-close la cierran; también se cierra con Esc o tocando fuera. */
 function openModal(html, onClose){
   const m = $("#modal"); m.innerHTML = html; m.hidden = false;
   const close = () => { m.hidden = true; m.innerHTML = ""; V.stop(); onClose && onClose(); };
@@ -585,6 +849,7 @@ function openModal(html, onClose){
   return close;
 }
 document.addEventListener("keydown", e => { if(e.key === "Escape" && !$("#modal").hidden){ const c = $("#modal [data-close]"); c && c.click(); } });
+/* Velocidad del texto que se escribe letra por letra (Configuración). */
 const speedMs = () => ({lenta:42, normal:22, rapida:7})[S.settings.speed] || 22;
 const X_ICON = '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 6l12 12M18 6 6 18"/></svg>';
 
@@ -609,8 +874,13 @@ function narrate(root, {who, paras, voice={}, endLabel, onEnd}){
   show();
 }
 
+/* ---- desde 2d/arte/iconos.js ---- */
+/* =====================================================================
+   arte/iconos.js · ÍCONOS, RELOJ Y LENTES (SVG)
+   ===================================================================== */
 
 /* ============ Íconos y arte SVG ============ */
+/* Íconos SVG de los puntos interactivos (hablar, escanear, escuchar, leer…). */
 const ICON = {
   talk:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M4 5h16v11H9l-5 4V5z"/></svg>',
   scan:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M4 8V4h4M16 4h4v4M20 16v4h-4M8 20H4v-4M4 12h16"/></svg>',
@@ -622,6 +892,7 @@ const ICON = {
   book:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M4 5a2 2 0 0 1 2-2h5v17H6a2 2 0 0 0-2 2zM20 5a2 2 0 0 0-2-2h-5v17h5a2 2 0 0 1 2 2z"/></svg>',
   flag:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M5 21V4M5 4h11l-2 4 2 4H5"/></svg>'
 };
+/* Dibuja el reloj con su anillo de avance (pct de 0 a 1). */
 function watchSVG(pct=0, big=false){
   const r = 26, c = 2*Math.PI*r;
   return `<svg viewBox="0 0 68 68" aria-hidden="true">
@@ -631,16 +902,7 @@ function watchSVG(pct=0, big=false){
    <circle cx="34" cy="34" r="${r}" fill="none" stroke="#3df58e" stroke-width="5" stroke-linecap="round" stroke-dasharray="${c}" stroke-dashoffset="${c*(1-pct)}" transform="rotate(-90 34 34)" style="transition:stroke-dashoffset .6s;filter:drop-shadow(0 0 4px #3df58e)"/>
   </svg>`;
 }
-const BADGES = {
-  conocimiento:{name:"Insignia de Conocimiento", color:"#3df58e", glyph:'<circle cx="40" cy="30" r="5"/><circle cx="28" cy="50" r="5"/><circle cx="52" cy="50" r="5"/><path d="M40 35 30 46M40 35l10 11M33 50h14"/>',
-    mean:"Reconoce que convertiste datos sueltos del terreno en conocimiento ordenado: cada hallazgo quedó en su categoría de análisis. Es el primer paso del método: sin datos organizados no hay evidencia."},
-  rigurosidad:{name:"Insignia de Rigurosidad", color:"#6fe3ff", glyph:'<circle cx="40" cy="42" r="16"/><circle cx="40" cy="42" r="8"/><path d="M40 42l11-11"/><circle cx="47" cy="36" r="2.5" fill="currentColor"/>',
-    mean:"Reconoce que separaste la evidencia del rumor: evaluaste cada testimonio por su fuente y sus sesgos antes de aceptarlo."},
-  interpretacion:{name:"Insignia de Interpretación", color:"#ff8f45", glyph:'<path d="M26 56V44M36 56V34M46 56V40M56 56V26"/><path d="M22 58h38"/>',
-    mean:"Reconoce que leíste los gráficos sin forzarlos: comparaste magnitudes, calculaste proporciones y no confundiste asociación con causa."},
-  cuarta:{name:"Insignia de Triangulación", color:"#f2d35e", glyph:'<path d="M40 22 60 56H20z"/><circle cx="40" cy="22" r="3.5" fill="currentColor"/><circle cx="60" cy="56" r="3.5" fill="currentColor"/><circle cx="20" cy="56" r="3.5" fill="currentColor"/>',
-    mean:"Reconoce que confirmaste hallazgos con tres fuentes independientes y redactaste una conclusión prudente: responde la pregunta, se apoya en la evidencia y reconoce sus límites."}
-};
+
 function badgeSVG(key, cls=""){
   const b = BADGES[key];
   return `<svg class="${cls}" viewBox="0 0 80 80" aria-hidden="true" style="color:${b.color}">
@@ -650,7 +912,67 @@ function badgeSVG(key, cls=""){
 }
 const LENS_SVG = `<svg viewBox="0 0 120 120" aria-hidden="true"><g fill="none" stroke="#6fe3ff" stroke-width="4" style="filter:drop-shadow(0 0 8px #6fe3ff)"><circle cx="38" cy="62" r="22"/><circle cx="82" cy="62" r="22"/><path d="M60 58c0-6 0-6 0 0M16 56 8 44M104 56l8-12M58 60h4"/><path d="M28 70l8-10 6 6 8-12" stroke="#3df58e"/><path d="M72 72v-8M80 72V58M88 72V52" stroke="#ff8f45"/></g></svg>`;
 
+/* ---- desde 2d/arte/graficos.js ---- */
+/* =====================================================================
+   arte/graficos.js · GRÁFICOS DEL DESAFÍO 3
+   Barras y diagrama de puntos en SVG. Se carga antes del contenido porque
+   las preguntas de contenido/desafios.js usan dotsChart al definirse.
+   ===================================================================== */
+
+/* ---------- Desafío 3: lectura de gráficos ---------- */
+/* Gráfico de barras horizontal en SVG a partir de {l, v} (etiqueta, valor). */
+function barChart({title, src, data, max}){
+  const narrow = innerWidth < 600;
+  const W = narrow ? 420 : 640, padL = narrow ? 150 : 200, padR = 64, top = 10, rowH = narrow ? 64 : 58, h = top + data.length*rowH + 36;
+  const fs = narrow ? 15 : 13;
+  const sc = v => (W-padL-padR) * v / max;
+  const ticks = narrow ? [0, max/2, max] : [0, max/4, max/2, max*3/4, max];
+  return `<p class="ctitle">${esc(title)}</p><svg viewBox="0 0 ${W} ${h}" role="img" aria-label="${esc(title)}">
+    ${ticks.map(t=>`<line x1="${padL+sc(t)}" y1="${top}" x2="${padL+sc(t)}" y2="${h-30}" stroke="#24505f" stroke-dasharray="3 4"/><text x="${padL+sc(t)}" y="${h-10}" fill="#93b4ae" font-size="${fs-2}" text-anchor="middle">${Math.round(t).toLocaleString("es-CR")}</text>`).join("")}
+    ${data.map((d,i)=>{ const y = top + i*rowH + rowH*0.2, bh = rowH*0.6; return `
+      <text x="${padL-10}" y="${y+bh/2+5}" fill="#e5f3ef" font-size="${fs}" text-anchor="end">${esc(d.l)}</text>
+      <rect x="${padL}" y="${y}" width="${Math.max(sc(d.v),2)}" height="${bh}" rx="3" fill="${d.c||"#3df58e"}"/>
+      <text x="${padL+Math.max(sc(d.v),2)+8}" y="${y+bh/2+5}" fill="${d.c||"#3df58e"}" font-size="${fs+1}" font-weight="600">${d.v.toLocaleString("es-CR")}</text>`; }).join("")}
+  </svg><p class="src">Fuente: ${esc(src)}</p>`;
+}
+/* Gráfico de 1.000 puntos (una cría cada uno) para la pregunta de supervivencia. */
+function dotsChart(){
+  const narrow = innerWidth < 600, cols = narrow ? 25 : 50, rows = narrow ? 40 : 20, s = 12; let out = "";
+  for(let r=0;r<rows;r++) for(let c=0;c<cols;c++){ const k = r*cols+c; const hi = k === 517; const blk = (Math.floor(c/5) + Math.floor(r/20)) % 2; out += `<circle cx="${8+c*s}" cy="${8+r*s}" r="${hi?5.4:3.6}" fill="${hi?"#ff8f45":(blk?"#2c6b5a":"#3a8f73")}"/>`; }
+  return `<p class="ctitle">1.000 crías de tortuga marina (cada punto = 1 cría)</p><p class="src" style="margin-bottom:8px">Cada bloque de color = 100 crías, más o menos lo que trae 1 nido. El punto naranja es la única que, en promedio, llega a adulta.</p>
+    <svg viewBox="0 0 ${cols*s+4} ${rows*s+4}" role="img" aria-label="1.000 crías representadas con puntos; una sola llega a adulta" style="max-width:${narrow?340:640}px">${out}</svg><p class="src">Fuente: Mongabay (2013)</p>`;
+}
+
+/* ---- desde 2d/contenido/insignias.js ---- */
+/* =====================================================================
+   contenido/insignias.js · LAS CUATRO INSIGNIAS
+   Definición del guion y significado en el caso.
+   ===================================================================== */
+
+/* Insignias: def = definición del guion; mean = qué significa en este caso;
+   glyph = dibujo dentro del hexágono. La clave «cuarta» es la de Triangulación
+   (se mantiene así para no romper partidas guardadas). */
+const BADGES = {
+  conocimiento:{def:"Recompensa por ordenar los hallazgos de la información recolectada en categorías de análisis claras.", name:"Insignia de Conocimiento", color:"#3df58e", glyph:'<circle cx="40" cy="30" r="5"/><circle cx="28" cy="50" r="5"/><circle cx="52" cy="50" r="5"/><path d="M40 35 30 46M40 35l10 11M33 50h14"/>',
+    mean:"Reconoce que convertiste datos sueltos del terreno en conocimiento ordenado: cada hallazgo quedó en su categoría de análisis. Es el primer paso del método: sin datos organizados no hay evidencia."},
+  rigurosidad:{def:"Identifica la capacidad de reconocer la evidencia verificable y seleccionar fuentes confiables.", name:"Insignia de Rigurosidad", color:"#6fe3ff", glyph:'<circle cx="40" cy="42" r="16"/><circle cx="40" cy="42" r="8"/><path d="M40 42l11-11"/><circle cx="47" cy="36" r="2.5" fill="currentColor"/>',
+    mean:"Reconoce que separaste la evidencia del rumor: evaluaste cada testimonio por su fuente y sus sesgos antes de aceptarlo."},
+  interpretacion:{def:"Acredita la lectura objetiva de datos y gráficos estadísticos sin forzar conclusiones.", name:"Insignia de Interpretación", color:"#ff8f45", glyph:'<path d="M26 56V44M36 56V34M46 56V40M56 56V26"/><path d="M22 58h38"/>',
+    mean:"Reconoce que leíste los gráficos sin forzarlos: comparaste magnitudes, calculaste proporciones y no confundiste asociación con causa."},
+  cuarta:{def:"Certifica el nivel máximo de análisis al conectar y validar los hallazgos mediante la triangulación de fuentes independientes.", name:"Insignia de Triangulación", color:"#f2d35e", glyph:'<path d="M40 22 60 56H20z"/><circle cx="40" cy="22" r="3.5" fill="currentColor"/><circle cx="60" cy="56" r="3.5" fill="currentColor"/><circle cx="20" cy="56" r="3.5" fill="currentColor"/>',
+    mean:"Reconoce que confirmaste hallazgos con tres fuentes independientes y redactaste una conclusión prudente: responde la pregunta, se apoya en la evidencia y reconoce sus límites."}
+};
+
+/* ---- desde 2d/arte/figuras.js ---- */
+/* =====================================================================
+   arte/figuras.js · FIGURAS DE LAS ESCENAS
+   Personas, casas, palmeras y zopilotes en SVG.
+   ===================================================================== */
+
 /* Figuras para las escenas */
+/* Figuras de las escenas: person() dibuja una persona con los pies en (x, y);
+   house(), palm() y vulture() dibujan casas, palmeras y zopilotes. Todas usan
+   coordenadas de 1600 × 900, las mismas de las escenas. */
 function person(x, y, o){ // y = pies
   const s = o.s || 1;
   return `<g transform="translate(${x} ${y}) scale(${s})">
@@ -686,7 +1008,18 @@ function vulture(x, y, s=1){
   return `<g transform="translate(${x} ${y}) scale(${s})"><ellipse cx="0" cy="-22" rx="24" ry="18" fill="#141414"/><path d="M-22 -26 q-12 18 6 22 M 20 -26 q 14 16 -2 22" fill="#0b0b0b"/><circle cx="18" cy="-42" r="8" fill="#3b3b3b"/><path d="M24 -42 l10 4 -10 2z" fill="#d9d2c0"/><path d="M-6 -4v8M6 -4v8" stroke="#8a8a8a" stroke-width="3"/></g>`;
 }
 
+/* ---- desde 2d/contenido/pistas.js ---- */
+/* =====================================================================
+   contenido/pistas.js · LOS 14 ELEMENTOS INVESTIGABLES
+   Texto de cada ficha, con sus citas y referencias.
+   ===================================================================== */
 
+/* Contenido de cada hallazgo */
+/* CLUES: ficha de cada elemento investigable. Campos:
+   zone (zona), title, who (solo si es una persona), action (texto del botón),
+   lines (lo que se ve al tocarlo), scan (registro del reloj, con citas),
+   src (fuente corta), refs (claves de REFS para la referencia completa),
+   short (resumen guardado en el reloj) y tag (tipo de evidencia). */
 const CLUES = {
   lideresa:{zone:"comunidad", title:"Testimonio de la lideresa comunal", who:"Doña Marta · lideresa comunal", action:"Registrar testimonio",
     lines:["«Yo nací aquí, en Moín. Antes uno bajaba a la playa de noche a ver a las baulas desovar. Ahora casi nadie baja.»",
@@ -755,7 +1088,9 @@ const CLUES = {
     src:"Bloque Verde, en SURCOS Digital (2026)", refs:["surcos"], short:"Trece años después: demandas pendientes; puerto, erosión y pérdida de hábitat afectan la anidación.", tag:"Documento histórico"}
 };
 
+
 const R = {};
+/* Elementos investigables de la comunidad y condiciones de cada paso. */
 const ZONE_IDS = ["lideresa","herramientas","lora","rotulo","periodico","perro"];
 const secDone = () => ZONE_IDS.every(id => S.clues[id]);
 const repoDone = () => !!S.read.repo1;
@@ -773,6 +1108,9 @@ function updateWatch(){
 function buzzWatch(){ A.buzz(); const b = $("#hWatch"); b.animate([{transform:"translateX(0)"},{transform:"translateX(-3px)"},{transform:"translateX(3px)"},{transform:"translateX(0)"}],{duration:120,iterations:8}); }
 function openPanel(){ $("#panel").hidden = false; $("#panel").scrollTop = 0; stage.innerHTML = ""; }
 function closePanel(){ $("#panel").hidden = true; stage.innerHTML = ""; document.body.classList.remove("ingame"); }
+/* go(): en 3D las pantallas del 2D (biblioteca, desafío 1) se abren en un panel
+   encima del mundo. go("explore1") cierra el panel y vuelve a caminar;
+   go("explore2") muestra el cierre del prototipo (fin3d). */
 function go(st){
   A.click(); V.stop();
   $("#modal").hidden = true; $("#modal").innerHTML = "";
@@ -782,6 +1120,13 @@ function go(st){
   (R[st] || R.fin3d)();
 }
 
+/* ---- desde 2d/pantallas/ficha.js ---- */
+/* =====================================================================
+   pantallas/ficha.js · FICHA DE UN ELEMENTO INVESTIGADO
+   ===================================================================== */
+
+/* openClue(): ficha de un elemento. Muestra lo que se ve (lines) y el botón para
+   escanear; al escanear guarda la pista en S.clues y muestra el registro del reloj. */
 function openClue(id, onDone){
   const c = CLUES[id];
   const already = !!S.clues[id];
@@ -792,7 +1137,7 @@ function openClue(id, onDone){
   openModal(`<div class="sheet" role="dialog" aria-modal="true" aria-label="${esc(c.title)}">
     <div class="sheet-h"><h3>${esc(c.title)}</h3><span class="tag sun">${esc(c.tag)}</span><button class="x" data-close aria-label="Cerrar">${X_ICON}</button></div>
     <div class="sheet-b">${body}
-      <div class="scan" id="scanBox" ${already?"":"hidden"}><h4>Registro del reloj</h4><p>${esc(c.scan)}</p>${(c.refs||[]).length?`<div class="refl"><span class="src">Referencias (APA 7)</span>${c.refs.map(k=>`<p class="src">${REFS[k]}</p>`).join("")}</div>`:(c.src?`<span class="src">Fuente: ${esc(c.src)}</span>`:"")}</div></div>
+      <div class="scan" id="scanBox" ${already?"":"hidden"}><h4>Registro del reloj</h4><p>${esc(c.scan)}</p>${(c.refs||[]).length?`<div class="refl"><span class="src">Referencias</span>${c.refs.map(k=>`<p class="src">${REFS[k]}</p>`).join("")}</div>`:(c.src?`<span class="src">Fuente: ${esc(c.src)}</span>`:"")}</div></div>
     <div class="sheet-f">${already?`<button class="btn ghost" type="button" data-close>Cerrar</button>`:`<button class="btn" type="button" id="doScan">${esc(c.action)}</button>`}</div></div>`);
   if(isTalk) V.say(c.lines.join(" "), {pitch:1, rate:1.02});
   const b = $("#doScan");
@@ -811,11 +1156,21 @@ function openClue(id, onDone){
   };
 }
 
+/* ---- desde 2d/contenido/bibliotecas.js ---- */
+/* =====================================================================
+   contenido/bibliotecas.js · TEXTOS DE LAS BIBLIOTECAS
+   Lo que entrega la archivista de Kinética en cada zona.
+   ===================================================================== */
+
+/* Repositorios */
 const REF = {
   hs:"Hernández-Sampieri, R., & Mendoza, C. P. (2018). Metodología de la investigación: Las rutas cuantitativa, cualitativa y mixta. McGraw-Hill.",
   lg:"Lincoln, Y. S., & Guba, E. G. (1985). Naturalistic inquiry. Sage.",
   dz:"Denzin, N. K. (1978). The research act: A theoretical introduction to sociological methods (2.ª ed.). McGraw-Hill."
 };
+/* REPOS: bibliotecas de cada zona. docs = textos con t (título), k (etiqueta),
+   b (párrafos, con citas) y ref (claves de REFS). La biblioteca se completa cuando
+   se abren todos sus textos, y eso desbloquea al agente de desafío. */
 const REPOS = {
   repo1:{title:"Biblioteca de la comunidad", back:"explore1", backLabel:"Volver a la comunidad",
     intro:"La archivista de Kinética abrió la biblioteca. Leé cada texto; cuando termines, el agente de desafío te abre La codificación de hallazgos.",
@@ -869,9 +1224,16 @@ const REPOS = {
       {t:"Tres tipos de fuente", k:"Guía de método · elaboración propia a partir de Denzin (1978)", b:["Testimonio directo: alguien vio o vivió lo que cuenta. Evidencia física: huellas, objetos o registros del terreno. Documento: un informe o registro con método, que se puede revisar.","Un triángulo sólido combina tipos distintos. Si los tres vértices dependen del mismo origen, es un solo dato repetido. Esta clasificación es una adaptación propia de la triangulación de datos que describe Denzin (1978)."], ref:["denzin"]},
       {t:"Qué hacer cuando no coinciden", k:"Guía de método · Cáceres (2003)", b:["Si las fuentes se contradicen, el hallazgo no se acepta ni se descarta sin más: se reformula o se anota como no confirmado y se buscan más datos. La saturación (cuando los datos nuevos ya no aportan nada distinto) y la consulta a informantes ayudan a decidir (Cáceres, 2003).","Una palabra como «siempre» o «nadie» exige evidencia que casi nunca existe."], ref:["caceres"]},
       {t:"Resultados, conclusiones y recomendaciones", k:"Guía de redacción · Bermúdez Rubio et al. (2021); Cházaro-Arellano (2024)", b:["Los resultados responden qué se encontró: en pasado y sin interpretar. Las conclusiones responden la pregunta principal y los objetivos, sin datos nuevos. Las recomendaciones salen de las conclusiones y dicen qué, quién y cómo (Bermúdez Rubio et al., 2021).","«Se registraron seis pistas de percepción de inseguridad» es un resultado. «Hay más inseguridad porque el Estado no vigila» es una interpretación (Cházaro-Arellano, 2024)."], ref:["bermudez","chazaro"]},
-      {t:"Cómo citar en tu conclusión", k:"Guía de redacción · APA 7", b:["Cada dato que no es tuyo lleva su cita: apellido o institución y año. Puede ir entre paréntesis al final de la idea, como (Mongabay, 2013), o dentro de la frase, como «Según Mongabay (2013)…».","Si leíste un dato dentro de otra fuente, se cita así: (WIDECAST, citado por Mongabay, 2013). Con tres o más autores se escribe el primero y «et al.»: (Bermúdez Rubio et al., 2021).","Al final del trabajo, cada cita del texto debe aparecer completa en la lista de referencias, y cada referencia de la lista debe estar citada en el texto."]}
+      {t:"Cómo citar en tu conclusión", k:"Guía de redacción · Citas", b:["Cada dato que no es tuyo lleva su cita: apellido o institución y año. Puede ir entre paréntesis al final de la idea, como (Mongabay, 2013), o dentro de la frase, como «Según Mongabay (2013)…».","Si leíste un dato dentro de otra fuente, se cita así: (WIDECAST, citado por Mongabay, 2013). Con tres o más autores se escribe el primero y «et al.»: (Bermúdez Rubio et al., 2021).","Al final del trabajo, cada cita del texto debe aparecer completa en la lista de referencias, y cada referencia de la lista debe estar citada en el texto."]}
     ]}
 };
+
+/* ---- desde 2d/pantallas/biblioteca.js ---- */
+/* =====================================================================
+   pantallas/biblioteca.js · PANTALLA DE BIBLIOTECA
+   ===================================================================== */
+
+/* Pantalla de biblioteca: lista de textos a la izquierda y lector a la derecha. */
 function renderRepo(key){
   const R0 = REPOS[key]; const read = new Set();
   stage.innerHTML = `<section class="screen"><div class="repo wrap">
@@ -884,7 +1246,7 @@ function renderRepo(key){
   const show = i => {
     const d = R0.docs[i]; read.add(i); A.click();
     $$(".file").forEach(f=>f.setAttribute("aria-current", f.dataset.i==i));
-    $("#viewer").innerHTML = `<p class="eyebrow">${esc(d.k)}</p><h3>${esc(d.t)}</h3>${d.b.map(p=>`<p>${esc(p)}</p>`).join("")}${(d.ref||[]).length?`<div class="refl"><span class="src">Referencias (APA 7)</span>${d.ref.map(r=>`<p class="src">${REFS[r]||esc(r)}</p>`).join("")}</div>`:""}`;
+    $("#viewer").innerHTML = `<p class="eyebrow">${esc(d.k)}</p><h3>${esc(d.t)}</h3>${d.b.map(p=>`<p>${esc(p)}</p>`).join("")}${(d.ref||[]).length?`<div class="refl"><span class="src">Referencias</span>${d.ref.map(r=>`<p class="src">${REFS[r]||esc(r)}</p>`).join("")}</div>`:""}`;
     $(`[data-r="${i}"]`).textContent = "LEÍDO";
     $("#left").textContent = `Textos leídos: ${read.size}/${R0.docs.length}`;
     if(read.size === R0.docs.length && !S.read[key]){ S.read[key] = true; save(); $("#phrase").hidden = false; A.ok(); buzzWatch(); toast("Desafío desbloqueado: volvé con el agente de desafío"); }
@@ -894,9 +1256,19 @@ function renderRepo(key){
   show(0);
 }
 R.repo1 = () => renderRepo("repo1");
+R.repo2 = () => renderRepo("repo2");
+R.repo4 = () => renderRepo("repo4");
+
+/* ---- desde 2d/contenido/referencias.js ---- */
+/* =====================================================================
+   contenido/referencias.js · REFERENCIAS COMPLETAS (APA)
+   Las usan pistas, bibliotecas, ayudas y créditos.
+   ===================================================================== */
 
 /* ---------- Desafío 1: La codificación de hallazgos ---------- */
 /* Guía de cada desafío: qué hacer, pasos, pistas progresivas, cómo se construyó y fuentes en APA 7 */
+/* REFS: referencias completas en formato APA, con <em> para la cursiva.
+   Las usan las pistas (refs), las bibliotecas (ref) y las ayudas (GUIDE). */
 const REFS = {
   caceres:"Cáceres, P. (2003). Análisis cualitativo de contenido: Una alternativa metodológica alcanzable. <em>Psicoperspectivas, 2</em>, 53–82. https://doi.org/10.5027/psicoperspectivas-vol2-issue1-fulltext-3",
   rueda:"Rueda Sánchez, M. P., Armas, W. J., &amp; Sigala-Paparella, S.-P. (2023). Análisis cualitativo por categorías a priori: Reducción de datos para estudios gerenciales. <em>Ciencia y Sociedad, 48</em>(2), 83–96. https://doi.org/10.22206/cys.2023.v48i2.pp83-96",
@@ -920,6 +1292,17 @@ const REFS = {
   delfino:"¿Cuánto ha avanzado Costa Rica en ciberseguridad tras la ola de ataques del 2022? (2024, abril). <em>Delfino.cr</em>. https://delfino.cr/2024/04/cuanto-ha-avanzado-costa-rica-en-ciberseguridad-tras-la-ola-de-ataques-del-2022"
 };
 const CASE_REFS = ["universo","mongabay","semanario","last","extra","surcos","nacion","delfino"];
+
+/* ---- desde 2d/contenido/desafios.js ---- */
+/* =====================================================================
+   contenido/desafios.js · DATOS DE LOS CUATRO DESAFÍOS
+   Ayudas, fragmentos, testimonios, preguntas, acertijos y la redacción final.
+   La lógica de cada desafío está en pantallas/desafioN.js.
+   ===================================================================== */
+
+/* GUIDE: contenido del botón «Pistas, explicación y fuentes» de cada desafío:
+   goal (qué hacer), steps (cómo se resuelve), hints (pistas, la última da la
+   respuesta), made (cómo se construyó) y refs (fuentes). */
 const GUIDE = {
   game1:{title:"La codificación de hallazgos", goal:"Asociar cada fragmento de información con la categoría de análisis que mejor lo describe.",
     steps:["Leé el fragmento completo y preguntate de qué habla: del miedo y de cómo operan las bandas, de lo que hace o deja de hacer el Estado, o del daño a las tortugas y a la naturaleza.",
@@ -960,7 +1343,7 @@ const GUIDE = {
            "Elegí tres fuentes de tipos distintos: un testimonio directo, una evidencia física o un documento, y un registro del terreno.",
            "Descartá las fuentes de oídas, las generalizaciones y las que repiten lo que dijo otra fuente: no son independientes.",
            "En el tercer acertijo decidí si las fuentes confirman, no alcanzan o contradicen la afirmación.",
-           "Al final, redactá la conclusión siguiendo la lista de revisión de la derecha. Cada dato tomado de una fuente lleva su cita en APA 7."],
+           "Al final, redactá la conclusión siguiendo la lista de revisión de la derecha. Cada dato tomado de una fuente lleva su cita."],
     hints:["Acertijo 1: pescador artesanal + huellas en la arena + perro guardián.",
            "Acertijo 2: registro de WIDECAST + biólogo de campo + lideresa comunal. La nota de prensa repite a WIDECAST, así que no cuenta.",
            "Acertijo 3: las tres fuentes muestran patrullas que llegaban y se iban. La afirmación con «siempre» queda contradicha.",
@@ -968,32 +1351,16 @@ const GUIDE = {
     made:"La triangulación de fuentes sigue a Denzin (1978) y a Cáceres (2003). La redacción de conclusiones sigue a Bermúdez Rubio et al. (2021): responder la pregunta, apoyarse en los resultados, no traer datos nuevos y señalar limitaciones. Las afirmaciones combinan datos publicados con testimonios ficticios escritos para practicar.",
     refs:["denzin","caceres","bermudez","chazaro","mongabay","universo"]}
 };
-function openGuide(key){
-  const G = GUIDE[key]; if(!G) return; let shown = 1;
-  A.click();
-  const render = () => {
-    openModal(`<div class="sheet" role="dialog" aria-modal="true" aria-label="Pistas y fuentes">
-     <div class="sheet-h"><h3>${esc(G.title)} · Pistas y fuentes</h3><button class="x" data-close aria-label="Cerrar">${X_ICON}</button></div>
-     <div class="sheet-b refs guide">
-      <div class="kv"><div><b>Qué hay que hacer</b><span>${esc(G.goal)}</span></div></div>
-      <h4>Cómo se resuelve</h4><ol class="gsteps">${G.steps.map(x=>`<li>${esc(x)}</li>`).join("")}</ol>
-      <h4>Pistas</h4>${G.hints.slice(0, shown).map((h,k)=>`<p class="ghint"><b>Pista ${k+1}.</b> ${esc(h)}</p>`).join("")}
-      ${shown < G.hints.length ? `<div><button class="btn ghost" type="button" id="gMore">Mostrar otra pista (${shown} de ${G.hints.length})</button></div>` : `<p class="src">Ya ves todas las pistas.</p>`}
-      <h4>Cómo se construyó este desafío</h4><p class="gmade">${esc(G.made)}</p>
-      <h4>Fuentes (APA 7)</h4>${G.refs.map(k=>`<p>${REFS[k]}</p>`).join("")}
-     </div></div>`);
-    const m = $("#gMore"); if(m) m.onclick = () => { shown++; render(); };
-  };
-  render();
-}
-document.addEventListener("click", e => { const g = e.target.closest && e.target.closest("[data-guide]"); if(g) openGuide(g.dataset.guide); });
-const guideBtn = key => `<div><button class="btn ghost hintbtn" type="button" data-guide="${key}">Pistas, explicación y fuentes</button></div>`;
+
+/* Categorías de análisis del desafío 1 (las tres del guion + la emergente). */
 const CATS = {
   inseg:{s:"Inseguridad", t:"Percepción de inseguridad mediante la presencia criminal", d:"Cómo perciben los habitantes las dinámicas y el modo de operar de las bandas criminales."},
   inst:{s:"Institucional", t:"Capacidad institucional estatal", d:"Cómo se ejerce la institucionalidad en la zona: limitaciones, acciones y presencia."},
   socio:{s:"Socioambiental", t:"Afectación socioambiental", d:"Daño a la biodiversidad y a la conservación en la zona."},
   none:{s:"Ninguna encaja", t:"Ninguna encaja todavía", d:"Se guarda aparte: puede ser el comienzo de una categoría nueva (emergente)."}
 };
+/* FRAGS: fragmentos del desafío 1. c = categoría correcta, code = código
+   (categoría-escenario-fuente), t = texto. El de c:"none" es la categoría emergente. */
 const FRAGS = [
   {c:"inseg", code:"PI-C-LC", t:"Los vecinos ya no bajan a la playa de noche por miedo."},
   {c:"inseg", code:"PI-C-PC", t:"Las redes criminales comercializan los huevos y la carne de tortuga."},
@@ -1009,7 +1376,9 @@ const FRAGS = [
   {c:"socio", code:"AS-C-LO", t:"En Moín anidan la baula, la tortuga verde y la carey."},
   {c:"none", code:"NEW-C-VE", t:"Un vecino cuenta que el puerto trajo empleos, pero también más luces y tráfico cerca de la playa.", n:"Es un tema nuevo: los efectos del puerto en la comunidad. Podría ser una categoría emergente (fragmento de práctica, ficticio)."}
 ];
+/* Pista que se muestra en el primer error, según la categoría correcta. */
 const HINT = {inseg:"Habla de miedo o del modo de operar de las bandas.", inst:"Habla de la policía, los tribunales o la presencia del Estado.", socio:"Habla de las tortugas, los nidos o la biodiversidad.", none:"No habla de miedo, de instituciones ni de las tortugas: ¿será otro tema?"};
+/* Explicación de cada acierto. La clave es el texto exacto del fragmento. */
 const WHY1 = {
   "Los vecinos ya no bajan a la playa de noche por miedo.":"Describe cómo se siente la comunidad: es percepción de inseguridad.",
   "Las redes criminales comercializan los huevos y la carne de tortuga.":"Describe el modo de operar de las bandas criminales (Mongabay, 2013).",
@@ -1024,7 +1393,171 @@ const WHY1 = {
   "Un nido saqueado equivale a unas 100 crías que no llegan al mar.":"Cuantifica el daño de cada saqueo a la biodiversidad (Mongabay, 2013).",
   "En Moín anidan la baula, la tortuga verde y la carey.":"Describe la biodiversidad de la zona (Latin American Sea Turtles, 2023)."
 };
+
+/* ---------- Desafío 2: El radar de la información ---------- */
+/* TESTS: testimonios del desafío 2. v = true se valida; why = explicación. */
+const TESTS = [
+  {who:"Lideresa comunal", q:"«Desde 2013, las familias de mi calle ya no dejan que los chiquitos bajen a la playa cuando oscurece. Lo veo todos los días.»", v:true, tag:"Testimonio directo", why:"Habla de lo que ve en su propia calle y no lo extiende a toda la provincia."},
+  {who:"Vecino en la pulpería", q:"«Todo el mundo en Limón come huevo de tortuga, eso lo sabe cualquiera.»", v:false, tag:"Generalización", why:"«Todo el mundo» no se puede sostener y no viene acompañado de ningún dato."},
+  {who:"Biólogo de campo", q:"«Cada nido que encontramos queda anotado con hora, coordenadas y estado. Si al amanecer aparece vacío, también se anota.»", v:true, tag:"Registro sistemático", why:"El método es explícito y cualquier persona lo puede revisar."},
+  {who:"Joven en la parada del bus", q:"«Un primo me contó que un amigo de él vio que los que saquean son policías.»", v:false, tag:"Testimonio de oídas", why:"Pasó por tres personas antes de llegar a vos. Se anota como rumor para investigar, no como evidencia."},
+  {who:"Comerciante del centro", q:"«Los ambientalistas exageran; las tortugas siempre van a volver.»", v:false, tag:"Opinión sin evidencia", why:"Contradice los registros de anidación y de saqueo y no aporta ningún dato propio."},
+  {who:"Pescador artesanal", q:"«El sábado, como a las 2 de la mañana, vi dos carros sin luces entrar a la playa por el camino del muelle.»", v:true, tag:"Observación directa", why:"Tiene fecha, hora y lugar. Se puede contrastar con el registro del perro y las huellas en la arena."},
+  {who:"Vecina del barrio", q:"«Desde que llegaron los voluntarios a cuidar tortugas, el pueblo está peor. Antes todo era tranquilo.»", v:false, tag:"Falsa causalidad", why:"Que dos cosas ocurran en la misma época no prueba que una cause la otra."},
+  {who:"Informe del vivero · LAST 2023", q:"«En 2023 se reubicaron 323 nidos en Moín: 316 de baula, 4 de verde y 3 de carey.»", v:true, tag:"Fuente documental", why:"Es un informe con método publicado, verificable por cualquier persona."}
+];
+
+/* ---------- Repositorio 3 (pantalla de carga) ---------- */
+/* Consejos de la pantalla de carga del desafío 3 (cómo leer gráficos). */
+const TIPS = [
+  ["Leé el título y la fuente", "Antes de mirar las barras, preguntate qué se midió, dónde, cuándo y quién lo midió."],
+  ["Revisá los ejes y las unidades", "¿El eje empieza en cero? ¿Son nidos, huevos o porcentajes? Una misma barra cuenta historias distintas según la unidad."],
+  ["Compará magnitudes", "Dividí un valor entre otro para saber cuántas veces más grande es. Las diferencias absolutas y las relativas no dicen lo mismo."],
+  ["Asociación no es causa", "Si dos cosas cambian juntas, hay una asociación. Para hablar de causa hay que descartar otras explicaciones."],
+  ["Resultado no es interpretación", "Un resultado dice qué se encontró, en pasado y sin explicarlo. El porqué es una interpretación y se argumenta en la discusión. Contar describe: no mide qué pesa más."]
+];
+
+/* Q3: preguntas del desafío 3. chart = gráfico a mostrar (o null para usar el
+   anterior), o = opciones, a = índice de la correcta, why = explicación. */
+const Q3 = [
+  {chart:()=>barChart({title:"Nidos salvados en Moín por temporada, según patrullaje", src:"WIDECAST, citado por Mongabay (2013)", max:2000,
+     data:[{l:"Con patrullaje",v:1750},{l:"Sin patrullaje",v:6,c:"#ff8f45"}]}),
+   q:"Según el gráfico, ¿cuántas veces más nidos se salvaron en la temporada con patrullaje?",
+   o:["Unas 3 veces más","Unas 30 veces más","Unas 290 veces más","Unas 1.750 veces más"], a:2,
+   why:"1.750 ÷ 6 ≈ 292. La diferencia relativa es enorme aunque la barra pequeña casi no se vea."},
+  {chart:null, q:"Con ese mismo gráfico, ¿cuál conclusión es la más rigurosa?",
+   o:["El patrullaje policial fue la única causa de la diferencia.","Hay una asociación fuerte entre la presencia policial y los nidos salvados, aunque otros factores también pudieron influir.","En la temporada sin patrullaje solo llegaron 6 tortugas a la playa.","El gráfico demuestra que los saqueadores desaparecen cuando hay policía."], a:1,
+   why:"El gráfico compara dos temporadas. Muestra una asociación clara, pero no controla otras variables (número de voluntarios, clima, cantidad de hembras). Por eso se habla de asociación, no de causa única (Hernández-Sampieri y Mendoza, 2018)."},
+  {chart:()=>barChart({title:"Nidos reubicados al vivero de Moín en 2023, por especie", src:"LAST, informe de temporada 2023", max:400,
+     data:[{l:"Baula",v:316},{l:"Verde",v:4,c:"#6fe3ff"},{l:"Carey",v:3,c:"#ff8f45"}]}),
+   q:"¿Qué porcentaje aproximado de los nidos reubicados fue de tortuga baula?",
+   o:["Cerca del 33 %","Cerca del 50 %","Cerca del 75 %","Cerca del 98 %"], a:3,
+   why:"El total es 316 + 4 + 3 = 323. Entonces 316 ÷ 323 ≈ 0,978, o sea cerca del 98 %."},
+  {chart:null, q:"¿Con cuál categoría de análisis se relaciona más directamente este gráfico de especies?",
+   o:["Percepción de inseguridad mediante la presencia criminal","Capacidad institucional estatal","Afectación socioambiental"], a:2,
+   why:"Describe qué especies dependen de la playa y cuántos nidos hubo que proteger (Latin American Sea Turtles, 2023): es información sobre biodiversidad y conservación."},
+  {chart:dotsChart, q:"Si un nido tiene unos 100 huevos y solo 1 de cada 1.000 crías llega a adulta, ¿cuántos nidos hacen falta, en promedio, para que una tortuga llegue a adulta?",
+   o:["1 nido","5 nidos","10 nidos","100 nidos"], a:2,
+   why:"1.000 crías ÷ 100 por nido = 10 nidos. Por eso un solo nido saqueado ya resta una parte importante de la próxima generación."}
+];
+
+/* ---------- Desafío 4: Triangulando la realidad ---------- */
+/* TRI: acertijos del desafío 4. Los dos primeros piden elegir 3 fuentes con
+   ok:true entre 6; el tercero (verdict) pide decidir si la afirmación se confirma. */
+const TRI = [
+  {claim:"Vehículos ajenos a la comunidad entran de noche a la playa por el camino del muelle.",
+   win:"Un testimonio directo, una evidencia física y un registro del terreno no se conocen entre sí y dicen lo mismo. El hallazgo queda confirmado.",
+   cards:[
+    {t:"Testimonio directo", who:"Pescador artesanal", q:"«El sábado, como a las 2 de la mañana, vi dos carros sin luces entrar a la playa por el camino del muelle.»", ok:true},
+    {t:"Evidencia física", who:"Huellas en la arena", q:"Marcas de doble llanta que salen del camino del muelle y cruzan la playa. En una zanja quedó atrapada una cría.", ok:true},
+    {t:"Registro del reloj", who:"Perro guardián", q:"Los ladridos nocturnos coinciden con el sonido de motores entre la medianoche y el amanecer.", ok:true},
+    {t:"Testimonio de oídas", who:"Joven en la parada", q:"«Un primo me contó que un amigo vio unos carros raros en la playa.»", ok:false, why:"Es de oídas: pasó por varias personas y no se sabe quién lo vio."},
+    {t:"Nota de prensa", who:"Periódico local", q:"«Según un pescador, el sábado dos carros sin luces entraron a la playa.»", ok:false, why:"Repite lo que ya dijo el pescador. No es una segunda fuente, es la misma con otro formato."},
+    {t:"Generalización", who:"Comerciante del centro", q:"«Aquí nunca pasa nada raro, eso es puro cuento.»", ok:false, why:"Generaliza sin datos y no trae ninguna observación propia."}]},
+  {claim:"Cuando hay patrullaje policial se salvan muchos más nidos.",
+   win:"Un documento con cifras, un testimonio de campo y la voz de la comunidad coinciden. Eso es triangular. Ojo: confirma una asociación fuerte, no una causa única.",
+   cards:[
+    {t:"Documento", who:"Registro de WIDECAST", q:"Con una unidad policial patrullando se salvaron unos 1.750 nidos; en la temporada siguiente, sin patrullaje, unos seis (WIDECAST, citado por Mongabay, 2013).", ok:true},
+    {t:"Testimonio directo", who:"Biólogo de campo", q:"«Cuando la policía patrulla con nosotros, llegamos a los nidos antes de que lleguen los saqueadores.»", ok:true},
+    {t:"Testimonio comunitario", who:"Lideresa comunal", q:"«Mientras vino la patrulla, la gente volvió a bajar a la playa. Cuando se fue, volvió el miedo.»", ok:true},
+    {t:"Nota de prensa", who:"Reportaje que cita a WIDECAST", q:"«Según WIDECAST, con patrullaje se salvaron unos 1.750 nidos y sin él, unos seis.»", ok:false, why:"Reproduce el mismo registro de WIDECAST. Es la misma fuente, no una segunda."},
+    {t:"Opinión", who:"Comerciante del centro", q:"«Las tortugas siempre van a volver, con o sin policía.»", ok:false, why:"Es una opinión sin datos y contradice los registros de anidación."},
+    {t:"Falsa causalidad", who:"Vecino del barrio", q:"«Desde que hay policía en el puerto, todo mejoró.»", ok:false, why:"Dos hechos que coinciden en el tiempo no prueban que uno cause el otro, y no habla de los nidos."}]},
+  {verdict:true, claim:"La policía siempre responde a las denuncias de la comunidad.",
+   cards:[
+    {t:"Testimonio directo", who:"Lideresa comunal", q:"«Hemos pedido patrullas muchas veces. Vienen unas semanas y después se van.»"},
+    {t:"Nota de prensa", who:"El Universo, 2012", q:"El grupo de voluntariado había pedido ayuda policial durante semanas por amenazas constantes (El Universo, 2012)."},
+    {t:"Documento", who:"WIDECAST, citado por Mongabay (2013)", q:"Con patrullaje se salvaron unos 1.750 nidos; sin patrullaje, unos seis."}],
+   o:["Confirmada: las tres fuentes la respaldan.","No se puede confirmar: faltan datos.","Contradicha: las fuentes muestran una respuesta intermitente, no constante."], a:2,
+   win:"Tres fuentes independientes apuntan a lo mismo: la presencia policial fue intermitente. El «siempre» no se sostiene, así que el hallazgo se reformula: la respuesta fue intermitente."}
+];
+
+/* Por qué sirve cada fuente correcta (la clave es el nombre exacto en «who»). */
+const WHY4 = {
+  "Pescador artesanal":"Testimonio directo: lo vio con sus propios ojos y da fecha, hora y lugar.",
+  "Huellas en la arena":"Evidencia física: las marcas existen aunque nadie las cuente, y no dependen del pescador.",
+  "Perro guardián":"Registro del terreno: el reloj cruzó ladridos y motores sin depender de lo que dijeron las personas.",
+  "Registro de WIDECAST":"Documento con cifras de dos temporadas, producido por el proyecto de conservación (WIDECAST, citado por Mongabay, 2013).",
+  "Biólogo de campo":"Testimonio de quien trabaja cada noche en la playa: conoce el efecto del patrullaje de primera mano.",
+  "Lideresa comunal":"Voz de la comunidad: describe cómo cambia la vida diaria cuando la patrulla llega o se va."
+};
+const R3WHY = {
+  "Lideresa comunal":"Dice que las patrullas «vienen unas semanas y después se van»: una presencia intermitente.",
+  "El Universo, 2012":"El voluntariado pidió ayuda durante semanas sin recibir respuesta.",
+  "WIDECAST, citado por Mongabay (2013)":"Hubo una temporada con patrullaje y otra sin él."
+};
+const HINT4 = [
+  "Buscá tres tipos de fuente distintos: alguien que lo vio, una marca física en la playa y un registro del reloj. Descartá lo que es de oídas, lo que repite a otra fuente y lo que generaliza.",
+  "Necesitás un documento con cifras, alguien que trabaja en la playa y la voz de la comunidad. La nota de prensa repite el registro de WIDECAST, así que no cuenta como fuente aparte.",
+  "Fijate en la palabra «siempre»: ¿alguna de las tres fuentes describe una respuesta constante de la policía?"
+];
+
+/* Pistas del desafío 3, en orden de pregunta (se muestran al primer error). */
+const HINT3 = ["Dividí la cifra mayor entre la menor: 1.750 ÷ 6.",
+    "Un gráfico que compara dos temporadas muestra una asociación. Para hablar de causa habría que descartar otras explicaciones.",
+    "Sumá el total (316 + 4 + 3) y dividí la cantidad de baula entre ese total.",
+    "Pensá de qué habla el gráfico: especies y nidos, o sea, biodiversidad.",
+    "Dividí las 1.000 crías entre los 100 huevos que tiene, en promedio, cada nido."];
+
+/* Redacción del desafío 4: frases de apoyo que se insertan con un toque. */
+const CHIPS = ["Las fuentes revisadas muestran que", "El testimonio de", "coincide con", "Además, el registro de WIDECAST (citado por Mongabay, 2013) indica que", "(Mongabay, 2013)", "(Latin American Sea Turtles, 2023)", "Sin embargo, estos datos no permiten afirmar que", "Haría falta"];
+
+/* Redacción del desafío 4: ejemplo de conclusión (botón «Ver un ejemplo»). */
+const MODEL = "Las fuentes revisadas muestran que vehículos ajenos a la comunidad entran de noche a la playa de Moín: el testimonio del pescador, las huellas de llanta en la arena y el registro del perro guardián coinciden, aunque no dependen unas de otras. Además, el registro de WIDECAST indica que con patrullaje policial se salvaron unos 1.750 nidos y sin él unos seis (WIDECAST, citado por Mongabay, 2013), lo que sugiere una asociación entre la vigilancia nocturna y la protección de los nidos. Sin embargo, estos datos no permiten afirmar que el patrullaje sea la única causa; haría falta comparar más temporadas y entrevistar a más personas de la comunidad.";
+
+/* ---- desde 2d/pantallas/guia.js ---- */
+/* =====================================================================
+   pantallas/guia.js · BOTÓN «PISTAS, EXPLICACIÓN Y FUENTES»
+   ===================================================================== */
+
+/* Abre la ayuda de un desafío; las pistas se muestran de una en una. */
+function openGuide(key){
+  const G = GUIDE[key]; if(!G) return; let shown = 1;
+  A.click();
+  const render = () => {
+    openModal(`<div class="sheet" role="dialog" aria-modal="true" aria-label="Pistas y fuentes">
+     <div class="sheet-h"><h3>${esc(G.title)} · Pistas y fuentes</h3><button class="x" data-close aria-label="Cerrar">${X_ICON}</button></div>
+     <div class="sheet-b refs guide">
+      <div class="kv"><div><b>Qué hay que hacer</b><span>${esc(G.goal)}</span></div></div>
+      <h4>Cómo se resuelve</h4><ol class="gsteps">${G.steps.map(x=>`<li>${esc(x)}</li>`).join("")}</ol>
+      <h4>Pistas</h4>${G.hints.slice(0, shown).map((h,k)=>`<p class="ghint"><b>Pista ${k+1}.</b> ${esc(h)}</p>`).join("")}
+      ${shown < G.hints.length ? `<div><button class="btn ghost" type="button" id="gMore">Mostrar otra pista (${shown} de ${G.hints.length})</button></div>` : `<p class="src">Ya ves todas las pistas.</p>`}
+      <h4>Cómo se construyó este desafío</h4><p class="gmade">${esc(G.made)}</p>
+      <h4>Fuentes</h4>${G.refs.map(k=>`<p>${REFS[k]}</p>`).join("")}
+     </div></div>`);
+    const m = $("#gMore"); if(m) m.onclick = () => { shown++; render(); };
+  };
+  render();
+}
+document.addEventListener("click", e => { const g = e.target.closest && e.target.closest("[data-guide]"); if(g) openGuide(g.dataset.guide); });
+const guideBtn = key => `<div><button class="btn ghost hintbtn" type="button" data-guide="${key}">Pistas, explicación y fuentes</button></div>`;
+
+/* ---- desde 2d/pantallas/insignias.js ---- */
+/* =====================================================================
+   pantallas/insignias.js · VENTANA DE INSIGNIA GANADA
+   ===================================================================== */
+
+/* Ventana de insignia ganada: la guarda en S.badges y ofrece seguir. */
+function earnBadge(key, title, next, nextLabel){
+  if(!S.badges.includes(key)) S.badges.push(key); save(); A.fanfare(); buzzWatch();
+  const b = BADGES[key];
+  openModal(`<div class="sheet" role="dialog" aria-modal="true" aria-label="Insignia obtenida">
+    <div class="sheet-h"><h3>${esc(title)}</h3></div>
+    <div class="sheet-b"><div class="reward"><div class="glowin">${badgeSVG(key)}</div>
+      <div class="kv"><div><b>Tu recompensa</b><span style="font-family:var(--f-display);font-size:22px">${b.name}</span></div><div><b>¿Qué significa?</b><span>${b.def}</span></div><div><b>En este caso</b><span>${b.mean}</span></div></div></div>
+      <p class="src">Insignias: ${S.badges.length} de 4. La encontrás en la pestaña Insignias del reloj.</p></div>
+    <div class="sheet-f"><button class="btn" type="button" data-close>${esc(nextLabel)}</button></div></div>`, () => go(next));
+}
+
+/* ---- desde 2d/pantallas/desafio1.js ---- */
+/* =====================================================================
+   pantallas/desafio1.js · DESAFÍO 1 · LA CODIFICACIÓN DE HALLAZGOS
+   ===================================================================== */
+
 const cap = c => FRAGS.filter(f=>f.c===c).length;
+/* Desafío 1: arrastrar (o tocar y tocar) cada fragmento a su categoría.
+   Cada acierto queda apilado en su categoría con su número de orden y su código.
+   Tras dos errores con el mismo fragmento, se muestra dónde va y se resalta. */
 R.game1 = () => {
   const order = FRAGS.map((f,i)=>i).sort(()=>Math.random()-.5);
   const fill = {inseg:0, inst:0, socio:0, none:0}; let placed = 0, sel = null; const ERR1 = {};
@@ -1033,21 +1566,25 @@ R.game1 = () => {
     <p class="muted">Arrastrá cada fragmento flotante hasta su categoría de análisis. En pantallas táctiles también podés tocar el fragmento y luego la categoría. Cada acierto carga la categoría con energía de conocimiento. Cada fragmento tiene un código de tres partes: categoría (PI inseguridad, CI institucional, AS socioambiental), escenario (C comunidad, P playa) y fuente. Uno no encaja en ninguna categoría: guardalo aparte.</p>${guideBtn("game1")}</div>
     <div class="cloud" id="cloud">${order.map(i=>`<div class="frag" tabindex="0" role="button" data-i="${i}">${esc(FRAGS[i].t)}</div>`).join("")}</div>
     <p class="fb" id="fb" aria-live="polite"></p>
-    <div class="bins">${Object.entries(CATS).map(([k,c])=>`<button class="bin" type="button" data-c="${k}"><h3><span class="long">${c.t}</span><span class="short">${c.s}</span></h3><p>${c.d}</p><div class="energy"><i></i></div><span class="src" data-n="${k}">0/${cap(k)}</span></button>`).join("")}</div>
+    <div class="bins">${Object.entries(CATS).map(([k,c])=>`<button class="bin" type="button" data-c="${k}"><h3><span class="long">${c.t}</span><span class="short">${c.s}</span></h3><p>${c.d}</p><div class="energy"><i></i></div><span class="src" data-n="${k}">0/${cap(k)}</span><span class="stack" data-s="${k}" aria-live="polite"></span></button>`).join("")}</div>
   </div></section>`;
   const fb = $("#fb");
+  /* Intenta colocar un fragmento en una categoría y da retroalimentación. */
   const tryPlace = (fragEl, cat) => {
     const f = FRAGS[+fragEl.dataset.i];
     if(f.c === cat){
       A.ok(); fill[cat]++; placed++;
       fragEl.remove(); sel = null;
       const bin = $(`.bin[data-c="${cat}"]`);
+      const it = document.createElement("span"); it.className = "it";
+      it.innerHTML = `<span class="n">${placed}</span><span class="tx"><b>${esc(f.code)}</b> ${esc(f.t)}</span>`;
+      it.title = f.t; bin.querySelector(".stack").appendChild(it);
       bin.querySelector(".energy i").style.width = (fill[cat]/cap(cat)*100)+"%";
       $(`[data-n="${cat}"]`).textContent = `${fill[cat]}/${cap(cat)}`;
       $$(".bin").forEach(x=>x.classList.remove("hint"));
       fb.className = "fb ok"; fb.textContent = cat === "none" ? `Guardado aparte. ${f.n} Código provisional: ${f.code}.` : `Bien codificado (${f.code}). ${WHY1[f.t] || ""}`;
       if(fill[cat] === cap(cat)){ bin.classList.add("full"); A.fanfare(); if(cat !== "none") fb.textContent = `Categoría completa: ${CATS[cat].t}.`; }
-      if(placed === FRAGS.length) setTimeout(()=>earnBadge("conocimiento", "¡Felicidades, has superado el desafío 1!", "explore2", "Ver el resumen de la zona"), 900);
+      if(placed === FRAGS.length){ $(".g1").classList.add("done"); fb.className = "fb ok"; fb.textContent = "¡Codificaste los 13 fragmentos! Así quedó tu matriz, en el orden en que los encontraste."; setTimeout(()=>earnBadge("conocimiento", "¡Felicidades, has superado el desafío 1!", "explore2", "Ver el resumen de la zona"), 3200); }
     } else {
       A.bad(); fragEl.classList.remove("bad"); void fragEl.offsetWidth; fragEl.classList.add("bad");
       const ix = +fragEl.dataset.i; ERR1[ix] = (ERR1[ix] || 0) + 1; fb.className = "fb no";
@@ -1083,19 +1620,8 @@ R.game1 = () => {
   $$(".bin").forEach(b => b.onclick = () => { if(sel) tryPlace(sel, b.dataset.c); else { fb.className="fb"; fb.textContent = "Primero elegí o arrastrá un fragmento."; } });
 };
 
-function earnBadge(key, title, next, nextLabel){
-  if(!S.badges.includes(key)) S.badges.push(key); save(); A.fanfare(); buzzWatch();
-  const b = BADGES[key];
-  openModal(`<div class="sheet" role="dialog" aria-modal="true" aria-label="Insignia obtenida">
-    <div class="sheet-h"><h3>${esc(title)}</h3></div>
-    <div class="sheet-b"><div class="reward"><div class="glowin">${badgeSVG(key)}</div>
-      <div class="kv"><div><b>Tu recompensa</b><span style="font-family:var(--f-display);font-size:22px">${b.name}</span></div><div><b>¿Qué significa?</b><span>${b.mean}</span></div></div></div>
-      <p class="src">Insignias: ${S.badges.length} de 4. La encontrás en la pestaña Insignias del reloj.</p></div>
-    <div class="sheet-f"><button class="btn" type="button" data-close>${esc(nextLabel)}</button></div></div>`, () => go(next));
-}
 
-
-
+/* Cierre del prototipo: resumen de la zona tras ganar la insignia. */
 R.fin3d = () => {
   const n = ZONE_IDS.filter(id => S.clues[id]).length;
   stage.innerHTML = `<section class="screen"><div class="endscr wrap">
@@ -1161,6 +1687,7 @@ const CHARS = [
   {name:"Bitácora", txt:"Anota todo, con su fuente."},
   {name:"Horizonte", txt:"Mira lejos y lee mapas."}
 ];
+/* Pantalla de inicio: elegir personaje y entrar al mundo. */
 function showStart(){
   const st = $("#start"); st.hidden = false;
   if(S.char === null) S.char = 0;
@@ -1187,6 +1714,9 @@ function showStart(){
 }
 
 /* ============ Mundo 3D ============ */
+/* Mundo 3D. Unidades en metros aproximados; el personaje empieza en START.
+   world.obs = obstáculos (círculos y rectángulos) para las colisiones;
+   world.inter = elementos con los que se puede interactuar. */
 const TOUCH = matchMedia("(pointer:coarse)").matches || "ontouchstart" in window;
 const START = {x:5.3, z:35.5};
 let renderer, scene, camera, sun, player, pShadow, playerTex = [], world = {obs:[], inter:[], houses:[]};
@@ -1197,6 +1727,8 @@ const blocked = () => !$("#modal").hidden || !$("#panel").hidden || !$("#start")
 function mat(color, opts={}){ return new THREE.MeshLambertMaterial(Object.assign({color, flatShading:true}, opts)); }
 function box(w,h,d,color,x,y,z,parent,shadow=true){ const m = new THREE.Mesh(new THREE.BoxGeometry(w,h,d), typeof color === "number" || typeof color === "string" ? mat(color) : color); m.position.set(x,y,z); m.castShadow = shadow; m.receiveShadow = true; parent.add(m); return m; }
 function canvasTex(w, h, draw){ const c = document.createElement("canvas"); c.width = w; c.height = h; draw(c.getContext("2d"), w, h); const t = new THREE.CanvasTexture(c); t.anisotropy = 4; return t; }
+/* Convierte un SVG del 2D en textura. Así los personajes y objetos 3D son las
+   mismas ilustraciones del 2D, dibujadas como sprites que siempre miran a la cámara. */
 function svgTex(svg, w, h){
   const c = document.createElement("canvas"); c.width = w; c.height = h;
   const t = new THREE.CanvasTexture(c);
@@ -1221,6 +1753,7 @@ const NPC_LOOK = {
   agente:{skin:"#c08a5f",shirt:"#0f2a2a",pants:"#111",hair:'<path d="M-24 -160 q24 -30 48 0 q-6 -8 -24 -10 q-18 2 -24 10z" fill="#3b2a1a"/>',extra:'<circle cx="12" cy="-108" r="6" fill="#3df58e"/>'}
 };
 
+/* Camino de lastre: una cinta que sigue una curva suave entre puntos. */
 function makeRoad(points, width, color){
   const curve = new THREE.CatmullRomCurve3(points.map(p => new THREE.Vector3(p[0], 0, p[1])));
   const N = 140, pos = [], idx = [];
@@ -1237,6 +1770,7 @@ function makeRoad(points, width, color){
 function wallTex(color){
   return canvasTex(128, 128, (c,w,h) => { c.fillStyle = color; c.fillRect(0,0,w,h); c.strokeStyle = "rgba(0,0,0,.14)"; c.lineWidth = 3; for(let y=16;y<h;y+=21){ c.beginPath(); c.moveTo(0,y); c.lineTo(w,y); c.stroke(); } });
 }
+/* Casa de madera sobre pilotes, de bajo polígono; agrega su obstáculo. */
 function makeHouse({x, z, w, d, h, wall, roof, rot=0, porch=false, sign=null, stilt=1.2}){
   const g = new THREE.Group();
   const wood = 0x5a3d27;
@@ -1286,6 +1820,8 @@ function makePalm(x, z, s=1){
 function makeBush(x, z, r=.8, color=0x2f6b33){ const m = new THREE.Mesh(new THREE.IcosahedronGeometry(r, 0), mat(color)); m.position.set(x, r*.7, z); m.castShadow = true; scene.add(m); return m; }
 function boardTex(draw){ return canvasTex(512, 256, draw); }
 
+/* buildWorld(): arma toda la comunidad: suelo, camino, casas, árboles, NPC y los
+   seis elementos investigables. Para mover algo, cambiar sus coordenadas aquí. */
 function buildWorld(){
   scene = new THREE.Scene();
   scene.background = canvasTex(4, 256, (c,w,h) => { const g = c.createLinearGradient(0,0,0,h); g.addColorStop(0,"#2f3f6b"); g.addColorStop(.55,"#e98a5c"); g.addColorStop(1,"#f8c77f"); c.fillStyle = g; c.fillRect(0,0,w,h); });
@@ -1385,6 +1921,7 @@ const ASPECT = [287/620, 279/620, 310/620];
 function setPlayerChar(i){ if(!player) return; player.material.map = playerTex[i]; player.material.needsUpdate = true; player.scale.set(2.3*ASPECT[i]*facing, 2.3, 1); }
 function placePlayer(x, z){ if(!player) return; player.position.set(x, 0, z); pShadow.position.set(x, .04, z); }
 
+/* Actualiza los marcadores de los elementos según estén pendientes o ya investigados. */
 function refreshMarkers(){
   for(const i of world.inter){
     let color = 0x3df58e, show = true, op = .55;
@@ -1397,6 +1934,7 @@ function refreshMarkers(){
 
 /* ---------- Interacción ---------- */
 let near = null;
+/* Acción sobre el elemento cercano: ficha, biblioteca o desafío (con bloqueos). */
 function interact(i){
   if(!i || blocked()) return;
   A.click(); keys.w = keys.a = keys.s = keys.d = keys.arrowup = keys.arrowdown = keys.arrowleft = keys.arrowright = false;
@@ -1465,6 +2003,7 @@ $("#actBtn").onclick = () => interact(near);
 }
 
 /* ---------- Bucle ---------- */
+/* Empuja al personaje fuera de los obstáculos (círculos y rectángulos). */
 function collide(p){
   const pr = .42;
   for(const o of world.obs){
@@ -1478,6 +2017,8 @@ function collide(p){
 const clock = new THREE.Clock();
 const camTarget = new THREE.Vector3();
 let frame = 0;
+/* Bucle por cuadro: mueve al personaje, sigue con la cámara, detecta el elemento
+   cercano y dibuja. Si hay un panel abierto deja de dibujar para ahorrar batería. */
 function tick(){
   requestAnimationFrame(tick);
   const dt = Math.min(clock.getDelta(), .05), t = clock.elapsedTime;
@@ -1525,6 +2066,7 @@ function tick(){
   renderer.render(scene, camera);
   if(!$("#mini").hidden && (Math.floor(t*12) % 2 === 0)) drawMini();
 }
+/* Minimapa de la esquina: camino, casas, marcadores visibles y flecha del personaje. */
 function drawMini(){
   const c = $("#mini").getContext("2d"), W = 300, sc = W/72, X = x => (x + 34)*sc, Z = z => (z + 33)*sc;
   c.clearRect(0,0,W,W); c.fillStyle = "rgba(91,138,58,.35)"; c.fillRect(0,0,W,W);
@@ -1534,6 +2076,7 @@ function drawMini(){
   for(const i of world.inter){ if(!i.marker.visible) continue; c.fillStyle = "#" + i.marker.material.color.getHexString(); c.beginPath(); c.arc(X(i.x), Z(i.z), 9, 0, 7); c.fill(); }
   if(player){ const px = X(player.position.x), pz = Z(player.position.z); c.save(); c.translate(px, pz); c.rotate(-yaw); c.fillStyle = "#fff"; c.beginPath(); c.moveTo(0,-14); c.lineTo(9,10); c.lineTo(-9,10); c.closePath(); c.fill(); c.restore(); }
 }
+/* Calidad gráfica: en «baja» (por defecto en celulares) baja la resolución y quita las sombras. */
 function applyQuality(){
   if(!renderer) return;
   const low = (S.settings.quality || (TOUCH ? "baja" : "alta")) === "baja";
@@ -1565,6 +2108,5 @@ async function boot(){
 boot();
 })();
 </script>
-
 </body>
 </html>
